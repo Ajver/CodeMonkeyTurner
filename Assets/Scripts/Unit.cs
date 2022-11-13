@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -15,8 +12,14 @@ public class Unit : MonoBehaviour
         {
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
 
-            float moveSpeed = 4f;
+            float moveSpeed = 8f;
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Mouse pressed");
+            Move(MouseWorld.GetPosition());
         }
     }
     
