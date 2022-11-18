@@ -26,8 +26,7 @@ public class UnitActionSystem : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            bool hasSelected = TryHandleUnitSelection();
-            if (hasSelected)
+            if (TryHandleUnitSelection())
             {
                 return;
             }
