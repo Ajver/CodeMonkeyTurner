@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpinAction : BaseAction
@@ -32,4 +30,8 @@ public class SpinAction : BaseAction
         onActionComplete = onSpinComplete;
     }
 
+    public override string GetActionName()
+    {
+        return "Spin";
+    }
 }

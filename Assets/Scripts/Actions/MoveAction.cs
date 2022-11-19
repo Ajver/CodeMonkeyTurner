@@ -18,6 +18,11 @@ public class MoveAction : BaseAction
         targetPosition = transform.position;
     }
 
+    public override string GetActionName()
+    {
+        return "Move";
+    }
+
     private void Update()
     {
         if (!isActive)

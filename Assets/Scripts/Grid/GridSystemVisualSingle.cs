@@ -5,16 +5,16 @@ using UnityEngine;
 public class GridSystemVisualSingle : MonoBehaviour
 {
 
-    [SerializeField] private MeshRenderer renderer;
+    [SerializeField] private MeshRenderer meshRenderer;
     
     public void Show()
     {
-        renderer.enabled = true;
+        meshRenderer.enabled = true;
     }
 
     public void Hide()
     {
-        renderer.enabled = false;
+        meshRenderer.enabled = false;
     }
     
 }
