@@ -75,5 +75,15 @@ public class GridSystem
         GridObject obj = gridObjectsArray[gridPosition.x, gridPosition.z];
         return obj.HasAnyUnit();
     }
+
+    public int GetWidth()
+    {
+        return width;
+    }
+
+    public int GetHeight()
+    {
+        return height;
+    }
     
 }
