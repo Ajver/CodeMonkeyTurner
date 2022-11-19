@@ -6,12 +6,14 @@ public class Unit : MonoBehaviour
     [SerializeField] private Animator unitAnimator;
 
     private MoveAction moveAction;
+    private SpinAction spinAction;
 
     private GridPosition gridPosition;
 
     private void Start()
     {
         moveAction = GetComponent<MoveAction>();
+        spinAction = GetComponent<SpinAction>();
         
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
@@ -35,6 +37,11 @@ public class Unit : MonoBehaviour
     public MoveAction GetMoveAction()
     {
         return moveAction;
+    }
+    
+    public SpinAction GetSpinAction()
+    {
+        return spinAction;
     }
 
     public GridPosition GetGridPosition()

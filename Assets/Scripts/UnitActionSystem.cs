@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitActionSystem : MonoBehaviour
@@ -10,6 +11,8 @@ public class UnitActionSystem : MonoBehaviour
     [SerializeField] private Unit selectedUnit;
     [SerializeField] private LayerMask unitLayerMask;
 
+    private bool isBusy;
+    
     private void Awake()
     {
         if (Instance != null)
@@ -24,21 +27,41 @@ public class UnitActionSystem : MonoBehaviour
 
     private void Update()
     {
+        if (isBusy)
+        {
+            return;
+        }
+        
         if (Input.GetMouseButtonDown(0))
         {
-            if (TryHandleUnitSelection())
+            if (!TryHandleUnitSelection())
             {
-                return;
-            }
+                MoveAction moveAction = selectedUnit.GetMoveAction();
 
-            MoveAction moveAction = selectedUnit.GetMoveAction();
-
-            GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
-            if (moveAction.IsValidActionGridPosition(mouseGridPosition))
-            {
-                moveAction.Move(mouseGridPosition);
+                GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
+                if (moveAction.IsValidActionGridPosition(mouseGridPosition))
+                {
+                    SetBusy();
+                    moveAction.Move(mouseGridPosition, ClearBusy);
+                }
             }
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            SetBusy();
+            selectedUnit.GetSpinAction().Spin(ClearBusy);
+        }
+    }
+
+    private void SetBusy()
+    {
+        isBusy = true;
+    }
+
+    private void ClearBusy()
+    {
+        isBusy = false;
     }
 
     private bool TryHandleUnitSelection()
@@ -50,7 +73,6 @@ public class UnitActionSystem : MonoBehaviour
         {
             if (hitInfo.collider.TryGetComponent<Unit>(out Unit unit))
             {
-                Debug.Log("Selected: " + selectedUnit.name);
                 SetSelectedUnit(unit);
                 return true;
             }

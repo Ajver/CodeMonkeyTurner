@@ -3,24 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveAction : MonoBehaviour
+public class MoveAction : BaseAction
 {
     [SerializeField] private int maxMoveDistance = 4; 
 
     private Animator unitAnimator;
     private Vector3 targetPosition;
 
-    private Unit unit;
-    
-    private void Awake()
+    protected override void Awake()
     {
-        unit = GetComponent<Unit>();
+        base.Awake();
+        
         unitAnimator = unit.GetAnimator();
         targetPosition = transform.position;
     }
 
     private void Update()
     {
+        if (!isActive)
+        {
+            return;
+        }
+
         float stoppingDistance = 0.1f;
         if (Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
         {
@@ -37,12 +41,16 @@ public class MoveAction : MonoBehaviour
         else
         {
             unitAnimator.SetBool("IsWalking", false);
+            isActive = false;
+            onActionComplete();
         }
     }
     
-    public void Move(GridPosition gridPosition)
+    public void Move(GridPosition gridPosition, Action callback)
     {
         targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        isActive = true;
+        onActionComplete = callback;
     }
 
     public bool IsValidActionGridPosition(GridPosition gridPosition)
