@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class Testing : MonoBehaviour
 {
-    [SerializeField] private Transform gameObjectPrefab; 
+    [SerializeField] private Unit unit;
 
-    private GridSystem gridSystem;
-    
-    void Start()
+
+    private void Update()
     {
-        gridSystem = new GridSystem(10, 10, 2f);
-        gridSystem.CreateDebugObjects(gameObjectPrefab);
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            unit.GetMoveAction().GetValidActionGridPositionList();
+        }
     }
 }

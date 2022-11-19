@@ -123,6 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &3492203 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7068710491601792925, guid: 3af174e552a820fe0b55b2d4bf0a7058,
+    type: 3}
+  m_PrefabInstance: {fileID: 7068710492240138608}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ac0c70c420b610ca88e89ea8f3d6d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &85721753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -451,8 +463,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
+  m_HorizontalDamping: 0
+  m_VerticalDamping: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0
@@ -980,6 +992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ffbb344b4bb13758acce49a6e5db87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 1334939427}
 --- !u!1 &1137823476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,8 +1221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66abfb5955a424addb11d6b26d1374f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 4486440069603274062, guid: 2be748da50b85479fa57d71aa7bc106e,
-    type: 3}
+  unit: {fileID: 3492203}
 --- !u!4 &1885185367
 Transform:
   m_ObjectHideFlags: 0

@@ -61,5 +61,19 @@ public class GridSystem
     {
         return gridObjectsArray[gridPosition.x, gridPosition.z];
     }
+
+    public bool IsValidGridPosition(GridPosition gridPosition)
+    {
+        return gridPosition.x >= 0 && 
+               gridPosition.z >= 0 && 
+               gridPosition.x < width && 
+               gridPosition.z < height;
+    }
+
+    public bool HasAnyUnitOnGridPosition(GridPosition gridPosition)
+    {
+        GridObject obj = gridObjectsArray[gridPosition.x, gridPosition.z];
+        return obj.HasAnyUnit();
+    }
     
 }
