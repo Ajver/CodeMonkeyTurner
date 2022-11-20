@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class BaseAction : MonoBehaviour
 {
@@ -25,5 +26,10 @@ public abstract class BaseAction : MonoBehaviour
     }
 
     public abstract List<GridPosition> GetValidActionGridPositionList();
-    
+
+    public virtual int GetActionPointsCost()
+    {
+        return 1;
+    }
+
 }
