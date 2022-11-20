@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7068710491601792924}
   - component: {fileID: 7068710491601792925}
+  - component: {fileID: 5484858137869309397}
   - component: {fileID: 638369518}
   - component: {fileID: 946886411521965959}
   - component: {fileID: 7676582317044561777}
@@ -150,6 +151,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 7155471455653380901}
   isEnemy: 0
+--- !u!114 &5484858137869309397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7068710491601792923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb9da5a527d124d7be50a293cb2be6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7155471455653380901}
 --- !u!65 &638369518
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -200,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a3ec68ebe56365d4a6618d31710febd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootDistance: 7
 --- !u!1001 &7068710491563516041
 PrefabInstance:
   m_ObjectHideFlags: 0

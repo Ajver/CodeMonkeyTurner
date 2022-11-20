@@ -1,11 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class ShootAction : BaseAction
 {
+    public event EventHandler OnShoot;
+    
     [SerializeField] private int shootDistance = 7;
 
     private enum State
@@ -72,6 +72,7 @@ public class ShootAction : BaseAction
     
     private void Shoot()
     {
+        OnShoot?.Invoke(this, EventArgs.Empty);
         targetUnit.Damage();
     }
     
