@@ -4,7 +4,6 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
 
-    [SerializeField] private Animator unitAnimator;
     [SerializeField] private bool isEnemy;
 
     public static event EventHandler OnAnyActionPointsChanged;
@@ -12,17 +11,20 @@ public class Unit : MonoBehaviour
     private const int ACTION_POINTS_MAX = 2; 
 
     private MoveAction moveAction;
-    private SpinAction spinAction;
     private BaseAction[] baseActionsArray;
 
+    private HealthSystem healthSystem;
+    
     private GridPosition gridPosition;
     private int actionPoints = ACTION_POINTS_MAX;
     
     private void Awake()
     {
         moveAction = GetComponent<MoveAction>();
-        spinAction = GetComponent<SpinAction>();
         baseActionsArray = GetComponents<BaseAction>();
+        
+        healthSystem = GetComponent<HealthSystem>();
+        healthSystem.OnDead += HealthSystem_OnDead;
     }
 
     private void Start()
@@ -41,20 +43,10 @@ public class Unit : MonoBehaviour
             gridPosition = newGridPosition;
         }
     }
-
-    public Animator GetAnimator()
-    {
-        return unitAnimator;
-    }
     
     public MoveAction GetMoveAction()
     {
         return moveAction;
-    }
-    
-    public SpinAction GetSpinAction()
-    {
-        return spinAction;
     }
 
     public BaseAction[] GetBaseActionsArray()
@@ -110,9 +102,15 @@ public class Unit : MonoBehaviour
         return isEnemy;
     }
 
-    public void Damage()
+    public void Damage(int damageAmount)
     {
-        Debug.Log(gameObject + " damaged!");
+        healthSystem.Damage(damageAmount);
+    }
+
+    private void HealthSystem_OnDead(object sender, EventArgs e)
+    {
+        LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
+        Destroy(gameObject);
     }
     
 }
