@@ -76,6 +76,12 @@ public class GridSystem
         return obj.HasAnyUnit();
     }
 
+    public Unit GetUnitAtGridPosition(GridPosition gridPosition)
+    {
+        GridObject obj = gridObjectsArray[gridPosition.x, gridPosition.z];
+        return obj.GetUnit();
+    }
+    
     public int GetWidth()
     {
         return width;

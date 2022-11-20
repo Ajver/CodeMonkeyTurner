@@ -36,10 +36,6 @@ public class UnitActionSystemUI : MonoBehaviour
         
         Unit unit = UnitActionSystem.Instance.GetSelectedUnit();
 
-        Debug.Log("Selected unit: " + unit);
-        
-        // BaseAction[] allActions = ;
-        // Debug.Log("All actions:\n" + allActions);
         foreach (BaseAction action in unit.GetBaseActionsArray())
         {
             Transform actionButtonTransform = Instantiate(actionButtonPrefab, actionButtonContainerTransform);

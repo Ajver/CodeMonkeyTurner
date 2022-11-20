@@ -5,6 +5,7 @@ public class Unit : MonoBehaviour
 {
 
     [SerializeField] private Animator unitAnimator;
+    [SerializeField] private bool isEnemy;
 
     public static event EventHandler OnAnyActionPointsChanged;
     
@@ -58,8 +59,6 @@ public class Unit : MonoBehaviour
 
     public BaseAction[] GetBaseActionsArray()
     {
-        Debug.Log("All actions....?");
-        Debug.Log(baseActionsArray);
         return baseActionsArray;
     }
 
@@ -93,13 +92,27 @@ public class Unit : MonoBehaviour
 
     private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
     {
-        actionPoints = ACTION_POINTS_MAX;
+        if ((IsEnemy() && !TurnSystem.Instance.IsPlayerTurn()) ||
+            (!IsEnemy() && TurnSystem.Instance.IsPlayerTurn()))
+        {
+            actionPoints = ACTION_POINTS_MAX;
+        }
         OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
     }
     
     public int GetActionPoints()
     {
         return actionPoints;
+    }
+
+    public bool IsEnemy()
+    {
+        return isEnemy;
+    }
+
+    public void Damage()
+    {
+        Debug.Log(gameObject + " damaged!");
     }
     
 }

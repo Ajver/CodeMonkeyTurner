@@ -46,16 +46,14 @@ public class MoveAction : BaseAction
         else
         {
             unitAnimator.SetBool("IsWalking", false);
-            isActive = false;
-            onActionComplete();
+            ActionComplete();
         }
     }
     
     public override void TakeAction(GridPosition gridPosition, Action callback)
     {
         targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
-        isActive = true;
-        onActionComplete = callback;
+        ActionStart(callback);
     }
 
     public override List<GridPosition> GetValidActionGridPositionList()
@@ -76,7 +74,7 @@ public class MoveAction : BaseAction
                     continue;
                 }
 
-                if (unit.GetGridPosition() == testPos)
+                if (unitGridPosition == testPos)
                 {
                     // Cannot move to the same position as already on
                     continue;
