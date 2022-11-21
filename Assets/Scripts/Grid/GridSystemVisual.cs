@@ -25,6 +25,9 @@ public class GridSystemVisual : MonoBehaviour
 
     private void Start()
     {
+        UnitActionSystem.Instance.OnSelectedActionChanged += UnitActionSystem_OnSelectedActionChanged;
+        LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
+        
         gridSystemVisualSingles = new GridSystemVisualSingle[
             LevelGrid.Instance.GetWidth(), 
             LevelGrid.Instance.GetHeight()
@@ -43,9 +46,16 @@ public class GridSystemVisual : MonoBehaviour
                 gridSystemVisualSingles[x, z] = visualSingle.GetComponent<GridSystemVisualSingle>();
             }
         }
+
+        UpdateGridVisual();
     }
 
-    private void Update()
+    private void UnitActionSystem_OnSelectedActionChanged(object sender, EventArgs e)
+    {
+        UpdateGridVisual();
+    }
+
+    private void LevelGrid_OnAnyUnitMovedGridPosition(object sender, EventArgs e)
     {
         UpdateGridVisual();
     }
