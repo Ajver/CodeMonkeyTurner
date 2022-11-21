@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpinAction : BaseAction
 {
-    private float totalSpinnedAmount = 0f;
+    private float totalSpinnedAmount;
 
     public void Update()
     {
@@ -19,13 +19,14 @@ public class SpinAction : BaseAction
 
         if (totalSpinnedAmount >= 360f)
         {
-            totalSpinnedAmount = 0f;
             ActionComplete();
         }
     }
 
     public override void TakeAction(GridPosition gridPosition, Action callback)
     {
+        totalSpinnedAmount = 0f;
+
         ActionStart(callback);
     }
 
