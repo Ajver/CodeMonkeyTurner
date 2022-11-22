@@ -7,6 +7,8 @@ public class Unit : MonoBehaviour
     [SerializeField] private bool isEnemy;
 
     public static event EventHandler OnAnyActionPointsChanged;
+    public static event EventHandler OnAnyUnitSpawned;
+    public static event EventHandler OnAnyUnitDead;
     
     private const int ACTION_POINTS_MAX = 2; 
 
@@ -32,6 +34,8 @@ public class Unit : MonoBehaviour
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
+        
+        OnAnyUnitSpawned?.Invoke(this, EventArgs.Empty);
     }
     
     private void Update()
@@ -61,7 +65,7 @@ public class Unit : MonoBehaviour
         return gridPosition;
     }
 
-    public bool TrySpendActionPOintsToTakeAction(BaseAction action)
+    public bool TrySpendActionPointsToTakeAction(BaseAction action)
     {
         if (CanSpendActionPointsToTakeAction(action))
         {
@@ -113,6 +117,8 @@ public class Unit : MonoBehaviour
     {
         LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
         Destroy(gameObject);
+        
+        OnAnyUnitDead?.Invoke(this, EventArgs.Empty);
     }
     
 }

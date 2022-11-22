@@ -145,7 +145,7 @@ public class UnitActionSystem : MonoBehaviour
                 return;
             }
 
-            if (!selectedUnit.TrySpendActionPOintsToTakeAction(selectedAction))
+            if (!selectedUnit.TrySpendActionPointsToTakeAction(selectedAction))
             {
                 return;
             }
