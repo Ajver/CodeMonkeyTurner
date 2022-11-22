@@ -123,16 +123,20 @@ public class ShootAction : BaseAction
 
     public override List<GridPosition> GetValidActionGridPositionList()
     {
+        GridPosition unitGridPosition = unit.GetGridPosition();
+        return GetValidActionGridPositionList(unitGridPosition);
+    }
+
+    public List<GridPosition> GetValidActionGridPositionList(GridPosition gridPosition)
+    {
         List<GridPosition> validPosList = new List<GridPosition>();
 
-        GridPosition unitGridPosition = unit.GetGridPosition();
-        
         for (int x = -shootDistance; x <= shootDistance; x++)
         {
             for (int z = -shootDistance; z <= shootDistance; z++)
             {
                 GridPosition offsetGridPos = new GridPosition(x, z);
-                GridPosition testPos = unitGridPosition + offsetGridPos;
+                GridPosition testPos = gridPosition + offsetGridPos;
                 
                 if (!LevelGrid.Instance.IsValidGridPosition(testPos))
                 {
@@ -172,5 +176,25 @@ public class ShootAction : BaseAction
     public int GetMaxShootDistance()
     {
         return shootDistance;
+    }
+
+    public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
+    {
+        Unit unit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+
+        // The lower HP unit has, the bigger the score is (so it's more attractive to be shoot) 
+        int unitWeaknessScore = Mathf.RoundToInt((1 - unit.GetHealthNormalized()) * 100f);
+        
+        return new EnemyAIAction
+        {
+            gridPosition = gridPosition,
+            actionValue = 100 + unitWeaknessScore,
+        };
+    }
+
+    public int GetTargetCountAtPosition(GridPosition gridPosition)
+    {
+        List<GridPosition> targetsPositions = GetValidActionGridPositionList();
+        return targetsPositions.Count;
     }
 }

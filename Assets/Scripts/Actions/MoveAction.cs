@@ -92,4 +92,14 @@ public class MoveAction : BaseAction
         return validPosList;
     }
 
+    public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
+    {
+        int targetCountAtGridPos = unit.GetComponent<ShootAction>().GetTargetCountAtPosition(gridPosition);
+
+        return new EnemyAIAction
+        {
+            gridPosition = gridPosition,
+            actionValue = targetCountAtGridPos + 1,
+        };
+    }
 }
