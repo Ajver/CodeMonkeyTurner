@@ -1,29 +1,29 @@
 using System;
 using UnityEngine;
 
-public class GridSystem
+public class GridSystem<TGridObject>
 {
 
     private int width;
     private int height;
     private float cellSize;
 
-    private GridObject[,] gridObjectsArray;
+    private TGridObject[,] gridObjectsArray;
     
-    public GridSystem(int width, int height, float cellSize)
+    public GridSystem(int width, int height, float cellSize, Func<GridSystem<TGridObject>, GridPosition, TGridObject> createGridObject)
     {
         this.width = width;
         this.height = height;
         this.cellSize = cellSize;
 
-        gridObjectsArray = new GridObject[width, height];
+        gridObjectsArray = new TGridObject[width, height];
         
         for (int x = 0; x < width; x++)
         {
             for (int z = 0; z < height; z++)
             {
                 GridPosition gridPosition = new GridPosition(x, z);
-                GridObject obj = new GridObject(this, gridPosition);
+                TGridObject obj = createGridObject(this, gridPosition);
                 gridObjectsArray[x, z] = obj;
                 
                 Debug.DrawLine(GetWorldPosition(gridPosition), GetWorldPosition(gridPosition) + Vector3.right * .2f, Color.white, 1000);
@@ -52,12 +52,12 @@ public class GridSystem
                 GridPosition gridPosition = new GridPosition(x, z);
                 Transform debugTransform = GameObject.Instantiate(debugPrefab, GetWorldPosition(gridPosition), Quaternion.identity);
                 GridDebugObject debugObject = debugTransform.GetComponent<GridDebugObject>();
-                debugObject.SetGridObject(GetGridObject(gridPosition));
+                debugObject.SetGridObject(GetGridObject(gridPosition) as GridObject);
             }
         }
     }
 
-    public GridObject GetGridObject(GridPosition gridPosition)
+    public TGridObject GetGridObject(GridPosition gridPosition)
     {
         return gridObjectsArray[gridPosition.x, gridPosition.z];
     }
@@ -70,18 +70,6 @@ public class GridSystem
                gridPosition.z < height;
     }
 
-    public bool HasAnyUnitOnGridPosition(GridPosition gridPosition)
-    {
-        GridObject obj = gridObjectsArray[gridPosition.x, gridPosition.z];
-        return obj.HasAnyUnit();
-    }
-
-    public Unit GetUnitAtGridPosition(GridPosition gridPosition)
-    {
-        GridObject obj = gridObjectsArray[gridPosition.x, gridPosition.z];
-        return obj.GetUnit();
-    }
-    
     public int GetWidth()
     {
         return width;

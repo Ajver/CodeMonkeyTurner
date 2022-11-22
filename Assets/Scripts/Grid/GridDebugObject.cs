@@ -16,6 +16,6 @@ public class GridDebugObject : MonoBehaviour
 
     public void Update()
     {
-        text.text = gridObject.ToString();
+        // text.text = gridObject.ToString();
     }
 }

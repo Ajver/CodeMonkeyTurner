@@ -50,9 +50,17 @@ public class Unit : MonoBehaviour
         }
     }
     
-    public MoveAction GetMoveAction()
+    public T GetAction<T>() where T : BaseAction
     {
-        return moveAction;
+        foreach (BaseAction baseAction in baseActionsArray)
+        {
+            if (baseAction is T)
+            {
+                return baseAction as T;
+            }
+        }
+
+        return null;
     }
 
     public BaseAction[] GetBaseActionsArray()

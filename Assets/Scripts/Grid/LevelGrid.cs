@@ -10,7 +10,7 @@ public class LevelGrid : MonoBehaviour
     
     public static LevelGrid Instance { get; private set; }
     
-    private GridSystem gridSystem;
+    private GridSystem<GridObject> gridSystem;
     
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class LevelGrid : MonoBehaviour
         
         Instance = this;
         
-        gridSystem = new GridSystem(10, 10, 2f);
+        gridSystem = new GridSystem<GridObject>(10, 10, 2f, (gs, position) => new GridObject(gs, position));
         gridSystem.CreateDebugObjects(debugObjectPrefab);
     }
 
@@ -59,9 +59,17 @@ public class LevelGrid : MonoBehaviour
 
     public bool IsValidGridPosition(GridPosition gridPosition) => gridSystem.IsValidGridPosition(gridPosition);
 
-    public bool HasAnyUnitOnGridPosition(GridPosition gridPosition) => gridSystem.HasAnyUnitOnGridPosition(gridPosition);
+    public bool HasAnyUnitOnGridPosition(GridPosition gridPosition)
+    {
+        GridObject obj = gridSystem.GetGridObject(gridPosition);
+        return obj.HasAnyUnit();
+    }
 
-    public Unit GetUnitAtGridPosition(GridPosition gridPosition) => gridSystem.GetUnitAtGridPosition(gridPosition);
+    public Unit GetUnitAtGridPosition(GridPosition gridPosition)
+    {
+        GridObject obj = gridSystem.GetGridObject(gridPosition);
+        return obj.GetUnit();
+    }
     
     public int GetWidth() => gridSystem.GetWidth();
 
