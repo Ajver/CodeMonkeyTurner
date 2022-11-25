@@ -10,13 +10,8 @@ public class MoveAction : BaseAction
     
     [SerializeField] private int maxMoveDistance = 4; 
     
-    private Vector3 targetPosition;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        targetPosition = transform.position;
-    }
+    private List<Vector3> positionsList;
+    private int currentPositionIndex;
 
     public override string GetActionName()
     {
@@ -30,6 +25,7 @@ public class MoveAction : BaseAction
             return;
         }
 
+        Vector3 targetPosition = positionsList[currentPositionIndex];
         float stoppingDistance = 0.1f;
         if (Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
         {
@@ -43,14 +39,30 @@ public class MoveAction : BaseAction
         }
         else
         {
-            OnStopMoving?.Invoke(this, EventArgs.Empty);
-            ActionComplete();
+            currentPositionIndex++;
+
+            if (currentPositionIndex >= positionsList.Count)
+            {
+                OnStopMoving?.Invoke(this, EventArgs.Empty);
+                ActionComplete();
+            }
         }
     }
     
     public override void TakeAction(GridPosition gridPosition, Action callback)
     {
-        targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        List<GridPosition> gridPositionsPath = PathFinding.Instance.FindPath(unit.GetGridPosition(), gridPosition);
+
+        positionsList = new List<Vector3>();
+
+        foreach (GridPosition gridPos in gridPositionsPath)
+        {
+            Vector3 worldPos = LevelGrid.Instance.GetWorldPosition(gridPos);
+            positionsList.Add(worldPos);
+        }
+        
+        currentPositionIndex = 0;
+        
         OnStartMoving?.Invoke(this, EventArgs.Empty);
 
         ActionStart(callback);
@@ -82,6 +94,27 @@ public class MoveAction : BaseAction
 
                 if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testPos))
                 {
+                    continue;
+                }
+
+                if (!PathFinding.Instance.IsWalkableGridPosition(testPos))
+                {
+                    // There is an obstacle or so
+                    continue;
+                }
+
+                int pathLength;
+                List<GridPosition> path = PathFinding.Instance.FindPath(unitGridPosition, testPos, out pathLength);
+                
+                if (path == null)
+                {
+                    // There spot is unreachable
+                    continue;
+                }
+                
+                if (pathLength > maxMoveDistance * 10)
+                {
+                    // Path is too long
                     continue;
                 }
                 
