@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShootAction : BaseAction
 {
     public event EventHandler<OnShootEventArgs> OnShoot;
+    public static event EventHandler<OnShootEventArgs> OnAnyShoot;
 
     [SerializeField] private LayerMask obstaclesLayerMask;
     
@@ -86,7 +87,8 @@ public class ShootAction : BaseAction
             shootingUnit = unit,
         };
         OnShoot?.Invoke(this, eventArgs);
-
+        OnAnyShoot?.Invoke(this, eventArgs);
+        
         int damageAmount = 40;
         targetUnit.Damage(damageAmount);
     }
