@@ -21,6 +21,11 @@ public class PathNode
         return gridPosition.ToString();
     }
 
+    public GridPosition GetGridPosition()
+    {
+        return gridPosition;
+    }
+    
     public int GetGCost()
     {
         return gCost;
@@ -35,4 +40,37 @@ public class PathNode
     {
         return fCost;
     }
+    
+    
+    public void SetGCost(int cost)
+    {
+        gCost = cost;
+    }
+    
+    public void SetHCost(int cost)
+    {
+        hCost = cost;
+    }
+
+    public void CalculateFCost()
+    {
+        fCost = gCost + hCost;
+    }
+
+    public void ResetCameFromPathNode()
+    {
+        cameFromPathNode = null;
+    }
+
+    public void SetCameFromPathNode(PathNode pn)
+    {
+        cameFromPathNode = pn;
+    }
+
+    public PathNode GetCameFromPathNode()
+    {
+        return cameFromPathNode;
+    }
+    
 }
+
