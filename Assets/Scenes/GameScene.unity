@@ -374,6 +374,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugObjectPrefab: {fileID: 4486440069603274062, guid: 2be748da50b85479fa57d71aa7bc106e,
     type: 3}
+  width: 20
+  height: 10
+  cellSize: 2
 --- !u!4 &398047665
 Transform:
   m_ObjectHideFlags: 0

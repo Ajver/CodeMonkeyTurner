@@ -12,9 +12,6 @@ public class PathFinding : MonoBehaviour
     private const int MOVE_STAIGHT_COST = 10;
     private const int MOVE_DIAGONAL_COST = 14;
     
-    private int width;
-    private int height;
-    private float cellSize;
     private GridSystem<PathNode> gridSystem;
 
     private void Awake()
@@ -26,8 +23,11 @@ public class PathFinding : MonoBehaviour
             return;
         }
         Instance = this;
-        
-        gridSystem = new GridSystem<PathNode>(10, 10, 2f, (_gs, position) => new PathNode(position));
+    }
+
+    public void Setup(int width, int height, float cellSize)
+    {
+        gridSystem = new GridSystem<PathNode>(width, height, cellSize, (_gs, position) => new PathNode(position));
         gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
     }
 
