@@ -15,5 +15,24 @@ public class PathNode
     {
         this.gridPosition = gridPosition;
     }
+
+    public override string ToString()
+    {
+        return gridPosition.ToString();
+    }
+
+    public int GetGCost()
+    {
+        return gCost;
+    }
     
+    public int GetHCost()
+    {
+        return hCost;
+    }
+    
+    public int GetFCost()
+    {
+        return fCost;
+    }
 }
