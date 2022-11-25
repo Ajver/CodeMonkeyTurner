@@ -28,8 +28,6 @@ public class HealthSystem : MonoBehaviour
         }
         
         OnHealthChanged?.Invoke(this, EventArgs.Empty);
-        
-        Debug.Log(health);
     }
 
     public void Die()
