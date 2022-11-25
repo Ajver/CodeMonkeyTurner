@@ -6,6 +6,8 @@ public class ShootAction : BaseAction
 {
     public event EventHandler<OnShootEventArgs> OnShoot;
 
+    [SerializeField] private LayerMask obstaclesLayerMask;
+    
     public class OnShootEventArgs : EventArgs
     {
         public Unit targetUnit;
@@ -131,6 +133,8 @@ public class ShootAction : BaseAction
     {
         List<GridPosition> validPosList = new List<GridPosition>();
 
+        Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        
         for (int x = -shootDistance; x <= shootDistance; x++)
         {
             for (int z = -shootDistance; z <= shootDistance; z++)
@@ -158,6 +162,22 @@ public class ShootAction : BaseAction
                 Unit testTargetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testPos);
                 if (testTargetUnit.IsEnemy() == unit.IsEnemy())
                 {
+                    continue;
+                }
+
+                Vector3 testTargetWorldPosition = testTargetUnit.transform.position;
+                Vector3 unitsDiff = testTargetWorldPosition - unitWorldPosition;
+                Vector3 shootDir = unitsDiff.normalized;
+
+                float unitShoulderHeight = 1.7f;
+                if (Physics.Raycast(
+                    unitWorldPosition + Vector3.up * unitShoulderHeight,
+                    shootDir,
+                    unitsDiff.magnitude,
+                    obstaclesLayerMask
+                    ))
+                {
+                    // There is an obstacle
                     continue;
                 }
                 

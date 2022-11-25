@@ -10,7 +10,7 @@ public class Unit : MonoBehaviour
     public static event EventHandler OnAnyUnitSpawned;
     public static event EventHandler OnAnyUnitDead;
     
-    private const int ACTION_POINTS_MAX = 20; 
+    private const int ACTION_POINTS_MAX = 2; 
 
     private MoveAction moveAction;
     private BaseAction[] baseActionsArray;
