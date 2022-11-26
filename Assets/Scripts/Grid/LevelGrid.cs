@@ -62,16 +62,22 @@ public class LevelGrid : MonoBehaviour
         OnAnyUnitMovedGridPosition?.Invoke(this, EventArgs.Empty);
     }
 
-    public Door GetDoorAtGridPosition(GridPosition gridPosition)
+    public IInteractable GetInteractableAtGridPosition(GridPosition gridPosition)
     {
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        return gridObj.GetDoor();
+        return gridObj.GetInteractable();
     }
 
-    public void SetDoorAtGridPosition(GridPosition gridPosition, Door door)
+    public bool HasInteractableAtGridPosition(GridPosition gridPosition)
     {
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.SetDoor(door);
+        return gridObj.GetInteractable() != null;
+    }
+
+    public void SetInteractableAtGridPosition(GridPosition gridPosition, IInteractable interactable)
+    {
+        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
+        gridObj.SetInteractable(interactable);
     }
     
     public GridPosition GetGridPosition(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);
