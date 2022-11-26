@@ -28,8 +28,7 @@ public class GrenadeAction : BaseAction
         GrenadeProjectile grenade = Instantiate(grenadeProjectilePrefab, unit.transform.position, Quaternion.identity);
         grenade.Setup(gridPosition, OnGrenadeBehaviorComplete);
         
-        ActionStart(callback);
-        Debug.Log("Grenade action");
+        ActionStart(callback);  
     }
 
     private void OnGrenadeBehaviorComplete()
