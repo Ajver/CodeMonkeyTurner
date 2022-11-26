@@ -5,6 +5,7 @@ public class GridObject
     private GridSystem<GridObject> gridSystem;
     private GridPosition gridPosition;
     private List<Unit> units;
+    private Door door;
     
     public GridObject(GridSystem<GridObject> gridSystem, GridPosition gridPosition)
     {
@@ -54,6 +55,16 @@ public class GridObject
     public bool HasAnyUnit()
     {
         return units.Count > 0;
+    }
+
+    public Door GetDoor()
+    {
+        return door;
+    }
+
+    public void SetDoor(Door newDoor)
+    {
+        door = newDoor;
     }
     
 }
