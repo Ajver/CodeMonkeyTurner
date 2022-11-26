@@ -8,6 +8,8 @@ public class DestructibleCrate : MonoBehaviour
 
     public static event EventHandler OnAnyDestroyed;
 
+    [SerializeField] private Transform crateDestroyedPrefab;
+    
     private GridPosition gridPosition;
 
     private void Start()
@@ -17,6 +19,8 @@ public class DestructibleCrate : MonoBehaviour
 
     public void Damage()
     {
+        Instantiate(crateDestroyedPrefab, transform.position, transform.rotation);
+        
         Destroy(gameObject);
         OnAnyDestroyed?.Invoke(this, EventArgs.Empty);
     }
