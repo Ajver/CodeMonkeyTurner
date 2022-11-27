@@ -75,7 +75,7 @@ public class PathNode
 
     public bool IsWalkable()
     {
-        return isWalkable;
+        return isWalkable && !LevelGrid.Instance.HasAnyUnitOnGridPosition(gridPosition);
     }
 
     public void SetIsWalkable(bool flag)

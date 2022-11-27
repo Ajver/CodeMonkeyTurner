@@ -36,28 +36,25 @@ public class LevelGrid : MonoBehaviour
         PathFinding.Instance.Setup(width, height, cellSize);
     }
     
-    public void AddUnitAtGridPosition(GridPosition gridPosition, Unit unit)
+    public void SetUnitAtGridPosition(GridPosition gridPosition, Unit unit)
     { 
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.AddUnit(unit);
+        gridObj.SetUnit(unit);
     }
 
-    public List<Unit> GetUnitsAtGridPosition(GridPosition gridPosition)
+    public void ClearUnitAtGridPosition(GridPosition gridPosition)
     {
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        return gridObj.GetUnits();
-    }
-
-    public void RemoveUnitAtGridPosition(GridPosition gridPosition, Unit unit)
-    {
-        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.RemoveUnit(unit);
+        gridObj.ClearUnit();
     }
     
     public void UnitMovedGridPosition(Unit unit, GridPosition fromGridPosition, GridPosition toGridPosition)
     {
-        RemoveUnitAtGridPosition(fromGridPosition, unit);
-        AddUnitAtGridPosition(toGridPosition, unit);
+        ClearUnitAtGridPosition(fromGridPosition);
+        ClearDamageableAtGridPosition(fromGridPosition);
+        
+        SetUnitAtGridPosition(toGridPosition, unit);
+        SetDamageableAtGridPosition(toGridPosition, unit);
         
         OnAnyUnitMovedGridPosition?.Invoke(this, EventArgs.Empty);
     }
@@ -120,7 +117,7 @@ public class LevelGrid : MonoBehaviour
     public bool HasAnyUnitOnGridPosition(GridPosition gridPosition)
     {
         GridObject obj = gridSystem.GetGridObject(gridPosition);
-        return obj.HasAnyUnit();
+        return obj.HasUnit();
     }
 
     public Unit GetUnitAtGridPosition(GridPosition gridPosition)

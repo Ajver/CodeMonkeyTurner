@@ -66,6 +66,7 @@ public class ExplodingBarrel : MonoBehaviour, IInteractable, IDamageable
         
         LevelGrid.Instance.ClearInteractableAtGridPosition(gridPosition);
         LevelGrid.Instance.ClearDamageableAtGridPosition(gridPosition);
+        PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, true);
     }
     
 }

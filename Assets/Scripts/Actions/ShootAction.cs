@@ -160,7 +160,6 @@ public class ShootAction : BaseAction
                     continue;
                 }
 
-                // targetUnit will NEVER be null, because we checked above if there is a Unit on this position
                 IDamageable testDamageableTarget = LevelGrid.Instance.GetDamageableAtGridPosition(testPos);
                 if (testDamageableTarget.GetGameTeam() == unit.GetGameTeam())
                 {
@@ -202,21 +201,48 @@ public class ShootAction : BaseAction
 
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
-        Unit unit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+        IDamageable damageable = LevelGrid.Instance.GetDamageableAtGridPosition(gridPosition);
 
-        // The lower HP unit has, the bigger the score is (so it's more attractive to be shoot) 
-        int unitWeaknessScore = Mathf.RoundToInt((1 - unit.GetHealthNormalized()) * 100f);
-        
-        return new EnemyAIAction
-        {
-            gridPosition = gridPosition,
-            actionValue = 100 + unitWeaknessScore,
-        };
+        switch (damageable) {
+            case Unit unit:
+                // The lower HP unit has, the bigger the score is (so it's more attractive to be shoot) 
+                int unitWeaknessScore = Mathf.RoundToInt((1 - unit.GetHealthNormalized()) * 100f);
+            
+                return new EnemyAIAction
+                {
+                    gridPosition = gridPosition,
+                    actionValue = 100 + unitWeaknessScore,
+                };
+            case ExplodingBarrel barrel:
+                // TEMP: Now destroy ALL barrels
+                return new EnemyAIAction
+                {
+                    gridPosition = gridPosition,
+                    actionValue = 1000,
+                };
+            default:
+                // Not unit, neither Exploding barrel. Very unattractive target.
+                return new EnemyAIAction
+                {
+                    gridPosition = gridPosition,
+                    actionValue = 0,
+                };
+        }
     }
 
-    public int GetTargetCountAtPosition(GridPosition gridPosition)
+    public int GetUnitsCountAtPosition(GridPosition gridPosition)
     {
-        List<GridPosition> targetsPositions = GetValidActionGridPositionList();
-        return targetsPositions.Count;
+        List<GridPosition> targetsPositions = GetValidActionGridPositionList(gridPosition);
+
+        int unitsCount = 0;
+        foreach (GridPosition testPos in targetsPositions)
+        {
+            if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testPos))
+            {
+                unitsCount++;
+            }
+        }
+        
+        return unitsCount;
     }
 }

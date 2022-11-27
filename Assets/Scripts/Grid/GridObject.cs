@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GridObject
 {
     private GridSystem<GridObject> gridSystem;
     private GridPosition gridPosition;
-    private List<Unit> units;
+    private Unit unit;
     private IInteractable interactable;
     private IDamageable damageable;
     
@@ -12,50 +13,38 @@ public class GridObject
     {
         this.gridSystem = gridSystem;
         this.gridPosition = gridPosition;
-
-        units = new List<Unit>();
     }
 
     public override string ToString()
     {
-        string unitString = "";
+        return gridPosition + "\n" + unit;
+    }
 
-        foreach (Unit unit in units)
+    public void SetUnit(Unit newUnit)
+    {
+        if (unit != null)
         {
-            unitString += "\n" + unit;
+            // Some unit is already standing here.
+            // The other unit is probably just moving through this place
+            return;
         }
-        
-        return gridPosition + unitString;
+
+        unit = newUnit;
     }
 
-    public void AddUnit(Unit unit)
+    public void ClearUnit()
     {
-        units.Add(unit);
-    }
-
-    public void RemoveUnit(Unit unit)
-    {
-        units.Remove(unit);
+        unit = null;
     }
     
-    public List<Unit> GetUnits()
-    {
-        return units;
-    }
-
     public Unit GetUnit()
     {
-        if (HasAnyUnit())
-        {
-            return units[0];
-        }
-
-        return null;
+        return unit;
     }
-
-    public bool HasAnyUnit()
+    
+    public bool HasUnit()
     {
-        return units.Count > 0;
+        return unit != null;
     }
 
     public IInteractable GetInteractable()

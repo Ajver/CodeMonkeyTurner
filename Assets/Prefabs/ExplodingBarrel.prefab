@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5445511777275667912}
   - component: {fileID: 3378503106751311934}
   - component: {fileID: 9097087167421943778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExplodingBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,6 +69,10 @@ PrefabInstance:
     - target: {fileID: 1547116696582102, guid: f750d5f061e724f4c827ab6b376e2550, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Barrel_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547116696582102, guid: f750d5f061e724f4c827ab6b376e2550, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4483658618797090, guid: f750d5f061e724f4c827ab6b376e2550, type: 3}
       propertyPath: m_RootOrder

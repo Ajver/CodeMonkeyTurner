@@ -10,7 +10,7 @@ public class Unit : MonoBehaviour, IDamageable
     public static event EventHandler OnAnyUnitSpawned;
     public static event EventHandler OnAnyUnitDead;
     
-    private const int ACTION_POINTS_MAX = 20; 
+    private const int ACTION_POINTS_MAX = 3; 
 
     private MoveAction moveAction;
     private BaseAction[] baseActionsArray;
@@ -32,7 +32,7 @@ public class Unit : MonoBehaviour, IDamageable
     private void Start()
     {   
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
+        LevelGrid.Instance.SetUnitAtGridPosition(gridPosition, this);
         LevelGrid.Instance.SetDamageableAtGridPosition(gridPosition, this);
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
         
@@ -124,7 +124,7 @@ public class Unit : MonoBehaviour, IDamageable
 
     private void HealthSystem_OnDead(object sender, EventArgs e)
     {
-        LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
+        LevelGrid.Instance.ClearUnitAtGridPosition(gridPosition);
         LevelGrid.Instance.ClearDamageableAtGridPosition(gridPosition);
         
         Destroy(gameObject);
