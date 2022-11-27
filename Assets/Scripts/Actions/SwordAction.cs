@@ -21,7 +21,7 @@ public class SwordAction : BaseAction
     
     private int swordDistance = 1;
 
-    private Unit targetUnit;
+    private IDamageable damageableTarget;
     
     public override string GetActionName()
     {
@@ -34,7 +34,7 @@ public class SwordAction : BaseAction
         float beforeHitStateTime = 0.7f;
         stateTimer = beforeHitStateTime;
 
-        targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+        damageableTarget = LevelGrid.Instance.GetDamageableAtGridPosition(gridPosition);
         
         OnSwordActionStarted?.Invoke(this, EventArgs.Empty);
         
@@ -63,14 +63,14 @@ public class SwordAction : BaseAction
                     continue;
                 }
 
-                if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testPos))
+                if (!LevelGrid.Instance.HasDamageableOnGridPosition(testPos))
                 {
                     continue;
                 }
 
                 // targetUnit will NEVER be null, because we checked above if there is a Unit on this position
-                Unit testTargetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testPos);
-                if (testTargetUnit.IsEnemy() == unit.IsEnemy())
+                IDamageable testDamageableTarget = LevelGrid.Instance.GetDamageableAtGridPosition(testPos);
+                if (testDamageableTarget.GetGameTeam() == unit.GetGameTeam())
                 {
                     continue;
                 }
@@ -103,7 +103,7 @@ public class SwordAction : BaseAction
         switch (state)
         {
             case State.SwingingSwordBeforeHit:
-                Vector3 aimDirection = (targetUnit.transform.position - unit.transform.position).normalized;
+                Vector3 aimDirection = (damageableTarget.GetTransform().position - unit.transform.position).normalized;
 
                 float rotationSpeed = 15f;
                 transform.forward = Vector3.Lerp(transform.forward, aimDirection, rotationSpeed * Time.deltaTime);
@@ -127,7 +127,7 @@ public class SwordAction : BaseAction
                 float afterHitStateTime = 0.1f;
                 stateTimer = afterHitStateTime; 
                 
-                targetUnit.Damage(100);
+                damageableTarget.Damage(100);
                 
                 OnAnySwordHit?.Invoke(this, EventArgs.Empty);
                 

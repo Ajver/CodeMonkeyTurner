@@ -15,11 +15,14 @@ public class DestructibleCrate : MonoBehaviour, IDamageable
     private void Start()
     {
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+        LevelGrid.Instance.SetDamageableAtGridPosition(gridPosition, this);
     }
 
     public void Damage(int dmg)
     {
         Instantiate(crateDestroyedPrefab, transform.position, transform.rotation);
+        
+        LevelGrid.Instance.ClearDamageableAtGridPosition(gridPosition);
         
         Destroy(gameObject);
         OnAnyDestroyed?.Invoke(this, EventArgs.Empty);
