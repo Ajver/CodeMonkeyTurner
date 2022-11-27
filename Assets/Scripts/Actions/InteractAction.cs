@@ -25,7 +25,6 @@ public class InteractAction : BaseAction
     {
         IInteractable interactable = LevelGrid.Instance.GetInteractableAtGridPosition(gridPosition);
         interactable.Interact(OnInteractComplete);
-        Debug.Log("Interact start");
         ActionStart(callback);
     }
 

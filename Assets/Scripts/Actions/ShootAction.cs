@@ -11,7 +11,7 @@ public class ShootAction : BaseAction
     
     public class OnShootEventArgs : EventArgs
     {
-        public Unit targetUnit;
+        public IShootable shootableTarget;
         public Unit shootingUnit;
     } 
     
@@ -27,7 +27,7 @@ public class ShootAction : BaseAction
     private State state;
     private float stateTimer;
 
-    private Unit targetUnit;
+    private IShootable shootableTarget;
     private bool canShootBullet;
     
     public override string GetActionName()
@@ -64,7 +64,7 @@ public class ShootAction : BaseAction
 
     private void Aim()
     {
-        Vector3 faceDirection = (targetUnit.transform.position - unit.transform.position).normalized;
+        Vector3 faceDirection = (shootableTarget.GetTransform().position - unit.transform.position).normalized;
 
         float rotationSpeed = 10f;
         transform.forward = Vector3.Lerp(transform.forward, faceDirection, rotationSpeed * Time.deltaTime);
@@ -83,14 +83,14 @@ public class ShootAction : BaseAction
     {
         OnShootEventArgs eventArgs = new OnShootEventArgs
         {
-            targetUnit = targetUnit,
+            shootableTarget = shootableTarget,
             shootingUnit = unit,
         };
         OnShoot?.Invoke(this, eventArgs);
         OnAnyShoot?.Invoke(this, eventArgs);
         
         int damageAmount = 40;
-        targetUnit.Damage(damageAmount);
+        shootableTarget.Damage(damageAmount);
     }
     
     private void NextState()
@@ -116,7 +116,7 @@ public class ShootAction : BaseAction
     
     public override void TakeAction(GridPosition gridPosition, Action callback)
     {
-        targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+        shootableTarget = LevelGrid.Instance.GetShootableAtGridPosition(gridPosition);
         
         state = State.Aiming;
         float aimingStateTime = 1f;
@@ -155,19 +155,19 @@ public class ShootAction : BaseAction
                     continue;
                 }
                 
-                if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testPos))
+                if (!LevelGrid.Instance.HasShootableOnGridPosition(testPos))
                 {
                     continue;
                 }
 
                 // targetUnit will NEVER be null, because we checked above if there is a Unit on this position
-                Unit testTargetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testPos);
-                if (testTargetUnit.IsEnemy() == unit.IsEnemy())
+                IShootable testShootableTarget = LevelGrid.Instance.GetShootableAtGridPosition(testPos);
+                if (testShootableTarget.GetGameTeam() == unit.GetGameTeam())
                 {
                     continue;
                 }
 
-                Vector3 testTargetWorldPosition = testTargetUnit.transform.position;
+                Vector3 testTargetWorldPosition = testShootableTarget.GetTransform().position;
                 Vector3 unitsDiff = testTargetWorldPosition - unitWorldPosition;
                 Vector3 shootDir = unitsDiff.normalized;
 
@@ -190,9 +190,9 @@ public class ShootAction : BaseAction
         return validPosList;
     }
 
-    public Unit GetTargetUnit()
+    public IShootable GetShootableTarget()
     {
-        return targetUnit;
+        return shootableTarget;
     }
 
     public int GetMaxShootDistance()

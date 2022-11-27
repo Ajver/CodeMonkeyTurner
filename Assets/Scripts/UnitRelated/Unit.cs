@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit : MonoBehaviour, IShootable
 {
 
     [SerializeField] private bool isEnemy;
@@ -33,6 +33,7 @@ public class Unit : MonoBehaviour
     {   
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
+        LevelGrid.Instance.SetShootableAtGridPosition(gridPosition, this);
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
         
         OnAnyUnitSpawned?.Invoke(this, EventArgs.Empty);
@@ -124,6 +125,8 @@ public class Unit : MonoBehaviour
     private void HealthSystem_OnDead(object sender, EventArgs e)
     {
         LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
+        LevelGrid.Instance.ClearShootableAtGridPosition(gridPosition);
+        
         Destroy(gameObject);
         
         OnAnyUnitDead?.Invoke(this, EventArgs.Empty);
@@ -131,4 +134,20 @@ public class Unit : MonoBehaviour
 
     public float GetHealthNormalized() => healthSystem.GetHealthNormalized();
     
+    public GameTeam GetGameTeam()
+    {
+        if (isEnemy)
+        {
+            return GameTeam.Enemy;
+        }
+        else
+        {
+            return GameTeam.Player;
+        }
+    }
+    
+    public Transform GetTransform()
+    {
+        return transform;
+    }
 }

@@ -32,10 +32,10 @@ public class CameraManager : MonoBehaviour
         {
             case ShootAction shootAction:
                 Unit shooterUnit = shootAction.GetUnit();
-                Unit targetUnit = shootAction.GetTargetUnit();
+                Transform targetTransform = shootAction.GetShootableTarget().GetTransform();
                 
                 Vector3 cameraCharacterHeight = Vector3.up * 1.7f;
-                Vector3 shootDir = (targetUnit.transform.position - shooterUnit.transform.position).normalized;
+                Vector3 shootDir = (targetTransform.position - shooterUnit.transform.position).normalized;
 
                 float shoulderOffsetAmount = 0.5f;
                 Vector3 shoulderOffset = Quaternion.Euler(0, 90, 0) * shootDir * shoulderOffsetAmount;
@@ -47,7 +47,7 @@ public class CameraManager : MonoBehaviour
                     shootDir * -1;
 
                 actionCameraGameObject.transform.position = actionCameraPosition;
-                actionCameraGameObject.transform.LookAt(targetUnit.transform.position + cameraCharacterHeight);
+                actionCameraGameObject.transform.LookAt(targetTransform.position + cameraCharacterHeight);
                 
                 ShowActionCamera();
                 break;

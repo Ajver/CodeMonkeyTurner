@@ -79,6 +79,37 @@ public class LevelGrid : MonoBehaviour
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
         gridObj.SetInteractable(interactable);
     }
+
+    public void ClearInteractableAtGridPosition(GridPosition gridPosition)
+    {
+        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
+        gridObj.ClearInteractable();
+    }
+    
+    public bool HasShootableOnGridPosition(GridPosition gridPosition)
+    {
+        GridObject gridObject = gridSystem.GetGridObject(gridPosition);
+        return gridObject.GetShootable() != null;
+    }
+
+    public void SetShootableAtGridPosition(GridPosition gridPosition, IShootable shootable)
+    {
+        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
+        gridObj.SetShootable(shootable);
+    }
+    
+    public IShootable GetShootableAtGridPosition(GridPosition gridPosition)
+    {
+        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
+        return gridObj.GetShootable();
+    }
+
+    public void ClearShootableAtGridPosition(GridPosition gridPosition)
+    {
+        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
+        gridObj.ClearShootable();
+    }
+
     
     public GridPosition GetGridPosition(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);
 
