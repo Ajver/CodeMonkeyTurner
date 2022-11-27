@@ -213,13 +213,14 @@ public class ShootAction : BaseAction
                     gridPosition = gridPosition,
                     actionValue = 100 + unitWeaknessScore,
                 };
-            case ExplodingBarrel barrel:
-                // TEMP: Now destroy ALL barrels
-                return new EnemyAIAction
-                {
-                    gridPosition = gridPosition,
-                    actionValue = 1000,
-                };
+            // TODO: Count how many enemies will this kill (excluding case when it kills allies too)
+            //  and decide if shoot or not
+            // case ExplodingBarrel barrel:
+            //     return new EnemyAIAction
+            //     {
+            //         gridPosition = gridPosition,
+            //         actionValue = 0,
+            //     };
             default:
                 // Not unit, neither Exploding barrel. Very unattractive target.
                 return new EnemyAIAction

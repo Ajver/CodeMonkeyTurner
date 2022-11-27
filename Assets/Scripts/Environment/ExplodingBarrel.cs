@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class ExplodingBarrel : MonoBehaviour, IInteractable, IDamageable
 {
+    [SerializeField] private Transform explosionEffectPrefab;
+
+    public static event EventHandler OnAnyBarrelExploded;
+    
     private GridPosition gridPosition;
 
     private bool firedToExplode;
@@ -61,12 +65,27 @@ public class ExplodingBarrel : MonoBehaviour, IInteractable, IDamageable
     
     private void Explode()
     {
-        Debug.Log(gameObject + " Exploded!");
+        float radius = 5f;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.Damage(150);
+            }
+        }
+        
         Destroy(gameObject);
+
+        Vector3 offset = Vector3.up * 0.5f;
+        Instantiate(explosionEffectPrefab, transform.position + offset, transform.rotation);
+
+        OnAnyBarrelExploded?.Invoke(this, EventArgs.Empty);
         
         LevelGrid.Instance.ClearInteractableAtGridPosition(gridPosition);
         LevelGrid.Instance.ClearDamageableAtGridPosition(gridPosition);
         PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, true);
     }
-    
+ 
 }

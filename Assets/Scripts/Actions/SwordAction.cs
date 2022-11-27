@@ -84,11 +84,23 @@ public class SwordAction : BaseAction
 
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
-        return new EnemyAIAction
+        if (LevelGrid.Instance.HasUnitOnGridPosition(gridPosition))
         {
-            gridPosition = gridPosition,
-            actionValue = 200,
-        };
+            return new EnemyAIAction
+            {
+                gridPosition = gridPosition,
+                actionValue = 200,
+            };
+        }
+        else
+        {
+            // Attacking non-Unit is stupid idea. Don't do this.
+            return new EnemyAIAction
+            {
+                gridPosition = gridPosition,
+                actionValue = 0,
+            };
+        }
     }
 
     public void Update()

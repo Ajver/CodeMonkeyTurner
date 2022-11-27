@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8834d3aa82b62549bb86b1f95518ac39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionEffectPrefab: {fileID: 669285643184660720, guid: 61f701f428158e972994ab3664ea322f,
+    type: 3}
 --- !u!65 &9097087167421943778
 BoxCollider:
   m_ObjectHideFlags: 0
