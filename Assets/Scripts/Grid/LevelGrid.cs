@@ -50,12 +50,18 @@ public class LevelGrid : MonoBehaviour
     
     public void UnitMovedGridPosition(Unit unit, GridPosition fromGridPosition, GridPosition toGridPosition)
     {
-        ClearUnitAtGridPosition(fromGridPosition);
-        ClearDamageableAtGridPosition(fromGridPosition);
-        
-        SetUnitAtGridPosition(toGridPosition, unit);
-        SetDamageableAtGridPosition(toGridPosition, unit);
-        
+        if (GetUnitAtGridPosition(fromGridPosition) == unit)
+        {
+            ClearUnitAtGridPosition(fromGridPosition);
+            ClearDamageableAtGridPosition(fromGridPosition);
+        }
+
+        if (!HasUnitOnGridPosition(toGridPosition))
+        {
+            SetUnitAtGridPosition(toGridPosition, unit);
+            SetDamageableAtGridPosition(toGridPosition, unit);
+        }
+
         OnAnyUnitMovedGridPosition?.Invoke(this, EventArgs.Empty);
     }
 
@@ -114,7 +120,7 @@ public class LevelGrid : MonoBehaviour
 
     public bool IsValidGridPosition(GridPosition gridPosition) => gridSystem.IsValidGridPosition(gridPosition);
 
-    public bool HasAnyUnitOnGridPosition(GridPosition gridPosition)
+    public bool HasUnitOnGridPosition(GridPosition gridPosition)
     {
         GridObject obj = gridSystem.GetGridObject(gridPosition);
         return obj.HasUnit();

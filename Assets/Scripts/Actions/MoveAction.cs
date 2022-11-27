@@ -92,7 +92,7 @@ public class MoveAction : BaseAction
                     continue;
                 }
 
-                if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testPos))
+                if (LevelGrid.Instance.HasUnitOnGridPosition(testPos))
                 {
                     continue;
                 }

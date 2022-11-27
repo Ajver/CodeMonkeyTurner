@@ -237,7 +237,7 @@ public class ShootAction : BaseAction
         int unitsCount = 0;
         foreach (GridPosition testPos in targetsPositions)
         {
-            if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testPos))
+            if (LevelGrid.Instance.HasUnitOnGridPosition(testPos))
             {
                 unitsCount++;
             }
