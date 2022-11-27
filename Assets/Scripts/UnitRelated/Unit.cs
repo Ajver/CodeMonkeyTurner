@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Unit : MonoBehaviour, IShootable
+public class Unit : MonoBehaviour, IDamageable
 {
 
     [SerializeField] private bool isEnemy;
@@ -33,7 +33,7 @@ public class Unit : MonoBehaviour, IShootable
     {   
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
-        LevelGrid.Instance.SetShootableAtGridPosition(gridPosition, this);
+        LevelGrid.Instance.SetDamageableAtGridPosition(gridPosition, this);
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
         
         OnAnyUnitSpawned?.Invoke(this, EventArgs.Empty);
@@ -125,7 +125,7 @@ public class Unit : MonoBehaviour, IShootable
     private void HealthSystem_OnDead(object sender, EventArgs e)
     {
         LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
-        LevelGrid.Instance.ClearShootableAtGridPosition(gridPosition);
+        LevelGrid.Instance.ClearDamageableAtGridPosition(gridPosition);
         
         Destroy(gameObject);
         

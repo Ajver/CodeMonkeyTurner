@@ -86,28 +86,28 @@ public class LevelGrid : MonoBehaviour
         gridObj.ClearInteractable();
     }
     
-    public bool HasShootableOnGridPosition(GridPosition gridPosition)
+    public bool HasDamageableOnGridPosition(GridPosition gridPosition)
     {
         GridObject gridObject = gridSystem.GetGridObject(gridPosition);
-        return gridObject.GetShootable() != null;
+        return gridObject.GetDamageable() != null;
     }
 
-    public void SetShootableAtGridPosition(GridPosition gridPosition, IShootable shootable)
+    public void SetDamageableAtGridPosition(GridPosition gridPosition, IDamageable damageable)
     {
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.SetShootable(shootable);
+        gridObj.SetDamageable(damageable);
     }
     
-    public IShootable GetShootableAtGridPosition(GridPosition gridPosition)
+    public IDamageable GetDamageableAtGridPosition(GridPosition gridPosition)
     {
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        return gridObj.GetShootable();
+        return gridObj.GetDamageable();
     }
 
-    public void ClearShootableAtGridPosition(GridPosition gridPosition)
+    public void ClearDamageableAtGridPosition(GridPosition gridPosition)
     {
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.ClearShootable();
+        gridObj.ClearDamageable();
     }
 
     

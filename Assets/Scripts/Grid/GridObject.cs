@@ -6,7 +6,7 @@ public class GridObject
     private GridPosition gridPosition;
     private List<Unit> units;
     private IInteractable interactable;
-    private IShootable shootable;
+    private IDamageable damageable;
     
     public GridObject(GridSystem<GridObject> gridSystem, GridPosition gridPosition)
     {
@@ -73,19 +73,19 @@ public class GridObject
         interactable = null;
     }
 
-    public IShootable GetShootable()
+    public IDamageable GetDamageable()
     {
-        return shootable;
+        return damageable;
     }
     
-    public void SetShootable(IShootable shot)
+    public void SetDamageable(IDamageable hitt)
     {
-        shootable = shot;
+        damageable = hitt;
     }
 
-    public void ClearShootable()
+    public void ClearDamageable()
     {
-        shootable = null;
+        damageable = null;
     }
     
 }

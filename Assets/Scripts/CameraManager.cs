@@ -32,7 +32,7 @@ public class CameraManager : MonoBehaviour
         {
             case ShootAction shootAction:
                 Unit shooterUnit = shootAction.GetUnit();
-                Transform targetTransform = shootAction.GetShootableTarget().GetTransform();
+                Transform targetTransform = shootAction.GetDamageableTarget().GetTransform();
                 
                 Vector3 cameraCharacterHeight = Vector3.up * 1.7f;
                 Vector3 shootDir = (targetTransform.position - shooterUnit.transform.position).normalized;

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructibleCrate : MonoBehaviour
+public class DestructibleCrate : MonoBehaviour, IDamageable
 {
 
     public static event EventHandler OnAnyDestroyed;
@@ -17,7 +17,7 @@ public class DestructibleCrate : MonoBehaviour
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
     }
 
-    public void Damage()
+    public void Damage(int dmg)
     {
         Instantiate(crateDestroyedPrefab, transform.position, transform.rotation);
         
@@ -29,5 +29,14 @@ public class DestructibleCrate : MonoBehaviour
     {
         return gridPosition;
     }
-    
+
+    public GameTeam GetGameTeam()
+    {
+        return GameTeam.Neutral;
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
 }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ExplodingBarrel : MonoBehaviour, IInteractable, IShootable
+public class ExplodingBarrel : MonoBehaviour, IInteractable, IDamageable
 {
     private GridPosition gridPosition;
 
@@ -12,7 +12,7 @@ public class ExplodingBarrel : MonoBehaviour, IInteractable, IShootable
     {
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.SetInteractableAtGridPosition(gridPosition, this);
-        LevelGrid.Instance.SetShootableAtGridPosition(gridPosition, this);
+        LevelGrid.Instance.SetDamageableAtGridPosition(gridPosition, this);
     }
 
     private void Update()
@@ -65,7 +65,7 @@ public class ExplodingBarrel : MonoBehaviour, IInteractable, IShootable
         Destroy(gameObject);
         
         LevelGrid.Instance.ClearInteractableAtGridPosition(gridPosition);
-        LevelGrid.Instance.ClearShootableAtGridPosition(gridPosition);
+        LevelGrid.Instance.ClearDamageableAtGridPosition(gridPosition);
     }
     
 }

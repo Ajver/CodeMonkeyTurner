@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5445511777275667912}
   - component: {fileID: 3378503106751311934}
+  - component: {fileID: 9097087167421943778}
   m_Layer: 0
   m_Name: ExplodingBarrel
   m_TagString: Untagged
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8834d3aa82b62549bb86b1f95518ac39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &9097087167421943778
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445511777275667913}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 1.6, z: 1.2}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1001 &5445511776802701907
 PrefabInstance:
   m_ObjectHideFlags: 0

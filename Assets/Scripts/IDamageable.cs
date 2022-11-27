@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IShootable
+public interface IDamageable
 {
 
     void Damage(int dmg);

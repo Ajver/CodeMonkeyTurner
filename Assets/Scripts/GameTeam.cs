@@ -3,6 +3,6 @@ public enum GameTeam
     Player,
     Enemy,
     
-    // Used for shootable environment
+    // Used for damageable environment
     Neutral,
 }
