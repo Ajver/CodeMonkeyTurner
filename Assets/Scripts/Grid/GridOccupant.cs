@@ -32,7 +32,7 @@ public abstract class GridOccupant : MonoBehaviour
 
     protected abstract void OccupantUpdate();
     
-    protected void OnDestroy()
+    protected void ClearItselfFromGrid()
     {
         LevelGrid.Instance.ClearOccupantAtGridPosition(gridPosition);
     }

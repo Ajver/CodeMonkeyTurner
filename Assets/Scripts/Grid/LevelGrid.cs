@@ -36,7 +36,7 @@ public class LevelGrid : MonoBehaviour
     {
         PathFinding.Instance.Setup(width, height, cellSize);
     }
-    
+
     public void OccupantMovedGridPosition(GridOccupant occupant, GridPosition fromGridPosition, GridPosition toGridPosition)
     {
         if (GetOccupantAtGridPosition(fromGridPosition) == occupant)

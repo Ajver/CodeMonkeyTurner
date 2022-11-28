@@ -11,8 +11,10 @@ public class DestructibleCrate : GridOccupant, IDamageable
     public void Damage(int dmg)
     {
         Instantiate(crateDestroyedPrefab, transform.position, transform.rotation);
-        
+
         Destroy(gameObject);
+        ClearItselfFromGrid();
+        
         OnAnyDestroyed?.Invoke(this, EventArgs.Empty);
     }
 

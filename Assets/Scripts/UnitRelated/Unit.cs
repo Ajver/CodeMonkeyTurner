@@ -105,6 +105,7 @@ public class Unit : GridOccupant, IDamageable
     private void HealthSystem_OnDead(object sender, EventArgs e)
     {
         Destroy(gameObject);
+        ClearItselfFromGrid();
         
         OnAnyUnitDead?.Invoke(this, EventArgs.Empty);
     }

@@ -72,13 +72,12 @@ public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
         }
         
         Destroy(gameObject);
+        ClearItselfFromGrid();
 
         Vector3 offset = Vector3.up * 0.5f;
         Instantiate(explosionEffectPrefab, transform.position + offset, transform.rotation);
 
         OnAnyBarrelExploded?.Invoke(this, EventArgs.Empty);
-        
-        PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, true);
     }
  
 }
