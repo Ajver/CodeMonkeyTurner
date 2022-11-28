@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelArea : MonoBehaviour
@@ -60,20 +61,25 @@ public class LevelArea : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    // private void OnDrawGizmosSelected()
+    // {
+    //     if (isAreaActive)
+    //     {
+    //         Gizmos.color = new Color(0.2f, 0.8f, 0.2f, 0.5f);     
+    //     }
+    //     else
+    //     {
+    //         Gizmos.color = new Color(0.3f, 0.3f, 0.3f, 0.5f);            
+    //     }
+    //     
+    //     Rect rect = GetBoundsRect();
+    //     Vector3 size = new Vector3(rect.width, 1f, rect.height);
+    //     Vector3 centerPos = new Vector3(rect.x, 1f, rect.y) + size * 0.5f;
+    //     Gizmos.DrawCube(centerPos, size);
+    // }
+    
+    private void OnSelect()
     {
-        if (isAreaActive)
-        {
-            Gizmos.color = new Color(0.2f, 0.8f, 0.2f, 0.5f);     
-        }
-        else
-        {
-            Gizmos.color = new Color(0.3f, 0.3f, 0.3f, 0.5f);            
-        }
-        
-        Rect rect = GetBoundsRect();
-        Vector3 size = new Vector3(rect.width, 1f, rect.height);
-        Vector3 centerPos = new Vector3(rect.x, 1f, rect.y) + size * 0.5f;
-        Gizmos.DrawCube(centerPos, size);
+        Debug.Log("Test");
     }
 }
