@@ -78,6 +78,12 @@ public class EnemyAI : MonoBehaviour
     {
         foreach (Unit enemyUnit in UnitManager.Instance.GetEnemyUnitList())
         {
+            if (!enemyUnit.gameObject.activeSelf)
+            {
+                // Skip inactive units
+                continue;
+            }
+            
             if (TryTakeEnemyAIAction(enemyUnit, onEnemyAIActionComplete))
             {
                 return true;
