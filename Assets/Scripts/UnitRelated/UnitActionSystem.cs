@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,6 +16,7 @@ public class UnitActionSystem : MonoBehaviour
     [SerializeField] private LayerMask unitLayerMask;
 
     private BaseAction selectedAction;
+    private Unit previousSelectedUnit;
 
     private bool isBusy;
     
@@ -33,6 +35,7 @@ public class UnitActionSystem : MonoBehaviour
     private void Start()
     {
         Unit.OnAnyUnitDead += Unit_OnAnyUnitDead;
+        TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
 
         if (selectedUnit != null)
         {
@@ -149,6 +152,11 @@ public class UnitActionSystem : MonoBehaviour
     
     private void HandleSelectedAction()
     {
+        if (selectedAction == null)
+        {
+            return;
+        }
+
         if (InputManager.Instance.IsMouseButtonDownThisFrame())
         {
             GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
@@ -177,6 +185,36 @@ public class UnitActionSystem : MonoBehaviour
         }
     }
 
+    private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
+    {
+        if (TurnSystem.Instance.IsPlayerTurn())
+        {
+            if (previousSelectedUnit == null)
+            {
+                // The previously selected unit probably died
+                // Let's select another one
+                List<Unit> allUnits = UnitManager.Instance.GetFriendlyUnitList();
+                if (allUnits.Count > 0)
+                {
+                    Unit firstUnit = allUnits[0];
+                    SetSelectedUnit(firstUnit);
+                }
+            }
+            else
+            {
+                SetSelectedUnit(previousSelectedUnit);
+            }
+        }
+        else
+        {
+            if (selectedUnit != null)
+            {
+                previousSelectedUnit = selectedUnit;
+                DeselectUnit();   
+            }
+        }
+    }
+    
     public void DeselectUnit()
     {
         SetSelectedUnit(null);

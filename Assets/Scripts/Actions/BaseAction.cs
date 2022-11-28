@@ -53,7 +53,6 @@ public abstract class BaseAction : MonoBehaviour
     {
         if (isActive)
         {
-            Debug.Log("Action destroyed when active");
             ActionComplete();
         }
     }
