@@ -1,10 +1,9 @@
 # TODO
 
-- [ ] Fix bug with selected unit dead - it still can select an action
 - [ ] Hide actions UI when no more Action Point
 - [ ] Next unit button ?? (selecting another unit with action points)
 - [ ] Fix bug when Shootable dies but the grid position is still highlighted as shootable (RED colored)
-- [ ] Fix bug when Selected Unit dies, but can still perform an action
+- [x] Fix bug when Selected Unit dies, but can still perform an action
 
 ## Done
 

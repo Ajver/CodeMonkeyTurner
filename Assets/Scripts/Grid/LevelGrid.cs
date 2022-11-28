@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LevelGrid : MonoBehaviour
 {
-    public event EventHandler OnAnyUnitMovedGridPosition;
+    public event EventHandler OnAnyOccupantMovedGridPosition;
+    public event EventHandler OnAnyOccupantClears;
     
     [SerializeField] private Transform debugObjectPrefab; 
     
@@ -48,7 +49,7 @@ public class LevelGrid : MonoBehaviour
             SetOccupantAtGridPosition(toGridPosition, occupant);
         }
 
-        OnAnyUnitMovedGridPosition?.Invoke(this, EventArgs.Empty);
+        OnAnyOccupantMovedGridPosition?.Invoke(this, EventArgs.Empty);
     }
 
     public IInteractable GetInteractableAtGridPosition(GridPosition gridPosition)
@@ -97,6 +98,8 @@ public class LevelGrid : MonoBehaviour
     {
         GridObject obj = gridSystem.GetGridObject(gridPosition);
         obj.ClearOccupant();
+        
+        OnAnyOccupantClears?.Invoke(this, EventArgs.Empty);
     }
     
     public GridOccupant GetOccupantAtGridPosition(GridPosition gridPosition)
