@@ -9,6 +9,7 @@ public class UnitActionSystemUI : MonoBehaviour
     [SerializeField] private Transform actionButtonPrefab;
     [SerializeField] private Transform actionButtonContainerTransform;
     [SerializeField] private TextMeshProUGUI actionPointsText;
+    [SerializeField] private GameObject noUnitSelectedGameObject;
 
     private List<ActionButtonUI> actionButtonsUi;
 
@@ -23,6 +24,8 @@ public class UnitActionSystemUI : MonoBehaviour
         
         CreateUnitActionButtons();
         UpdateActionPoints();
+        
+        HideNoUnitSelectedUI();
     }
 
     private void CreateUnitActionButtons()
@@ -47,8 +50,27 @@ public class UnitActionSystemUI : MonoBehaviour
 
     private void UnitActionSystem_OnSelectedUnitChanged(object sender, EventArgs e)
     {
-        CreateUnitActionButtons();
-        UpdateActionPoints();
+        if (UnitActionSystem.Instance.GetSelectedUnit() != null)
+        {
+            CreateUnitActionButtons();
+            UpdateActionPoints();
+            
+            HideNoUnitSelectedUI();
+        }
+        else
+        {
+            ShowNoUnitSelectedUI();
+        }
+    }
+
+    private void ShowNoUnitSelectedUI()
+    {
+        noUnitSelectedGameObject.SetActive(true);
+    }
+
+    private void HideNoUnitSelectedUI()
+    {
+        noUnitSelectedGameObject.SetActive(false);
     }
     
     private void UnitActionSystem_OnSelectedActionChanged(object sender, EventArgs e)
@@ -81,9 +103,12 @@ public class UnitActionSystemUI : MonoBehaviour
 
     private void UpdateActionPoints()
     {
-        Unit unit = UnitActionSystem.Instance.GetSelectedUnit();
-        int points = unit.GetActionPoints();
-        actionPointsText.text = $"Action Points: {points}";
+        if (UnitActionSystem.Instance.GetSelectedUnit() != null)
+        {
+            Unit unit = UnitActionSystem.Instance.GetSelectedUnit();
+            int points = unit.GetActionPoints();
+            actionPointsText.text = $"Action Points: {points}";
+        }
     }
     
 }

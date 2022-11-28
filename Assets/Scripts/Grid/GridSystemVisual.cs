@@ -149,8 +149,15 @@ public class GridSystemVisual : MonoBehaviour
     {
         HideAllGridPosition();
 
-        Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
         BaseAction selectedAction = UnitActionSystem.Instance.GetSelectedAction();
+
+        if (selectedAction == null)
+        {
+            // Maybe the unit has been deselected (i.e. killed)
+            return;
+        }
+        
+        Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
         List<GridPosition> validPositions = selectedAction.GetValidActionGridPositionList();
 
         GridVisualType gridVisualType = GridVisualType.White;
