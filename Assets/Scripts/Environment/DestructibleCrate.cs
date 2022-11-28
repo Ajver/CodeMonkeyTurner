@@ -1,36 +1,27 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DestructibleCrate : MonoBehaviour, IDamageable
+public class DestructibleCrate : GridOccupant, IDamageable
 {
 
     public static event EventHandler OnAnyDestroyed;
 
     [SerializeField] private Transform crateDestroyedPrefab;
-    
-    private GridPosition gridPosition;
-
-    private void Start()
-    {
-        gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        LevelGrid.Instance.SetDamageableAtGridPosition(gridPosition, this);
-    }
 
     public void Damage(int dmg)
     {
         Instantiate(crateDestroyedPrefab, transform.position, transform.rotation);
         
-        LevelGrid.Instance.ClearDamageableAtGridPosition(gridPosition);
-        
         Destroy(gameObject);
         OnAnyDestroyed?.Invoke(this, EventArgs.Empty);
     }
 
-    public GridPosition GetGridPosition()
+    protected override void OccupantStart()
     {
-        return gridPosition;
+    }
+
+    protected override void OccupantUpdate()
+    {
     }
 
     public GameTeam GetGameTeam()

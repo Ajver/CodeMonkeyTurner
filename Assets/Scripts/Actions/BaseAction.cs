@@ -48,7 +48,16 @@ public abstract class BaseAction : MonoBehaviour
         
         OnAnyActionCompleted?.Invoke(this, EventArgs.Empty);
     }
-    
+
+    protected void OnDestroy()
+    {
+        if (isActive)
+        {
+            Debug.Log("Action destroyed when active");
+            ActionComplete();
+        }
+    }
+
     public Unit GetUnit()
     {
         return unit;

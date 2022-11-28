@@ -1,25 +1,20 @@
 using System;
 using UnityEngine;
 
-public class ExplodingBarrel : MonoBehaviour, IInteractable, IDamageable
+public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
 {
     [SerializeField] private Transform explosionEffectPrefab;
 
     public static event EventHandler OnAnyBarrelExploded;
     
-    private GridPosition gridPosition;
-
     private bool firedToExplode;
     private Action onInteractComplete;
-    
-    private void Start()
+
+    protected override void OccupantStart()
     {
-        gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        LevelGrid.Instance.SetInteractableAtGridPosition(gridPosition, this);
-        LevelGrid.Instance.SetDamageableAtGridPosition(gridPosition, this);
     }
 
-    private void Update()
+    protected override void OccupantUpdate()
     {
         if (!firedToExplode)
         {
@@ -83,8 +78,6 @@ public class ExplodingBarrel : MonoBehaviour, IInteractable, IDamageable
 
         OnAnyBarrelExploded?.Invoke(this, EventArgs.Empty);
         
-        LevelGrid.Instance.ClearInteractableAtGridPosition(gridPosition);
-        LevelGrid.Instance.ClearDamageableAtGridPosition(gridPosition);
         PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, true);
     }
  

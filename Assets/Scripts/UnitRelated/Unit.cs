@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Unit : MonoBehaviour, IDamageable
+public class Unit : GridOccupant, IDamageable
 {
 
     [SerializeField] private bool isEnemy;
@@ -12,45 +12,30 @@ public class Unit : MonoBehaviour, IDamageable
     
     private const int ACTION_POINTS_MAX = 3; 
 
-    private MoveAction moveAction;
     private BaseAction[] baseActionsArray;
 
     private HealthSystem healthSystem;
     
-    private GridPosition gridPosition;
     private int actionPoints = ACTION_POINTS_MAX;
     
     private void Awake()
     {
-        moveAction = GetComponent<MoveAction>();
         baseActionsArray = GetComponents<BaseAction>();
         
         healthSystem = GetComponent<HealthSystem>();
         healthSystem.OnDead += HealthSystem_OnDead;
     }
 
-    private void Start()
-    {   
-        gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        LevelGrid.Instance.SetUnitAtGridPosition(gridPosition, this);
-        LevelGrid.Instance.SetDamageableAtGridPosition(gridPosition, this);
+    protected override void OccupantStart()
+    {
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
-        
         OnAnyUnitSpawned?.Invoke(this, EventArgs.Empty);
     }
-    
-    private void Update()
-    {   
-        GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        if (newGridPosition != gridPosition)
-        {
-            GridPosition oldGridPosition = gridPosition;
-            
-            gridPosition = newGridPosition;
-            LevelGrid.Instance.UnitMovedGridPosition(this, oldGridPosition, newGridPosition);
-        }
+
+    protected override void OccupantUpdate()
+    {
     }
-    
+
     public T GetAction<T>() where T : BaseAction
     {
         foreach (BaseAction baseAction in baseActionsArray)
@@ -67,11 +52,6 @@ public class Unit : MonoBehaviour, IDamageable
     public BaseAction[] GetBaseActionsArray()
     {
         return baseActionsArray;
-    }
-
-    public GridPosition GetGridPosition()
-    {
-        return gridPosition;
     }
 
     public bool TrySpendActionPointsToTakeAction(BaseAction action)
@@ -124,9 +104,6 @@ public class Unit : MonoBehaviour, IDamageable
 
     private void HealthSystem_OnDead(object sender, EventArgs e)
     {
-        LevelGrid.Instance.ClearUnitAtGridPosition(gridPosition);
-        LevelGrid.Instance.ClearDamageableAtGridPosition(gridPosition);
-        
         Destroy(gameObject);
         
         OnAnyUnitDead?.Invoke(this, EventArgs.Empty);

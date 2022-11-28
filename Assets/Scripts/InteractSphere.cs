@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class InteractSphere : MonoBehaviour, IInteractable
+public class InteractSphere : GridOccupant, IInteractable
 {
 
     [SerializeField] private Material greenMaterial;
@@ -15,15 +15,12 @@ public class InteractSphere : MonoBehaviour, IInteractable
     
     private bool isGreen;
     
-    private void Start()
+    protected override void OccupantStart()
     {
-        GridPosition gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        LevelGrid.Instance.SetInteractableAtGridPosition(gridPosition, this);
-        
         SetColorGreen();
     }
 
-    private void Update()
+    protected override void OccupantUpdate()
     {
         if (!isActive)
         {
@@ -38,7 +35,7 @@ public class InteractSphere : MonoBehaviour, IInteractable
             onInteractComplete();
         }
     }
-
+    
     public void Interact(Action onInteractComplete)
     {
         this.onInteractComplete = onInteractComplete;

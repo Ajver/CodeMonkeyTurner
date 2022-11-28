@@ -1,10 +1,9 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 public class GridObject
 {
     private GridSystem<GridObject> gridSystem;
     private GridPosition gridPosition;
+    private GridOccupant occupant;
+    
     private Unit unit;
     private IInteractable interactable;
     private IDamageable damageable;
@@ -20,61 +19,49 @@ public class GridObject
         return gridPosition + "\n" + unit;
     }
 
-    public void SetUnit(Unit newUnit)
+    public void SetOccupant(GridOccupant newOccupant)
     {
-        if (unit != null)
-        {
-            // Some unit is already standing here.
-            // The other unit is probably just moving through this place
-            return;
-        }
+        occupant = newOccupant;
 
-        unit = newUnit;
+        // Try to set helper variables
+        occupant.TryGetComponent<Unit>(out unit);
+        occupant.TryGetComponent<IInteractable>(out interactable);
+        occupant.TryGetComponent<IDamageable>(out damageable);
     }
 
-    public void ClearUnit()
+    public void ClearOccupant()
     {
+        occupant = null;
+        
+        // Clear other helper variables
         unit = null;
+        interactable = null;
+        damageable = null;
     }
     
-    public Unit GetUnit()
+    public GridOccupant GetOccupant()
     {
-        return unit;
+        return occupant;
     }
     
+    public bool HasOccupant()
+    {
+        return occupant != null;
+    }
+
     public bool HasUnit()
     {
         return unit != null;
     }
-
+    
     public IInteractable GetInteractable()
     {
         return interactable;
     }
 
-    public void SetInteractable(IInteractable inter)
-    {
-        interactable = inter;
-    }
-
-    public void ClearInteractable()
-    {
-        interactable = null;
-    }
-
     public IDamageable GetDamageable()
     {
         return damageable;
-    }
-    
-    public void SetDamageable(IDamageable hitt)
-    {
-        damageable = hitt;
-    }
-
-    public void ClearDamageable()
-    {
-        damageable = null;
     }
     
 }

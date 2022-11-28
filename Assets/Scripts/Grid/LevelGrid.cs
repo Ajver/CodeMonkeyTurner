@@ -36,30 +36,16 @@ public class LevelGrid : MonoBehaviour
         PathFinding.Instance.Setup(width, height, cellSize);
     }
     
-    public void SetUnitAtGridPosition(GridPosition gridPosition, Unit unit)
-    { 
-        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.SetUnit(unit);
-    }
-
-    public void ClearUnitAtGridPosition(GridPosition gridPosition)
+    public void OccupantMovedGridPosition(GridOccupant occupant, GridPosition fromGridPosition, GridPosition toGridPosition)
     {
-        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.ClearUnit();
-    }
-    
-    public void UnitMovedGridPosition(Unit unit, GridPosition fromGridPosition, GridPosition toGridPosition)
-    {
-        if (GetUnitAtGridPosition(fromGridPosition) == unit)
+        if (GetOccupantAtGridPosition(fromGridPosition) == occupant)
         {
-            ClearUnitAtGridPosition(fromGridPosition);
-            ClearDamageableAtGridPosition(fromGridPosition);
+            ClearOccupantAtGridPosition(fromGridPosition);
         }
 
-        if (!HasUnitOnGridPosition(toGridPosition))
+        if (!HasOccupantAtGridPosition(toGridPosition))
         {
-            SetUnitAtGridPosition(toGridPosition, unit);
-            SetDamageableAtGridPosition(toGridPosition, unit);
+            SetOccupantAtGridPosition(toGridPosition, occupant);
         }
 
         OnAnyUnitMovedGridPosition?.Invoke(this, EventArgs.Empty);
@@ -76,29 +62,11 @@ public class LevelGrid : MonoBehaviour
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
         return gridObj.GetInteractable() != null;
     }
-
-    public void SetInteractableAtGridPosition(GridPosition gridPosition, IInteractable interactable)
-    {
-        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.SetInteractable(interactable);
-    }
-
-    public void ClearInteractableAtGridPosition(GridPosition gridPosition)
-    {
-        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.ClearInteractable();
-    }
     
     public bool HasDamageableOnGridPosition(GridPosition gridPosition)
     {
         GridObject gridObject = gridSystem.GetGridObject(gridPosition);
         return gridObject.GetDamageable() != null;
-    }
-
-    public void SetDamageableAtGridPosition(GridPosition gridPosition, IDamageable damageable)
-    {
-        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.SetDamageable(damageable);
     }
     
     public IDamageable GetDamageableAtGridPosition(GridPosition gridPosition)
@@ -106,13 +74,6 @@ public class LevelGrid : MonoBehaviour
         GridObject gridObj = gridSystem.GetGridObject(gridPosition);
         return gridObj.GetDamageable();
     }
-
-    public void ClearDamageableAtGridPosition(GridPosition gridPosition)
-    {
-        GridObject gridObj = gridSystem.GetGridObject(gridPosition);
-        gridObj.ClearDamageable();
-    }
-
     
     public GridPosition GetGridPosition(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);
 
@@ -126,10 +87,28 @@ public class LevelGrid : MonoBehaviour
         return obj.HasUnit();
     }
 
-    public Unit GetUnitAtGridPosition(GridPosition gridPosition)
+    public void SetOccupantAtGridPosition(GridPosition gridPosition, GridOccupant occupant)
     {
         GridObject obj = gridSystem.GetGridObject(gridPosition);
-        return obj.GetUnit();
+        obj.SetOccupant(occupant);
+    }
+
+    public void ClearOccupantAtGridPosition(GridPosition gridPosition)
+    {
+        GridObject obj = gridSystem.GetGridObject(gridPosition);
+        obj.ClearOccupant();
+    }
+    
+    public GridOccupant GetOccupantAtGridPosition(GridPosition gridPosition)
+    {
+        GridObject obj = gridSystem.GetGridObject(gridPosition);
+        return obj.GetOccupant();
+    }
+
+    public bool HasOccupantAtGridPosition(GridPosition gridPosition)
+    {
+        GridObject obj = gridSystem.GetGridObject(gridPosition);
+        return obj.HasOccupant();
     }
     
     public int GetWidth() => gridSystem.GetWidth();

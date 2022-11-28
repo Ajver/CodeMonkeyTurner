@@ -1,23 +1,18 @@
 using System;
 using UnityEngine;
 
-public class Door : MonoBehaviour, IInteractable
+public class Door : GridOccupant, IInteractable
 {
     [SerializeField] private Animator animator;
 
     [SerializeField] private bool isOpen;
  
-    private GridPosition gridPosition;
-
     private Action onInteractComplete;
     private bool isActive;
     private float timer;
     
-    private void Start()
+    protected override void OccupantStart()
     {
-        gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        LevelGrid.Instance.SetInteractableAtGridPosition(gridPosition, this);
-
         if (isOpen)
         {
             OpenDoor();
@@ -28,7 +23,7 @@ public class Door : MonoBehaviour, IInteractable
         }
     }
 
-    private void Update()
+    protected override void OccupantUpdate()
     {
         if (!isActive)
         {
