@@ -1,6 +1,5 @@
 public class GridObject
 {
-    private GridSystem<GridObject> gridSystem;
     private GridPosition gridPosition;
     private GridOccupant occupant;
     
@@ -8,9 +7,8 @@ public class GridObject
     private IInteractable interactable;
     private IDamageable damageable;
     
-    public GridObject(GridSystem<GridObject> gridSystem, GridPosition gridPosition)
+    public GridObject(GridPosition gridPosition)
     {
-        this.gridSystem = gridSystem;
         this.gridPosition = gridPosition;
     }
 
