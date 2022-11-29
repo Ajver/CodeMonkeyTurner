@@ -30,4 +30,12 @@ public class ScreenShakeActions : MonoBehaviour
     {
         ScreenShake.Instance.Shake(7f);
     }
+
+    private void OnDestroy()
+    {
+        ShootAction.OnAnyShoot -= ShootAction_OnAnyShoot;
+        GrenadeProjectile.OnAnyGrenadeExploded -= GrenadeProjectile_OnAnyGrenadeExploded;
+        ExplodingBarrel.OnAnyBarrelExploded -= ExplodingBarrel_OnAnyBarrelExploded;
+        SwordAction.OnAnySwordHit -= SwordAction_OnAnySwordHit;
+    }
 }

@@ -78,4 +78,10 @@ public class UnitManager : MonoBehaviour
     {
         return friendlyUnitList;
     }
+
+    private void OnDestroy()
+    {
+        Unit.OnAnyUnitSpawned -= Unit_OnAnyUnitSpawned;
+        Unit.OnAnyUnitDead -= Unit_OnAnyUnitDead;
+    }
 }

@@ -219,6 +219,10 @@ public class UnitActionSystem : MonoBehaviour
     public void DeselectUnit()
     {
         SetSelectedUnit(null);
-    } 
-    
+    }
+
+    private void OnDestroy()
+    {
+        Unit.OnAnyUnitDead -= Unit_OnAnyUnitDead;
+    }
 }

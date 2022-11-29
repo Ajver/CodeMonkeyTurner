@@ -13,4 +13,9 @@ public class PathFindingUpdater : MonoBehaviour
         DestructibleCrate crate = sender as DestructibleCrate;
         PathFinding.Instance.SetIsWalkableGridPosition(crate.GetGridPosition(), true);
     }
+
+    private void OnDestroy()
+    {
+        DestructibleCrate.OnAnyDestroyed -= DestructibleCrate_OnAnyDestroyed;
+    }
 }

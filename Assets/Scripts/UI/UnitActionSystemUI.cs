@@ -110,5 +110,9 @@ public class UnitActionSystemUI : MonoBehaviour
             actionPointsText.text = $"Action Points: {points}";
         }
     }
-    
+
+    private void OnDestroy()
+    {
+        Unit.OnAnyActionPointsChanged -= Unit_OnAnyActionPointsChanged;
+    }
 }

@@ -29,6 +29,7 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
         if (timer <= 0f)
         {
             CollectTreasure();
+            isActive = false;
         }
     }
 
@@ -68,5 +69,9 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
         onInteractionComplete = onInteractComplete;
         isActive = true;
         timer = 0.7f;
+        
+        // Remove from grid, but still make the spot not-walkable
+        LevelGrid.Instance.ClearOccupantAtGridPosition(gridPosition);
+        PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, false);
     }
 }

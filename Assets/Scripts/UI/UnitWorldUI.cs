@@ -39,4 +39,9 @@ public class UnitWorldUI : MonoBehaviour
     {
         healthBarImage.fillAmount = healthSystem.GetHealthNormalized();
     }
+
+    private void OnDestroy()
+    {
+        Unit.OnAnyActionPointsChanged -= Unit_OnAnyActionPointsChanged;
+    }
 }
