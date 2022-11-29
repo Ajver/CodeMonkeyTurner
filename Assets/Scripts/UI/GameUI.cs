@@ -5,14 +5,13 @@ using UnityEngine.SceneManagement;
 public class GameUI : MonoBehaviour
 {
     
-    void Start()
+    private void Start()
     {
-        MissionSystem.Instance.OnMissionComplete += MissionSystem_OnMissionComplete;
+        GameManager.Instance.OnGameEnded += GameManager_OnGameEnded;
     }
 
-    private void MissionSystem_OnMissionComplete(object sender, EventArgs e)
+    private void GameManager_OnGameEnded(object sender, EventArgs e)
     {
-        Debug.Log("Deactivating game UI");
         gameObject.SetActive(false);
     }
     

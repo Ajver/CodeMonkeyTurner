@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class MissionSystem : MonoBehaviour
 {
     public event EventHandler OnMissionComplete;
+    public event EventHandler OnMissionFailed;
     
     public static MissionSystem Instance { get; private set; }
 
@@ -16,6 +17,7 @@ public class MissionSystem : MonoBehaviour
     private void Start()
     {
         TableWithSuitcase.OnAnyTreasureCollected += TableWithSuitcase_OnAnyTreasureCollected;
+        TableWithSuitcase.OnAnyTreasureDestroyed += TableWithSuitcase_OnAnyTreasureDestroyed;
 
         UnitManager.Instance.OnAllFriendlyUnitsDied += UnitManager_OnAllFriendlyUnitsDied;
     }
@@ -29,10 +31,21 @@ public class MissionSystem : MonoBehaviour
     private void OnDestroy()
     {
         TableWithSuitcase.OnAnyTreasureCollected -= TableWithSuitcase_OnAnyTreasureCollected;
+        TableWithSuitcase.OnAnyTreasureDestroyed -= TableWithSuitcase_OnAnyTreasureDestroyed;
     }
 
     private void UnitManager_OnAllFriendlyUnitsDied(object sender, EventArgs e)
     {
-        Debug.Log("Mission failed");
+        FailMission();
+    }
+
+    private void TableWithSuitcase_OnAnyTreasureDestroyed(object sender, EventArgs e)
+    {
+        FailMission();
+    }
+    
+    private void FailMission()
+    {
+        OnMissionFailed?.Invoke(this, EventArgs.Empty);
     }
 }

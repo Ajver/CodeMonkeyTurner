@@ -9,6 +9,7 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
     [SerializeField] private GameObject treasureGameObject;
 
     public static event EventHandler OnAnyTreasureCollected;
+    public static event EventHandler OnAnyTreasureDestroyed;
     
     private bool isActive;
     private float timer;
@@ -49,8 +50,10 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
 
     private void BreakIntoParts()
     {
-        // TODO: Loose the game
-        Debug.Log("MISSION FAILED!");
+        // TODO: visuals
+        OnAnyTreasureDestroyed?.Invoke(this, EventArgs.Empty);
+        
+        Destroy(gameObject);
     }
     
     public GameTeam GetGameTeam()

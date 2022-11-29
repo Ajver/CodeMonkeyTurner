@@ -14,11 +14,22 @@ public class CameraController : MonoBehaviour
 
     private CinemachineTransposer transposer;
     private Vector3 targetFollowOffset;
-
+    
     private void Awake()
     {
         transposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
         targetFollowOffset = transposer.m_FollowOffset;
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.OnGameEnded += GameManager_OnGameEnded;
+    }
+
+    private void GameManager_OnGameEnded(object sender, EventArgs e)
+    {
+        // Disables controls
+        enabled = false;
     }
 
     void Update()
