@@ -54,6 +54,8 @@ public class Door : GridOccupant, IInteractable
         {
             OpenDoor();
         }
+        
+        Debug.Log("Door opened: " + isOpen);
     }
 
     private void OpenDoor()

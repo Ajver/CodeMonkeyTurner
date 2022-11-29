@@ -1,8 +1,10 @@
 using System;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public abstract class GridOccupant : MonoBehaviour
 {
+    [SerializeField] protected bool isWalkable = false;
 
     protected GridPosition gridPosition;
 
@@ -40,5 +42,10 @@ public abstract class GridOccupant : MonoBehaviour
     public GridPosition GetGridPosition()
     {
         return gridPosition;
+    }
+
+    public bool IsWalkable()
+    {
+        return isWalkable;
     }
 }
