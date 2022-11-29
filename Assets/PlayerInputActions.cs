@@ -62,6 +62,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeSelectedUnit"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a3f8339-5888-4a1d-a141-11bceb54e595"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,39 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""245433cc-0132-42e1-b149-bf9a0b273f3f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeSelectedUnit"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""f361ae24-1bc1-4eec-8d90-471424c90f7f"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeSelectedUnit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""6191607b-f7f8-4c78-ad3f-83a4708371d3"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeSelectedUnit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -186,6 +228,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_CameraRotate = m_Player.FindAction("CameraRotate", throwIfNotFound: true);
         m_Player_CameraZoom = m_Player.FindAction("CameraZoom", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
+        m_Player_ChangeSelectedUnit = m_Player.FindAction("ChangeSelectedUnit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +292,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CameraRotate;
     private readonly InputAction m_Player_CameraZoom;
     private readonly InputAction m_Player_Click;
+    private readonly InputAction m_Player_ChangeSelectedUnit;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -257,6 +301,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @CameraRotate => m_Wrapper.m_Player_CameraRotate;
         public InputAction @CameraZoom => m_Wrapper.m_Player_CameraZoom;
         public InputAction @Click => m_Wrapper.m_Player_Click;
+        public InputAction @ChangeSelectedUnit => m_Wrapper.m_Player_ChangeSelectedUnit;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -278,6 +323,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Click.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClick;
                 @Click.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClick;
                 @Click.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClick;
+                @ChangeSelectedUnit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeSelectedUnit;
+                @ChangeSelectedUnit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeSelectedUnit;
+                @ChangeSelectedUnit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeSelectedUnit;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -294,6 +342,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @ChangeSelectedUnit.started += instance.OnChangeSelectedUnit;
+                @ChangeSelectedUnit.performed += instance.OnChangeSelectedUnit;
+                @ChangeSelectedUnit.canceled += instance.OnChangeSelectedUnit;
             }
         }
     }
@@ -304,5 +355,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnCameraRotate(InputAction.CallbackContext context);
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
+        void OnChangeSelectedUnit(InputAction.CallbackContext context);
     }
 }

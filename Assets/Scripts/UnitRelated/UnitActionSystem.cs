@@ -65,7 +65,7 @@ public class UnitActionSystem : MonoBehaviour
         {
             return;
         }
-
+        
         HandleSelectedAction();
     }
 
@@ -90,35 +90,88 @@ public class UnitActionSystem : MonoBehaviour
     {
         if (InputManager.Instance.IsMouseButtonDownThisFrame())
         {
-            Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
-            bool hit = Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue, unitLayerMask);
+            return TrySelectUnitByMouse();
+        }
+        
+        return TryChangeSelectedUnit();
+    }
 
-            if (!hit)
+    private bool TrySelectUnitByMouse()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
+        bool hit = Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue, unitLayerMask);
+
+        if (!hit)
+        {
+            return false;
+        }
+
+        if (hitInfo.collider.TryGetComponent<Unit>(out Unit unit))
+        {
+            if (unit.IsEnemy())
             {
                 return false;
             }
-
-            if (hitInfo.collider.TryGetComponent<Unit>(out Unit unit))
-            {
-                if (unit.IsEnemy())
-                {
-                    return false;
-                }
                 
-                if (unit == selectedUnit)
-                {
-                    // Unit already selected
-                    return false;
-                }
-
-                SetSelectedUnit(unit);
-                return true;
+            if (unit == selectedUnit)
+            {
+                // Unit already selected
+                return false;
             }
+
+            SetSelectedUnit(unit);
+            return true;
         }
-        
+
         return false;
     }
 
+    private bool TryChangeSelectedUnit()
+    {
+        int dir = InputManager.Instance.GetChangeSelectedUnitAxisThisFrame();
+
+        if (dir == 0)
+        {
+            return false;
+        }
+
+        ChangeSelectedUnit(dir);
+        return true;
+    }
+
+    private void ChangeSelectedUnit(int dir)
+    {
+        List<Unit> units = UnitManager.Instance.GetFriendlyUnitList();
+        int count = units.Count; 
+        if (count <= 0)
+        {
+            return;
+        }
+
+        int currentUnitIdx = 0;
+
+        if (selectedUnit != null)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                if (units[i] == selectedUnit)
+                {
+                    currentUnitIdx = i;
+                    break;
+                }
+            }
+        }
+        
+        // Add extra count, to always have non-negative values 
+        int anotherUnitIdx = (currentUnitIdx + dir + count) % count;
+        Unit anotherUnit = units[anotherUnitIdx];
+
+        if (anotherUnit != selectedUnit)
+        {
+            SetSelectedUnit(anotherUnit);
+        }
+    }
+    
     private void SetSelectedUnit(Unit unit)
     {
         selectedUnit = unit;

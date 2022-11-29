@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Composites;
 
 public class InputManager : MonoBehaviour
 {
@@ -39,6 +40,30 @@ public class InputManager : MonoBehaviour
         return playerInputActions.Player.Click.WasPressedThisFrame();
 #else
         return Input.GetMouseButtonDown(0);
+#endif
+    }
+
+    public int GetChangeSelectedUnitAxisThisFrame()
+    {
+#if USE_NEW_INPUT_SYSTEM
+        int axis = (int)playerInputActions.Player.ChangeSelectedUnit.ReadValue<float>();
+        bool pressedThisFrame = playerInputActions.Player.ChangeSelectedUnit.WasPressedThisFrame();
+        if (pressedThisFrame)
+        {
+            return axis;
+        }
+
+        return 0;
+#else
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            return -1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            return +1;
+        }
 #endif
     }
 
