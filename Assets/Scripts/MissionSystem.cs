@@ -15,8 +15,9 @@ public class MissionSystem : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Start");
         TableWithSuitcase.OnAnyTreasureCollected += TableWithSuitcase_OnAnyTreasureCollected;
+
+        UnitManager.Instance.OnAllFriendlyUnitsDied += UnitManager_OnAllFriendlyUnitsDied;
     }
 
     private void TableWithSuitcase_OnAnyTreasureCollected(object sender, EventArgs e)
@@ -28,5 +29,10 @@ public class MissionSystem : MonoBehaviour
     private void OnDestroy()
     {
         TableWithSuitcase.OnAnyTreasureCollected -= TableWithSuitcase_OnAnyTreasureCollected;
+    }
+
+    private void UnitManager_OnAllFriendlyUnitsDied(object sender, EventArgs e)
+    {
+        Debug.Log("Mission failed");
     }
 }

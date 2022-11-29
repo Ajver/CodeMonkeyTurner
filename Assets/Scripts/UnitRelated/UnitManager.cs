@@ -6,6 +6,9 @@ public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance { get; private set; }
 
+    public event EventHandler OnAllFriendlyUnitsDied;
+    public event EventHandler OnAllEnemyUnitsDied;
+
     private List<Unit> unitList;
     private List<Unit> friendlyUnitList;
     private List<Unit> enemyUnitList;
@@ -57,10 +60,20 @@ public class UnitManager : MonoBehaviour
         if (unit.IsEnemy())
         {
             enemyUnitList.Remove(unit);
+
+            if (enemyUnitList.Count <= 0)
+            {
+                OnAllEnemyUnitsDied?.Invoke(this, EventArgs.Empty);
+            }
         }
         else
         {
             friendlyUnitList.Remove(unit);
+            
+            if (friendlyUnitList.Count <= 0)
+            {
+                OnAllFriendlyUnitsDied?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 
