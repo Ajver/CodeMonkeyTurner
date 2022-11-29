@@ -15941,6 +15941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b4543a7cca4749297e494d4d55e692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWalkable: 0
   greenMaterial: {fileID: 2100000, guid: 814d47de0dd8bf702b1924416f43af0c, type: 2}
   redMaterial: {fileID: 2100000, guid: ccee3a1da3f2ea3f0bdfa2b5cee49610, type: 2}
   meshRenderer: {fileID: 1261133349}
@@ -24356,7 +24357,7 @@ PrefabInstance:
     - target: {fileID: 7068710491601792924, guid: 3af174e552a820fe0b55b2d4bf0a7058,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7068710491601792924, guid: 3af174e552a820fe0b55b2d4bf0a7058,
         type: 3}
@@ -24366,7 +24367,7 @@ PrefabInstance:
     - target: {fileID: 7068710491601792924, guid: 3af174e552a820fe0b55b2d4bf0a7058,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7068710491601792924, guid: 3af174e552a820fe0b55b2d4bf0a7058,
         type: 3}

@@ -92,14 +92,14 @@ public class MoveAction : BaseAction
                     continue;
                 }
 
-                if (LevelGrid.Instance.HasUnitOnGridPosition(testPos))
-                {
-                    continue;
-                }
-
                 if (!PathFinding.Instance.IsWalkableGridPosition(testPos))
                 {
                     // There is an obstacle or so
+                    continue;
+                }
+
+                if (LevelGrid.Instance.HasOccupantAtGridPosition(testPos))
+                {
                     continue;
                 }
 
