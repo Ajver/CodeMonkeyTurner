@@ -5,14 +5,42 @@ using UnityEngine;
 
 public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
 {
+
+    [SerializeField] private GameObject treasureGameObject;
+
+    public static event EventHandler OnAnyTreasureCollected;
+    
+    private bool isActive;
+    private float timer;
+    private Action onInteractionComplete;
+    
     protected override void OccupantStart()
     {
     }
 
     protected override void OccupantUpdate()
     {
+        if (!isActive)
+        {
+            return;
+        }
+
+        timer -= Time.deltaTime;
+        if (timer <= 0f)
+        {
+            CollectTreasure();
+        }
     }
 
+    private void CollectTreasure()
+    {
+        treasureGameObject.SetActive(false);
+        onInteractionComplete();
+        
+        OnAnyTreasureCollected?.Invoke(this, EventArgs.Empty);
+        Debug.Log("MISSION COMPLETE!");
+    }
+    
     public void Damage(int dmg)
     {
         BreakIntoParts();
@@ -20,7 +48,8 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
 
     private void BreakIntoParts()
     {
-        // TODO
+        // TODO: Loose the game
+        Debug.Log("MISSION FAILED!");
     }
     
     public GameTeam GetGameTeam()
@@ -36,7 +65,8 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
 
     public void Interact(Action onInteractComplete)
     {
-        // TODO: Hide the suitcase
-        // TODO: Win the game
+        onInteractionComplete = onInteractComplete;
+        isActive = true;
+        timer = 0.7f;
     }
 }
