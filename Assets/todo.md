@@ -9,11 +9,11 @@
 - [ ] Don't run open/close door animation at level start
 - [ ] Disabling Level areas and enabling them on doors opened
 - [ ] Main menu
-- [ ] Fix weird Grenade trail
 - [ ] Dynamic Mission Failed/Complete description (i.e. different reason of failure)
 
 ## Done
 
+- [x] Fix weird Grenade trail
 - [x] Fix bug when Shootable dies but the grid position is still highlighted as shootable (RED colored)
 - [x] Fix bug when Selected Unit dies, but can still perform an action
 - [x] Refactor Interactable objects (like door) - make general Interactable class with Event,

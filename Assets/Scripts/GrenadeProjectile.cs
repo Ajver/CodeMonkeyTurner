@@ -10,7 +10,7 @@ public class GrenadeProjectile : MonoBehaviour
     [SerializeField] private Transform trailRenderer;
     [SerializeField] private AnimationCurve arcYAnimationCurve;
     
-    private Vector3 targetPosition;
+    private Vector3 targetPositionXZ;
     private float totalDistance;
     private Vector3 positionXZ;
     
@@ -18,30 +18,31 @@ public class GrenadeProjectile : MonoBehaviour
     
     public void Setup(GridPosition targetGridPosition, Action onGrenadeBehaviorComplete)
     {
-        targetPosition = LevelGrid.Instance.GetWorldPosition(targetGridPosition);
+        targetPositionXZ = LevelGrid.Instance.GetWorldPosition(targetGridPosition);
         this.onGrenadeBehaviorComplete = onGrenadeBehaviorComplete;
         
         positionXZ = transform.position;
         positionXZ.y = 0;
-        totalDistance = Vector3.Distance(transform.position, targetPosition);
+        targetPositionXZ.y = 0; 
+        totalDistance = Vector3.Distance(transform.position, targetPositionXZ);
     }
 
     private void Update()
     {
-        Vector3 moveDir = (targetPosition - positionXZ).normalized;
+        Vector3 moveDir = (targetPositionXZ - positionXZ).normalized;
         
         float moveSpeed = 15f;
         positionXZ += moveDir * moveSpeed * Time.deltaTime;
 
-        float distance = Vector3.Distance(positionXZ, targetPosition);
+        float distance = Vector3.Distance(positionXZ, targetPositionXZ);
         float distanceNormalized = 0f;
         if (totalDistance == 0f)
         {
-            totalDistance = 0f;
+            distanceNormalized = 0f;
         }
         else
         {
-            totalDistance = 1 - (distance / totalDistance);
+            distanceNormalized = 1 - (distance / totalDistance);
         }
 
         float maxHeight = totalDistance * 0.2f;
@@ -50,7 +51,7 @@ public class GrenadeProjectile : MonoBehaviour
         transform.position = new Vector3(positionXZ.x, positionY, positionXZ.z);
         
         float reachedTargetDistance = .2f;
-        if (Vector3.Distance(transform.position, targetPosition) < reachedTargetDistance)
+        if (Vector3.Distance(transform.position, targetPositionXZ) < reachedTargetDistance)
         {
             Kaboom();
         }
@@ -59,7 +60,7 @@ public class GrenadeProjectile : MonoBehaviour
     private void Kaboom()
     {
         float radius = 3f;
-        Collider[] colliders = Physics.OverlapSphere(targetPosition, radius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 
         foreach (Collider collider in colliders)
         {
@@ -70,7 +71,7 @@ public class GrenadeProjectile : MonoBehaviour
         }
 
         trailRenderer.parent = null;
-        Instantiate(explosionEffectPrefab, targetPosition + Vector3.up * 1f, Quaternion.identity);
+        Instantiate(explosionEffectPrefab, transform.position + Vector3.up * 1f, Quaternion.identity);
         
         onGrenadeBehaviorComplete();
         OnAnyGrenadeExploded?.Invoke(this, EventArgs.Empty);
