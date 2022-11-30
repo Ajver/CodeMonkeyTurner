@@ -10,6 +10,7 @@
 - [ ] Disabling Level areas and enabling them on doors opened
 - [ ] Main menu
 - [ ] Fix weird Grenade trail
+- [ ] Dynamic Mission Failed/Complete description (i.e. different reason of failure)
 
 ## Done
 
