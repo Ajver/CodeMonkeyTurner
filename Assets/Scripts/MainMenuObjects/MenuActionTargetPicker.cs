@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MenuActionTargetPicker : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class MenuActionTargetPicker : MonoBehaviour
         }
 
         if (!InputManager.Instance.IsMouseButtonDownThisFrame())
+        {
+            return;
+        }
+        
+        if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }

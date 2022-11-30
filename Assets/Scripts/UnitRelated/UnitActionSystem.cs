@@ -171,8 +171,6 @@ public class UnitActionSystem : MonoBehaviour
         {
             SetSelectedUnit(anotherUnit, true);
         }
-        
-        
     }
     
     private void SetSelectedUnit(Unit unit, bool focusOnUnit)

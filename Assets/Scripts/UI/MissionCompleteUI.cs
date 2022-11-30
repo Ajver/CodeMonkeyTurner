@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MissionCompleteUI : MonoBehaviour
 {
+
+    [SerializeField] private string mainMenuSceneName;
+    
     private void Start()
     {
         MissionSystem.Instance.OnMissionComplete += MissionSystem_OnMissionComplete;
@@ -15,7 +18,7 @@ public class MissionCompleteUI : MonoBehaviour
 
     public void OnContinueBtnClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
     private void MissionSystem_OnMissionComplete(object sender, EventArgs e)
