@@ -45,6 +45,7 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
     
     public void Damage(int dmg)
     {
+        Debug.Log("Damaged");
         BreakIntoParts();
     }
 

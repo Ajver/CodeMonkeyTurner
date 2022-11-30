@@ -4937,6 +4937,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1587152672726090710}
   - component: {fileID: 1601031809}
+  - component: {fileID: 8218552407874931138}
   m_Layer: 0
   m_Name: TableWithSuitcase
   m_TagString: Untagged
@@ -4976,6 +4977,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWalkable: 0
   treasureGameObject: {fileID: 5100856554879954970}
+--- !u!65 &8218552407874931138
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587152672726090537}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.890098, z: 1}
+  m_Center: {x: 0, y: 0.445049, z: 0}
 --- !u!1 &5100856554879954970
 GameObject:
   m_ObjectHideFlags: 0
