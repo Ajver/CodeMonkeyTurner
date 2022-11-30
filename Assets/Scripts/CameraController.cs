@@ -14,6 +14,9 @@ public class CameraController : MonoBehaviour
 
     private CinemachineTransposer transposer;
     private Vector3 targetFollowOffset;
+
+    private bool isMovingToTarget;
+    private Vector3 targetPosition;
     
     private void Awake()
     {
@@ -24,12 +27,22 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnGameEnded += GameManager_OnGameEnded;
+        UnitActionSystem.Instance.OnFocusOnSelectedUnitRequested += UnitActionSystem_OnFocusOnSelectedUnitRequested;
     }
 
     private void GameManager_OnGameEnded(object sender, EventArgs e)
     {
         // Disables controls
         enabled = false;
+    }
+
+    private void UnitActionSystem_OnFocusOnSelectedUnitRequested(object sender, EventArgs e)
+    {
+        Unit unit = UnitActionSystem.Instance.GetSelectedUnit();
+
+        targetPosition = unit.transform.position;
+        targetPosition.y = transform.position.y;
+        isMovingToTarget = true;
     }
 
     void Update()
@@ -41,11 +54,26 @@ public class CameraController : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 inputMoveDir = InputManager.Instance.GetCameraMoveVector();
+        if (isMovingToTarget)
+        {
+            float moveSpeed = 15f;
+            Vector3 currentPos = transform.position;
+            transform.position = Vector3.Lerp(currentPos, targetPosition, Time.deltaTime * moveSpeed);
 
-        float moveSpeed = 10f;
-        Vector3 moveVector = transform.forward * inputMoveDir.y + transform.right * inputMoveDir.x;
-        transform.position += moveVector.normalized * moveSpeed * Time.deltaTime;
+            Vector2 diff = new Vector2(currentPos.x, currentPos.z) - new Vector2(targetPosition.x, targetPosition.z);
+            if (diff.sqrMagnitude < 0.1f)
+            {
+                isMovingToTarget = false;
+            }
+        }
+        else
+        {
+            Vector2 inputMoveDir = InputManager.Instance.GetCameraMoveVector();
+            Vector3 moveVector = transform.forward * inputMoveDir.y + transform.right * inputMoveDir.x;
+            
+            float moveSpeed = 10f;
+            transform.position += moveVector.normalized * moveSpeed * Time.deltaTime;
+        }
     }
 
     private void HandleRotation()

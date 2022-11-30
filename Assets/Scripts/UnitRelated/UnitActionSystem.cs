@@ -9,6 +9,7 @@ public class UnitActionSystem : MonoBehaviour
     public static UnitActionSystem Instance { get; private set; }
 
     public event EventHandler OnSelectedUnitChanged; 
+    public event EventHandler OnFocusOnSelectedUnitRequested; 
     public event EventHandler OnSelectedActionChanged; 
     public event EventHandler<bool> OnBusyChanged; 
     public event EventHandler OnActionStarted; 
@@ -40,7 +41,7 @@ public class UnitActionSystem : MonoBehaviour
 
         if (selectedUnit != null)
         {
-            SetSelectedUnit(selectedUnit);
+            SetSelectedUnit(selectedUnit, false);
         }
     }
 
@@ -119,7 +120,7 @@ public class UnitActionSystem : MonoBehaviour
                 return false;
             }
 
-            SetSelectedUnit(unit);
+            SetSelectedUnit(unit, false);
             return true;
         }
 
@@ -168,11 +169,13 @@ public class UnitActionSystem : MonoBehaviour
 
         if (anotherUnit != selectedUnit)
         {
-            SetSelectedUnit(anotherUnit);
+            SetSelectedUnit(anotherUnit, true);
         }
+        
+        
     }
     
-    private void SetSelectedUnit(Unit unit)
+    private void SetSelectedUnit(Unit unit, bool focusOnUnit)
     {
         selectedUnit = unit;
 
@@ -186,6 +189,11 @@ public class UnitActionSystem : MonoBehaviour
         }
 
         OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
+        
+        if (focusOnUnit && unit != null)
+        {
+            OnFocusOnSelectedUnitRequested?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public void SetSelectedAction(BaseAction action)
@@ -251,12 +259,12 @@ public class UnitActionSystem : MonoBehaviour
                 if (allUnits.Count > 0)
                 {
                     Unit firstUnit = allUnits[0];
-                    SetSelectedUnit(firstUnit);
+                    SetSelectedUnit(firstUnit, true);
                 }
             }
             else
             {
-                SetSelectedUnit(previousSelectedUnit);
+                SetSelectedUnit(previousSelectedUnit, true);
             }
         }
         else
@@ -271,7 +279,7 @@ public class UnitActionSystem : MonoBehaviour
     
     public void DeselectUnit()
     {
-        SetSelectedUnit(null);
+        SetSelectedUnit(null, false);
     }
 
     private void OnDestroy()
