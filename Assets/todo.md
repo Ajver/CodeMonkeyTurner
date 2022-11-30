@@ -2,6 +2,14 @@
 
 - [ ] Hide actions UI when no more Action Point
 - [ ] Next unit button ?? (selecting another unit with action points)
+- [ ] Central GameEvents singleton to replace static Events from classes
+- [ ] Pick suitcase animation
+- [ ] Improve rotation before shooting (wait for unit to fully face target)
+- [ ] Rotate before other actions (i.e. Interact, Grenade, etc)
+- [ ] Don't run open/close door animation at level start
+- [ ] Disabling Level areas and enabling them on doors opened
+- [ ] Main menu
+- [ ] Fix weird Grenade trail
 
 ## Done
 
