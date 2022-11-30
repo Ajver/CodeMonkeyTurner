@@ -1,15 +1,16 @@
 # TODO
 
+- [ ] Disabling Level areas and enabling them on doors opened
+- [ ] Improve rotation before shooting (wait for unit to fully face target)
 - [ ] Hide actions UI when no more Action Point
-- [ ] Next unit button ?? (selecting another unit with action points)
+- [ ] Dynamic Mission Failed/Complete description (i.e. different reason of failure)
+- [ ] Rotate before other actions (i.e. Interact, Grenade, etc)
+- [ ] Main menu
+- [ ] Next unit button (selecting another unit with action points)
 - [ ] Central GameEvents singleton to replace static Events from classes
 - [ ] Pick suitcase animation
-- [ ] Improve rotation before shooting (wait for unit to fully face target)
-- [ ] Rotate before other actions (i.e. Interact, Grenade, etc)
 - [ ] Don't run open/close door animation at level start
-- [ ] Disabling Level areas and enabling them on doors opened
-- [ ] Main menu
-- [ ] Dynamic Mission Failed/Complete description (i.e. different reason of failure)
+- [ ] Different levels (missions)
 
 ## Done
 
