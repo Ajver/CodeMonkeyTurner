@@ -1708,7 +1708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &147933081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3425,7 +3425,7 @@ PrefabInstance:
     - target: {fileID: 4458310619475243875, guid: f7227f3e6f2ba63acb630178c4c67eb1,
         type: 3}
       propertyPath: m_Name
-      value: Door (1)
+      value: CorridorDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7227f3e6f2ba63acb630178c4c67eb1, type: 3}
@@ -15641,6 +15641,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 147933082}
     m_Modifications:
+    - target: {fileID: 289743608228758965, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
+        type: 3}
+      propertyPath: isAreaActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289743608228758965, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
+        type: 3}
+      propertyPath: doorsWhichActivates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 289743608228758965, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
+        type: 3}
+      propertyPath: doorsWhichActivates.Array.data[0]
+      value: 
+      objectReference: {fileID: 4583629685441911}
     - target: {fileID: 289743608228758966, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
         type: 3}
       propertyPath: m_Name
@@ -17671,6 +17686,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76a672de8d8dc550c9394f2e0609a84b, type: 3}
+--- !u!114 &1561606177 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6609302808713373800, guid: f7227f3e6f2ba63acb630178c4c67eb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 676494429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35456528e9364d4f9bfc2058f32a4ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1584555929 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7068710491601792925, guid: 3af174e552a820fe0b55b2d4bf0a7058,
@@ -19796,6 +19823,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 147933082}
     m_Modifications:
+    - target: {fileID: 289743608228758965, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
+        type: 3}
+      propertyPath: isAreaActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289743608228758965, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
+        type: 3}
+      propertyPath: doorsWhichActivates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 289743608228758965, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
+        type: 3}
+      propertyPath: doorsWhichActivates.Array.data[0]
+      value: 
+      objectReference: {fileID: 1561606177}
     - target: {fileID: 289743608228758966, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
         type: 3}
       propertyPath: m_Name
@@ -21666,7 +21708,7 @@ PrefabInstance:
     - target: {fileID: 4458310619475243875, guid: f7227f3e6f2ba63acb630178c4c67eb1,
         type: 3}
       propertyPath: m_Name
-      value: Door (3)
+      value: 'CabinetDoor '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7227f3e6f2ba63acb630178c4c67eb1, type: 3}
@@ -21676,6 +21718,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1823119139}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1823119142 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6609302808713373800, guid: f7227f3e6f2ba63acb630178c4c67eb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1823119139}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35456528e9364d4f9bfc2058f32a4ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1826990805
 GameObject:
   m_ObjectHideFlags: 0
@@ -23751,6 +23805,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 147933082}
     m_Modifications:
+    - target: {fileID: 289743608228758965, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
+        type: 3}
+      propertyPath: isAreaActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289743608228758965, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
+        type: 3}
+      propertyPath: doorsWhichActivates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 289743608228758965, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
+        type: 3}
+      propertyPath: doorsWhichActivates.Array.data[0]
+      value: 
+      objectReference: {fileID: 1823119142}
     - target: {fileID: 289743608228758966, guid: 92c9a668a2dcfaedc8b863f2a0a2aa7c,
         type: 3}
       propertyPath: m_Name
@@ -27050,6 +27119,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4457026513084670416}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4583629685441911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6609302808713373800, guid: f7227f3e6f2ba63acb630178c4c67eb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4457026513084670416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35456528e9364d4f9bfc2058f32a4ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &289743609081060738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27263,12 +27344,12 @@ PrefabInstance:
     - target: {fileID: 4458310619475243875, guid: f7227f3e6f2ba63acb630178c4c67eb1,
         type: 3}
       propertyPath: m_Name
-      value: Door
+      value: SecondaryHallDoor
       objectReference: {fileID: 0}
     - target: {fileID: 6609302808713373800, guid: f7227f3e6f2ba63acb630178c4c67eb1,
         type: 3}
       propertyPath: isOpen
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7227f3e6f2ba63acb630178c4c67eb1, type: 3}

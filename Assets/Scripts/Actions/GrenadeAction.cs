@@ -7,6 +7,7 @@ public class GrenadeAction : BaseAction
 {
 
     [SerializeField] private GrenadeProjectile grenadeProjectilePrefab;
+    [SerializeField] private LayerMask obstaclesLayerMask;
     
     private int throwDistance = 7;
     
@@ -63,6 +64,22 @@ public class GrenadeAction : BaseAction
                 int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
                 if (testDistance > throwDistance)
                 {
+                    continue;
+                }
+
+                Vector3 testTargetWorldPosition = LevelGrid.Instance.GetWorldPosition(testPos);
+                Vector3 unitsDiff = testTargetWorldPosition - unitWorldPosition;
+                Vector3 throwDir = unitsDiff.normalized;
+                
+                float unitShoulderHeight = 1.7f;
+                if (Physics.Raycast(
+                        unitWorldPosition + Vector3.up * unitShoulderHeight,
+                        throwDir,
+                        unitsDiff.magnitude,
+                        obstaclesLayerMask
+                    ))
+                {
+                    // There is an obstacle
                     continue;
                 }
 

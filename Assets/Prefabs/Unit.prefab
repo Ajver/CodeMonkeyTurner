@@ -622,6 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ac0c70c420b610ca88e89ea8f3d6d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWalkable: 0
   isEnemy: 0
 --- !u!114 &5484858137869309397
 MonoBehaviour:
@@ -737,6 +738,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenadeProjectilePrefab: {fileID: 8143215734134888735, guid: cfd08285c3c76778d811562a1c04e7d7,
     type: 3}
+  obstaclesLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &9073154555484836351
 MonoBehaviour:
   m_ObjectHideFlags: 0

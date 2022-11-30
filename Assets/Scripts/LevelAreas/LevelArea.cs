@@ -9,6 +9,8 @@ public class LevelArea : MonoBehaviour
     
     [SerializeField] private bool isAreaActive;
 
+    [SerializeField] private Door[] doorsWhichActivates;
+
     private List<Unit> units;
     private Rect boundsRect;
     
@@ -23,8 +25,13 @@ public class LevelArea : MonoBehaviour
             {
                 unit.gameObject.SetActive(isAreaActive);
                 units.Add(unit);
-                Debug.Log(unit + " inside of " + this);
+                Debug.Log(unit + " inside " + this + " active: " + unit.gameObject.activeSelf);
             }
+        }
+
+        foreach (Door door in doorsWhichActivates)
+        {
+            door.OnOpened += OnDoorWhichActivateOpened;
         }
     }
 
@@ -52,34 +59,42 @@ public class LevelArea : MonoBehaviour
 
         return boundsRect;
     }
+
+    private void OnDoorWhichActivateOpened(object sender, EventArgs e)
+    {
+        if (isAreaActive)
+        {
+            return;
+        }
+        
+        ActivateArea();
+    }
     
-    public void ActivateArea()
+    private void ActivateArea()
     {
         foreach (Unit unit in units)
         {
             unit.gameObject.SetActive(true);
         }
+        
+        Debug.Log(this + " just activated!");
     }
 
-    // private void OnDrawGizmosSelected()
-    // {
-    //     if (isAreaActive)
-    //     {
-    //         Gizmos.color = new Color(0.2f, 0.8f, 0.2f, 0.5f);     
-    //     }
-    //     else
-    //     {
-    //         Gizmos.color = new Color(0.3f, 0.3f, 0.3f, 0.5f);            
-    //     }
-    //     
-    //     Rect rect = GetBoundsRect();
-    //     Vector3 size = new Vector3(rect.width, 1f, rect.height);
-    //     Vector3 centerPos = new Vector3(rect.x, 1f, rect.y) + size * 0.5f;
-    //     Gizmos.DrawCube(centerPos, size);
-    // }
-    
-    private void OnSelect()
+    private void OnDrawGizmosSelected()
     {
-        Debug.Log("Test");
+        if (isAreaActive)
+        {
+            Gizmos.color = new Color(0.2f, 0.8f, 0.2f, 0.5f);     
+        }
+        else
+        {
+            Gizmos.color = new Color(0.3f, 0.3f, 0.3f, 0.5f);            
+        }
+        
+        Rect rect = GetBoundsRect();
+        Vector3 size = new Vector3(rect.width, 1f, rect.height);
+        Vector3 centerPos = new Vector3(rect.x, 1f, rect.y) + size * 0.5f;
+        Gizmos.DrawCube(centerPos, size);
     }
+    
 }
