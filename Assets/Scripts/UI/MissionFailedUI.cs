@@ -1,11 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MissionFailedUI : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI missionDescriptionText;
     private void Start()
     {
         MissionSystem.Instance.OnMissionFailed += MissionSystem_OnMissionFailed;
@@ -18,8 +17,18 @@ public class MissionFailedUI : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void MissionSystem_OnMissionFailed(object sender, EventArgs e)
+    private void MissionSystem_OnMissionFailed(object sender, MissionSystem.MissionFailReason reason)
     {
+        switch (reason)
+        {
+            case MissionSystem.MissionFailReason.AllUnitsDied:
+                missionDescriptionText.text = "All allies died";
+                break;
+            case MissionSystem.MissionFailReason.TreasureDestroyed:
+                missionDescriptionText.text = "The Suitcase you were supposed to collect got destroyed";
+                break;
+        }
+
         gameObject.SetActive(true);
     }
 }

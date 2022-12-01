@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MissionCompleteUI : MonoBehaviour
 {
 
+    [SerializeField] private TextMeshProUGUI missionDescriptionText;
     [SerializeField] private string mainMenuSceneName;
     
     private void Start()
@@ -21,8 +23,18 @@ public class MissionCompleteUI : MonoBehaviour
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
-    private void MissionSystem_OnMissionComplete(object sender, EventArgs e)
+    private void MissionSystem_OnMissionComplete(object sender, MissionSystem.MissionCompleteReason reason)
     {
+        switch (reason)
+        {
+            case MissionSystem.MissionCompleteReason.CollectedTreasure:
+                missionDescriptionText.text = "You collected suitcase with a lot of money";
+                break;
+            case MissionSystem.MissionCompleteReason.KilledAllEnemies:
+                missionDescriptionText.text = "You killed all enemies";
+                break;
+        }
+        
         gameObject.SetActive(true);
     }
 

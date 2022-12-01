@@ -4,8 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class MissionSystem : MonoBehaviour
 {
-    public event EventHandler OnMissionComplete;
-    public event EventHandler OnMissionFailed;
+    public enum MissionCompleteReason
+    {
+        CollectedTreasure,
+        KilledAllEnemies,
+    }
+    
+    public enum MissionFailReason
+    {
+        AllUnitsDied,
+        TreasureDestroyed,
+    }
+    
+    public event EventHandler<MissionCompleteReason> OnMissionComplete;
+    public event EventHandler<MissionFailReason> OnMissionFailed;
     
     public static MissionSystem Instance { get; private set; }
 
@@ -25,7 +37,7 @@ public class MissionSystem : MonoBehaviour
     private void TableWithSuitcase_OnAnyTreasureCollected(object sender, EventArgs e)
     {
         Debug.Log("Treasure collected...");
-        OnMissionComplete?.Invoke(this, EventArgs.Empty);
+        OnMissionComplete?.Invoke(this, MissionCompleteReason.CollectedTreasure);
     }
 
     private void OnDestroy()
@@ -36,16 +48,16 @@ public class MissionSystem : MonoBehaviour
 
     private void UnitManager_OnAllFriendlyUnitsDied(object sender, EventArgs e)
     {
-        FailMission();
+        FailMission(MissionFailReason.AllUnitsDied);
     }
 
     private void TableWithSuitcase_OnAnyTreasureDestroyed(object sender, EventArgs e)
     {
-        FailMission();
+        FailMission(MissionFailReason.TreasureDestroyed);
     }
     
-    private void FailMission()
+    private void FailMission(MissionFailReason reason)
     {
-        OnMissionFailed?.Invoke(this, EventArgs.Empty);
+        OnMissionFailed?.Invoke(this, reason);
     }
 }

@@ -23,12 +23,12 @@ public class GameManager : MonoBehaviour
         MissionSystem.Instance.OnMissionFailed += MissionSystem_OnMissionFailed;
     }
 
-    private void MissionSystem_OnMissionComplete(object sender, EventArgs e)
+    private void MissionSystem_OnMissionComplete(object sender, MissionSystem.MissionCompleteReason reason)
     {
         EndGame();
     }
     
-    private void MissionSystem_OnMissionFailed(object sender, EventArgs e)
+    private void MissionSystem_OnMissionFailed(object sender, MissionSystem.MissionFailReason reason)
     {
         EndGame();
     }
