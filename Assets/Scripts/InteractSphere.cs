@@ -64,4 +64,9 @@ public class InteractSphere : GridOccupant, IInteractable
         isGreen = false;
         meshRenderer.material = redMaterial;
     }
+    
+    public Transform GetTransform()
+    {
+        return transform;
+    }
 }

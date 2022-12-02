@@ -115,10 +115,7 @@ public class SwordAction : BaseAction
         switch (state)
         {
             case State.SwingingSwordBeforeHit:
-                Vector3 aimDirection = (damageableTarget.GetTransform().position - unit.transform.position).normalized;
-
-                float rotationSpeed = 15f;
-                transform.forward = Vector3.Lerp(transform.forward, aimDirection, rotationSpeed * Time.deltaTime);
+                SlowlyLookAt(damageableTarget.GetTransform().position);
                 break;
             case State.SwingingSwordAfterHit:
                 break;

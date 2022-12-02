@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] Dynamic Mission Failed/Complete description (i.e. different reason of failure)
 - [ ] Improve rotation before shooting (wait for unit to fully face target)
 - [ ] Rotate before other actions (i.e. Interact, Grenade, etc)
 - [ ] Hide actions UI when no more Action Point
@@ -10,7 +9,8 @@
 - [ ] Different levels (missions)
 
 ## Done
-
+ 
+- [x] Dynamic Mission Failed/Complete description (i.e. different reason of failure)
 - [x] Don't run open/close door animation at level start
 - [x] Main menu
 - [x] Disabling Level areas and enabling them on doors opened

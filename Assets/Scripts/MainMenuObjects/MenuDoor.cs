@@ -57,4 +57,9 @@ public class MenuDoor : MonoBehaviour, IInteractable
             OpenDoor();
         }
     }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
 }

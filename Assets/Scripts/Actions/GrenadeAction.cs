@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GrenadeAction : BaseAction
@@ -8,8 +9,19 @@ public class GrenadeAction : BaseAction
 
     [SerializeField] private GrenadeProjectile grenadeProjectilePrefab;
     [SerializeField] private LayerMask obstaclesLayerMask;
+ 
+    private enum State
+    {
+        Aiming,
+        Throwing,
+    }
+
+    private State state;
+    private float stateTimer;
     
     private int throwDistance = 7;
+    private Vector3 targetPosition;
+    private GridPosition targetGridPosition;
     
     public override string GetActionName()
     {
@@ -22,12 +34,53 @@ public class GrenadeAction : BaseAction
         {
             return;
         }
+
+        switch (state)
+        {
+            case State.Aiming:
+                Vector3 targetPos = targetPosition;
+                SlowlyLookAt(targetPos);
+                break;
+        }
+
+        stateTimer -= Time.deltaTime;
+
+        if (stateTimer <= 0f)
+        {
+            NextState();
+        }
+    }
+
+    private void NextState()
+    {
+        switch (state)
+        {
+            case State.Aiming:
+                state = State.Throwing;
+                float throwingTime = 0.1f;
+                stateTimer = throwingTime;
+
+                ThrowGrenade();
+                break;
+            case State.Throwing:
+                break;
+        }
+    }
+
+    private void ThrowGrenade()
+    {
+        GrenadeProjectile grenade = Instantiate(grenadeProjectilePrefab, unit.transform.position, Quaternion.identity);
+        grenade.Setup(targetGridPosition, OnGrenadeBehaviorComplete);
     }
 
     public override void TakeAction(GridPosition gridPosition, Action callback)
     {
-        GrenadeProjectile grenade = Instantiate(grenadeProjectilePrefab, unit.transform.position, Quaternion.identity);
-        grenade.Setup(gridPosition, OnGrenadeBehaviorComplete);
+        state = State.Aiming;
+        float aimingTimer = 0.5f;
+        stateTimer = aimingTimer;
+
+        targetGridPosition = gridPosition;
+        targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
         
         ActionStart(callback);  
     }

@@ -5,5 +5,7 @@ public interface IInteractable
 {
 
     void Interact(Action onInteractComplete);
-    
+
+    Transform GetTransform();
+
 }

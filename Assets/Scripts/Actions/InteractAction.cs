@@ -5,7 +5,17 @@ using UnityEngine;
 
 public class InteractAction : BaseAction
 {
+    private enum State
+    {
+        LookingInto,
+        Interacting,
+    }
 
+    private State state;
+    private float stateTimer;
+
+    private IInteractable interactable;
+    
     private int interactDistance = 1;
 
     private void Update()
@@ -13,6 +23,38 @@ public class InteractAction : BaseAction
         if (!isActive)
         {
             return;
+        }
+
+        switch (state)
+        {
+            case State.LookingInto:
+                SlowlyLookAt(interactable.GetTransform().position);
+                break;
+            case State.Interacting:
+                break;
+        }
+
+        stateTimer -= Time.deltaTime;
+
+        if (stateTimer <= 0f)
+        {
+            NextState();
+        }
+    }
+
+    private void NextState()
+    {
+        switch (state)
+        {
+            case State.LookingInto:
+                state = State.Interacting;
+                interactable.Interact(OnInteractComplete);
+
+                // Don't need any state timer - the interaction time is controlled by the Interactable object 
+                isActive = false;
+                break;
+            case State.Interacting:
+                break;
         }
     }
 
@@ -23,8 +65,12 @@ public class InteractAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action callback)
     {
-        IInteractable interactable = LevelGrid.Instance.GetInteractableAtGridPosition(gridPosition);
-        interactable.Interact(OnInteractComplete);
+        interactable = LevelGrid.Instance.GetInteractableAtGridPosition(gridPosition);
+        
+        state = State.LookingInto;
+        float lookingIntoTime = 1f;
+        stateTimer = lookingIntoTime;
+        
         ActionStart(callback);
     }
 

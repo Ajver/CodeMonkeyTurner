@@ -6,6 +6,8 @@ public abstract class BaseAction : MonoBehaviour
 {
     public static event EventHandler OnAnyActionStarted;
     public static event EventHandler OnAnyActionCompleted;
+
+    [SerializeField] private float unitRotationSpeed = 5f;
     
     protected Unit unit;
     protected bool isActive;
@@ -16,6 +18,19 @@ public abstract class BaseAction : MonoBehaviour
         unit = GetComponent<Unit>();
     }
 
+    protected void SlowlyLookAt(Vector3 targetPos)
+    {
+        Vector3 faceDirection = (targetPos - unit.transform.position).normalized;
+        faceDirection.y = 0f;
+
+        float diff = Vector3.Distance(faceDirection, transform.forward);
+        
+        // The more unit has to rotate, the faster it does it
+        float rotationSpeed = unitRotationSpeed * diff;
+        rotationSpeed = Mathf.Max(rotationSpeed, 5f);
+        transform.forward = Vector3.Lerp(transform.forward, faceDirection, rotationSpeed * Time.deltaTime);
+    }
+    
     public abstract string GetActionName();
 
     public abstract void TakeAction(GridPosition gridPosition, Action callback);

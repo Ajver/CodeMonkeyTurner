@@ -64,10 +64,8 @@ public class ShootAction : BaseAction
 
     private void Aim()
     {
-        Vector3 faceDirection = (damageableTarget.GetTransform().position - unit.transform.position).normalized;
-
-        float rotationSpeed = 10f;
-        transform.forward = Vector3.Lerp(transform.forward, faceDirection, rotationSpeed * Time.deltaTime);
+        Vector3 targetPos = damageableTarget.GetTransform().position;
+        SlowlyLookAt(targetPos);
     }
     
     private void TryShoot()

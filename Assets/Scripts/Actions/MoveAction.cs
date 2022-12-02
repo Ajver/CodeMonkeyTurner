@@ -31,8 +31,8 @@ public class MoveAction : BaseAction
         {
             Vector3 moveDirection = (targetPosition - transform.position).normalized;
 
-            float rotationSpeed = 11f;
-            transform.forward = Vector3.Lerp(transform.forward, moveDirection, rotationSpeed * Time.deltaTime);
+            Vector3 targetPos = targetPosition;
+            SlowlyLookAt(targetPos);
 
             float moveSpeed = 4f;
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
