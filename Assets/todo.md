@@ -2,6 +2,7 @@
 
 - [ ] Different levels (missions)
 - [ ] Invisible inactive level areas
+- [ ] Prevent grenades/barrels destroing stuff through walls
 - [ ] Next unit button (selecting another unit with action points)
 - [ ] Hide actions UI when no more Action Point
 - [ ] Pick suitcase animation
