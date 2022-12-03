@@ -67,6 +67,24 @@ public class InputManager : MonoBehaviour
 #endif
     }
 
+    public bool IsFocusUnitBtnPressed()
+    {
+#if USE_NEW_INPUT_SYSTEM
+        bool pressedThisFrame = playerInputActions.Player.FocusOnUnit.IsPressed();
+        return pressedThisFrame;
+#else
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            return -1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            return +1;
+        }
+#endif
+    }
+
     public Vector2 GetCameraMoveVector()
     {
 #if USE_NEW_INPUT_SYSTEM

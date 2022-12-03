@@ -71,6 +71,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FocusOnUnit"",
+                    ""type"": ""Button"",
+                    ""id"": ""87b5ab53-21ac-438e-8e51-dc317efb2186"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -216,6 +225,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""ChangeSelectedUnit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1bc909c8-c620-4416-9610-caef203d511b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FocusOnUnit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -229,6 +249,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_CameraZoom = m_Player.FindAction("CameraZoom", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
         m_Player_ChangeSelectedUnit = m_Player.FindAction("ChangeSelectedUnit", throwIfNotFound: true);
+        m_Player_FocusOnUnit = m_Player.FindAction("FocusOnUnit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,6 +314,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CameraZoom;
     private readonly InputAction m_Player_Click;
     private readonly InputAction m_Player_ChangeSelectedUnit;
+    private readonly InputAction m_Player_FocusOnUnit;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -302,6 +324,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @CameraZoom => m_Wrapper.m_Player_CameraZoom;
         public InputAction @Click => m_Wrapper.m_Player_Click;
         public InputAction @ChangeSelectedUnit => m_Wrapper.m_Player_ChangeSelectedUnit;
+        public InputAction @FocusOnUnit => m_Wrapper.m_Player_FocusOnUnit;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -326,6 +349,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ChangeSelectedUnit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeSelectedUnit;
                 @ChangeSelectedUnit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeSelectedUnit;
                 @ChangeSelectedUnit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeSelectedUnit;
+                @FocusOnUnit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFocusOnUnit;
+                @FocusOnUnit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFocusOnUnit;
+                @FocusOnUnit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFocusOnUnit;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -345,6 +371,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @ChangeSelectedUnit.started += instance.OnChangeSelectedUnit;
                 @ChangeSelectedUnit.performed += instance.OnChangeSelectedUnit;
                 @ChangeSelectedUnit.canceled += instance.OnChangeSelectedUnit;
+                @FocusOnUnit.started += instance.OnFocusOnUnit;
+                @FocusOnUnit.performed += instance.OnFocusOnUnit;
+                @FocusOnUnit.canceled += instance.OnFocusOnUnit;
             }
         }
     }
@@ -356,5 +385,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
         void OnChangeSelectedUnit(InputAction.CallbackContext context);
+        void OnFocusOnUnit(InputAction.CallbackContext context);
     }
 }

@@ -1,15 +1,17 @@
 # TODO
 
-- [ ] Improve rotation before shooting (wait for unit to fully face target)
-- [ ] Rotate before other actions (i.e. Interact, Grenade, etc)
-- [ ] Hide actions UI when no more Action Point
-- [ ] Next unit button (selecting another unit with action points)
-- [ ] Central GameEvents singleton to replace static Events from classes
-- [ ] Pick suitcase animation
 - [ ] Different levels (missions)
+- [ ] Invisible inactive level areas
+- [ ] Next unit button (selecting another unit with action points)
+- [ ] Hide actions UI when no more Action Point
+- [ ] Pick suitcase animation
+- [ ] Central GameEvents singleton to replace static Events from classes
 
 ## Done
- 
+
+- [x] Space to move camera to selected Unit
+- [x] Rotate before other actions (i.e. Interact, Grenade, etc)
+- [x] Improve rotation before shooting (wait for unit to fully face target)
 - [x] Dynamic Mission Failed/Complete description (i.e. different reason of failure)
 - [x] Don't run open/close door animation at level start
 - [x] Main menu

@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FocusOnUnit",
+                    "type": "Button",
+                    "id": "87b5ab53-21ac-438e-8e51-dc317efb2186",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -194,6 +203,17 @@
                     "action": "ChangeSelectedUnit",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1bc909c8-c620-4416-9610-caef203d511b",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FocusOnUnit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

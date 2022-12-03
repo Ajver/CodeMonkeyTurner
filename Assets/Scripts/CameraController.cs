@@ -38,33 +38,53 @@ public class CameraController : MonoBehaviour
 
     private void UnitActionSystem_OnFocusOnSelectedUnitRequested(object sender, EventArgs e)
     {
+        FocusOnSelectedUnit();
+    }
+
+    private void FocusOnSelectedUnit()
+    {
         Unit unit = UnitActionSystem.Instance.GetSelectedUnit();
 
+        if (unit == null)
+        {
+            return;
+        }
+        
         targetPosition = unit.transform.position;
         targetPosition.y = transform.position.y;
         isMovingToTarget = true;
     }
-
+    
     void Update()
     {
+        HandleFocusing();
         HandleMovement();
         HandleRotation();
         HandleZoom();
     }
 
+    private void HandleFocusing()
+    {
+        if (InputManager.Instance.IsFocusUnitBtnPressed())
+        {
+            FocusOnSelectedUnit();
+        }
+    }
+    
     private void HandleMovement()
     {
         if (isMovingToTarget)
         {
-            float moveSpeed = 15f;
             Vector3 currentPos = transform.position;
-            transform.position = Vector3.Lerp(currentPos, targetPosition, Time.deltaTime * moveSpeed);
-
             Vector2 diff = new Vector2(currentPos.x, currentPos.z) - new Vector2(targetPosition.x, targetPosition.z);
             if (diff.sqrMagnitude < 0.1f)
             {
                 isMovingToTarget = false;
+                return;
             }
+            
+            float moveSpeed = 15f;
+            transform.position = Vector3.Lerp(currentPos, targetPosition, Time.deltaTime * moveSpeed);
         }
         else
         {
