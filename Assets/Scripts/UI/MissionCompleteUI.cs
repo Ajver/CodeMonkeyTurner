@@ -27,10 +27,10 @@ public class MissionCompleteUI : MonoBehaviour
     {
         switch (reason)
         {
-            case MissionSystem.MissionCompleteReason.CollectedTreasure:
+            case MissionSystem.MissionCompleteReason.CollectTreasure:
                 missionDescriptionText.text = "You collected suitcase with a lot of money";
                 break;
-            case MissionSystem.MissionCompleteReason.KilledAllEnemies:
+            case MissionSystem.MissionCompleteReason.KillEnemies:
                 missionDescriptionText.text = "You killed all enemies";
                 break;
         }

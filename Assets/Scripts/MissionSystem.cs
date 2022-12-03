@@ -6,8 +6,8 @@ public class MissionSystem : MonoBehaviour
 {
     public enum MissionCompleteReason
     {
-        CollectedTreasure,
-        KilledAllEnemies,
+        CollectTreasure,
+        KillEnemies,
     }
     
     public enum MissionFailReason
@@ -18,6 +18,8 @@ public class MissionSystem : MonoBehaviour
     
     public event EventHandler<MissionCompleteReason> OnMissionComplete;
     public event EventHandler<MissionFailReason> OnMissionFailed;
+
+    [SerializeField] private MissionCompleteReason missionGoal;
     
     public static MissionSystem Instance { get; private set; }
 
@@ -32,14 +34,25 @@ public class MissionSystem : MonoBehaviour
         TableWithSuitcase.OnAnyTreasureDestroyed += TableWithSuitcase_OnAnyTreasureDestroyed;
 
         UnitManager.Instance.OnAllFriendlyUnitsDied += UnitManager_OnAllFriendlyUnitsDied;
+        UnitManager.Instance.OnAllEnemyUnitsDied += UnitManager_OnAllEnemyUnitsDied;
     }
 
     private void TableWithSuitcase_OnAnyTreasureCollected(object sender, EventArgs e)
     {
-        Debug.Log("Treasure collected...");
-        OnMissionComplete?.Invoke(this, MissionCompleteReason.CollectedTreasure);
+        if (missionGoal == MissionCompleteReason.CollectTreasure)
+        {
+            OnMissionComplete?.Invoke(this, missionGoal);
+        }
     }
 
+    private void UnitManager_OnAllEnemyUnitsDied(object sender, EventArgs e)
+    {
+        if (missionGoal == MissionCompleteReason.KillEnemies)
+        {
+            OnMissionComplete?.Invoke(this, missionGoal);
+        }
+    }
+    
     private void OnDestroy()
     {
         TableWithSuitcase.OnAnyTreasureCollected -= TableWithSuitcase_OnAnyTreasureCollected;
@@ -53,7 +66,11 @@ public class MissionSystem : MonoBehaviour
 
     private void TableWithSuitcase_OnAnyTreasureDestroyed(object sender, EventArgs e)
     {
-        FailMission(MissionFailReason.TreasureDestroyed);
+        if (missionGoal == MissionCompleteReason.CollectTreasure)
+        {
+            // If it's not the goal of the mission - don't fail
+            FailMission(MissionFailReason.TreasureDestroyed);
+        }
     }
     
     private void FailMission(MissionFailReason reason)

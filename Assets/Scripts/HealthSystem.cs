@@ -12,6 +12,8 @@ public class HealthSystem : MonoBehaviour
 
     private int healthMax;
 
+    private bool isAlive = true;
+    
     private void Awake()
     {
         healthMax = health;
@@ -19,6 +21,11 @@ public class HealthSystem : MonoBehaviour
 
     public void Damage(int damageAmount)
     {
+        if (!isAlive)
+        {
+            return;
+        }
+
         health -= damageAmount;
 
         if (health <= 0)
@@ -32,6 +39,7 @@ public class HealthSystem : MonoBehaviour
 
     public void Die()
     {
+        isAlive = false;
         OnDead?.Invoke(this, EventArgs.Empty);
     }
 

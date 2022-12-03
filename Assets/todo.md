@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] Different levels (missions)
+- [/] Different levels (missions)
 - [ ] Invisible inactive level areas
 - [ ] Prevent grenades/barrels destroing stuff through walls
 - [ ] Next unit button (selecting another unit with action points)
