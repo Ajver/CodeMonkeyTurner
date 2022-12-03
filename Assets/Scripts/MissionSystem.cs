@@ -77,4 +77,9 @@ public class MissionSystem : MonoBehaviour
     {
         OnMissionFailed?.Invoke(this, reason);
     }
+
+    public MissionCompleteReason GetMissionGoal()
+    {
+        return missionGoal;
+    }
 }
