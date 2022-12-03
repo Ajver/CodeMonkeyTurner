@@ -31,8 +31,6 @@ public class MenuShootAction: MonoBehaviour
         float aimingStateTime = 0.6f;
         stateTimer = aimingStateTime;
         isActive = true;
-
-        animator.SetTrigger("Shoot");
     }
     
     public void Update()
@@ -85,6 +83,8 @@ public class MenuShootAction: MonoBehaviour
         bullet.Setup(targetPosition);
         
         damageableTarget.Damage(100);
+        
+        animator.SetTrigger("Shoot");
         
         ScreenShake.Instance.Shake(1f);
     }
