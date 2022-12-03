@@ -7,6 +7,7 @@
 - [ ] Hide actions UI when no more Action Point
 - [ ] Pick suitcase animation
 - [ ] Central GameEvents singleton to replace static Events from classes
+- [ ] Displaying selected unit data in the corner + camera showing his face 
 
 ## Done
 

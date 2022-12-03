@@ -36,6 +36,11 @@ public class Door : GridOccupant, IInteractable
 
         if (timer <= 0)
         {
+            if (isOpen)
+            {
+                OnOpened?.Invoke(this, EventArgs.Empty);
+            }
+            
             isActive = false;
             onInteractComplete();
         }
@@ -46,7 +51,7 @@ public class Door : GridOccupant, IInteractable
         this.onInteractComplete = onInteractComplete;
 
         isActive = true;
-        timer = .5f;
+        timer = 0.5f;
         
         if (isOpen)
         {
@@ -68,8 +73,6 @@ public class Door : GridOccupant, IInteractable
         isOpen = true;
         animator.SetBool("IsOpen", isOpen);
         PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, isOpen);
-        
-        OnOpened?.Invoke(this, EventArgs.Empty);
     }
     
     private void CloseDoor()
