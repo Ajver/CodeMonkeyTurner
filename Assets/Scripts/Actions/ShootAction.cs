@@ -87,7 +87,7 @@ public class ShootAction : BaseAction
         OnShoot?.Invoke(this, eventArgs);
         OnAnyShoot?.Invoke(this, eventArgs);
         
-        int damageAmount = 40;
+        int damageAmount = 50;
         damageableTarget.Damage(damageAmount);
     }
     
