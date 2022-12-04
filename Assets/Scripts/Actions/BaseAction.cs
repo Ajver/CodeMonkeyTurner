@@ -102,4 +102,14 @@ public abstract class BaseAction : MonoBehaviour
     }
     
     public abstract EnemyAIAction GetEnemyAIAction(GridPosition gridPosition);
+
+    public virtual bool CanBeTaken()
+    {
+        return true;
+    }
+    
+    public virtual int GetAvailableUsagesLeft()
+    {
+        return -1;
+    }
 }

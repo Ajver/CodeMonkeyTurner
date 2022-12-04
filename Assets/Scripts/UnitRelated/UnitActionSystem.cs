@@ -233,6 +233,12 @@ public class UnitActionSystem : MonoBehaviour
             SetBusy();
             selectedAction.TakeAction(mouseGridPosition, ClearBusy);   
             OnActionStarted?.Invoke(this, EventArgs.Empty);
+
+            if (!selectedAction.CanBeTaken())
+            {
+                // Deselect action, if it can't be taken again
+                SetSelectedAction(null);
+            }
         }
     }
 

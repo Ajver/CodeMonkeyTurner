@@ -9,7 +9,9 @@ public class GrenadeAction : BaseAction
 
     [SerializeField] private GrenadeProjectile grenadeProjectilePrefab;
     [SerializeField] private LayerMask obstaclesLayerMask;
- 
+
+    [SerializeField] private int grenadesLeft = 1;
+    
     private enum State
     {
         Aiming,
@@ -75,6 +77,8 @@ public class GrenadeAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action callback)
     {
+        grenadesLeft--;
+        
         state = State.Aiming;
         float aimingTimer = 0.5f;
         stateTimer = aimingTimer;
@@ -151,4 +155,15 @@ public class GrenadeAction : BaseAction
             actionValue = 0,
         };
     }
+
+    public override bool CanBeTaken()
+    {
+        return grenadesLeft > 0;
+    }
+    
+    public override int GetAvailableUsagesLeft()
+    {
+        return grenadesLeft;
+    }
+    
 }

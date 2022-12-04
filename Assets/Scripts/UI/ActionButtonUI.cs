@@ -6,8 +6,12 @@ public class ActionButtonUI : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI usagesLeftText;
     [SerializeField] private Button button;
     [SerializeField] private Image selectedImg;
+
+    [SerializeField] private Color textColorEnabled;
+    [SerializeField] private Color textColorDisabled;
 
     private BaseAction action;
 
@@ -16,6 +20,8 @@ public class ActionButtonUI : MonoBehaviour
         this.action = action;
         
         text.text = action.GetActionName();
+
+        UpdateUsagesLeft();
         
         button.onClick.AddListener(() =>
         {
@@ -25,6 +31,45 @@ public class ActionButtonUI : MonoBehaviour
         UpdateSelectedVisual();
     }
 
+    public void UpdateUsagesLeft()
+    {
+        int usagesLeft = action.GetAvailableUsagesLeft();
+        if (usagesLeft == -1)
+        {
+            usagesLeftText.enabled = false;
+        }
+        else
+        {
+            usagesLeftText.enabled = true;
+            usagesLeftText.text = usagesLeft.ToString();
+        }
+        
+        if (!action.CanBeTaken())
+        {
+            SetAsDisabled();
+        }
+        else
+        {
+            SetAsEnabled();
+        }
+    }
+    
+    private void SetAsDisabled()
+    {
+        button.interactable = false;
+        
+        text.color = textColorDisabled;
+        usagesLeftText.color = textColorDisabled;
+    }
+
+    private void SetAsEnabled()
+    {
+        button.interactable = true;
+        
+        text.color = textColorEnabled;
+        usagesLeftText.color = textColorEnabled;
+    }
+    
     public void UpdateSelectedVisual()
     {
         bool isSelected = action == UnitActionSystem.Instance.GetSelectedAction();

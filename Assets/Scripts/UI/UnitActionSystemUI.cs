@@ -88,6 +88,7 @@ public class UnitActionSystemUI : MonoBehaviour
     private void UnitActionSystem_OnActionStarted(object sender, EventArgs e)
     {
         UpdateActionPoints();
+        UpdateActionsUsagesLeft();
     }
 
     private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
@@ -108,6 +109,14 @@ public class UnitActionSystemUI : MonoBehaviour
         }
     }
 
+    private void UpdateActionsUsagesLeft()
+    {
+        foreach (ActionButtonUI button in actionButtonsUi)
+        {
+            button.UpdateUsagesLeft();
+        }
+    }
+    
     private void UpdateActionPoints()
     {
         if (UnitActionSystem.Instance.GetSelectedUnit() != null)
