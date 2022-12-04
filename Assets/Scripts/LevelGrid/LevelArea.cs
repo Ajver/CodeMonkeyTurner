@@ -25,7 +25,6 @@ public class LevelArea : MonoBehaviour
             {
                 unit.gameObject.SetActive(isAreaActive);
                 units.Add(unit);
-                Debug.Log(unit + " inside " + this + " active: " + unit.gameObject.activeSelf);
             }
         }
 
@@ -72,12 +71,12 @@ public class LevelArea : MonoBehaviour
     
     private void ActivateArea()
     {
+        isAreaActive = true;
+        
         foreach (Unit unit in units)
         {
             unit.gameObject.SetActive(true);
         }
-        
-        Debug.Log(this + " just activated!");
     }
 
     private void OnDrawGizmosSelected()
