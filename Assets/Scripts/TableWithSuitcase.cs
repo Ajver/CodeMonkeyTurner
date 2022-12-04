@@ -40,12 +40,10 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
         onInteractionComplete();
         
         OnAnyTreasureCollected?.Invoke(this, EventArgs.Empty);
-        Debug.Log("MISSION COMPLETE!");
     }
     
     public void Damage(int dmg)
     {
-        Debug.Log("Damaged");
         BreakIntoParts();
     }
 

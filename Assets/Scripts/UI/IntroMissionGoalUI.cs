@@ -47,7 +47,6 @@ public class IntroMissionGoalUI : MonoBehaviour
     
     public void DeactivateGameObject()
     {
-        Debug.Log("Deactivated popup!");
         gameObject.SetActive(false);
     }
 }

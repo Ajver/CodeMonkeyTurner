@@ -80,7 +80,6 @@ public class EnemyAI : MonoBehaviour
         {
             if (!enemyUnit.gameObject.activeSelf)
             {
-                Debug.Log(enemyUnit + " is inactive");
                 // Skip inactive units
                 continue;
             }
