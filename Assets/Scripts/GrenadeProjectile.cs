@@ -66,7 +66,8 @@ public class GrenadeProjectile : MonoBehaviour
         {
             if (collider.TryGetComponent(out IDamageable damageable))
             {
-                damageable.Damage(50);
+                int damage = 100;
+                damageable.Damage(damage);
             }
         }
 
