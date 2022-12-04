@@ -19,7 +19,7 @@ public class GrenadeAction : BaseAction
     private State state;
     private float stateTimer;
     
-    private int throwDistance = 7;
+    private int throwDistance = 5;
     private Vector3 targetPosition;
     private GridPosition targetGridPosition;
     

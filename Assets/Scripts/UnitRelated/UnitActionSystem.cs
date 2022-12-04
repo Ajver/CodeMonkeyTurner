@@ -176,6 +176,7 @@ public class UnitActionSystem : MonoBehaviour
     private void SetSelectedUnit(Unit unit, bool focusOnUnit)
     {
         selectedUnit = unit;
+        OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
 
         if (unit != null)
         {
@@ -186,8 +187,6 @@ public class UnitActionSystem : MonoBehaviour
             SetSelectedAction(null);
         }
 
-        OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
-        
         if (focusOnUnit && unit != null)
         {
             OnFocusOnSelectedUnitRequested?.Invoke(this, EventArgs.Empty);

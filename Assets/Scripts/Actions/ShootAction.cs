@@ -15,7 +15,7 @@ public class ShootAction : BaseAction
         public Unit shootingUnit;
     } 
     
-    [SerializeField] private int shootDistance = 7;
+    [SerializeField] private int shootDistance = 8;
 
     private enum State
     {

@@ -21,11 +21,18 @@ public class UnitActionSystemUI : MonoBehaviour
         
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
         Unit.OnAnyActionPointsChanged += Unit_OnAnyActionPointsChanged;
-        
-        CreateUnitActionButtons();
-        UpdateActionPoints();
-        
-        HideNoUnitSelectedUI();
+
+        if (UnitActionSystem.Instance.GetSelectedUnit() != null)
+        {
+            CreateUnitActionButtons();
+            UpdateActionPoints();
+
+            HideNoUnitSelectedUI();
+        }
+        else
+        {
+            ShowNoUnitSelectedUI();
+        }
     }
 
     private void CreateUnitActionButtons()
