@@ -8,7 +8,9 @@ public class SwordAction : BaseAction
     public static event EventHandler OnAnySwordHit;
     
     public event EventHandler OnSwordActionStarted; 
-    public event EventHandler OnSwordActionCompleted; 
+    public event EventHandler OnSwordActionCompleted;
+
+    [SerializeField] private AudioSource swordAudio;
 
     private enum State
     {
@@ -34,6 +36,8 @@ public class SwordAction : BaseAction
         float beforeHitStateTime = 0.7f;
         stateTimer = beforeHitStateTime;
 
+        swordAudio.Play();
+        
         damageableTarget = LevelGrid.Instance.GetDamageableAtGridPosition(gridPosition);
         
         OnSwordActionStarted?.Invoke(this, EventArgs.Empty);

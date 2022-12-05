@@ -7,6 +7,9 @@ public class TurnSystem : MonoBehaviour
     public static TurnSystem Instance { get; private set; }
 
     public event EventHandler OnTurnChanged;
+
+    [SerializeField] private AudioSource startPlayerTurnAudio;
+    [SerializeField] private AudioSource startEnemyTurnAudio;
     
     private int turnNumber = 1;
 
@@ -28,6 +31,15 @@ public class TurnSystem : MonoBehaviour
     {
         turnNumber++;
         isPlayerTurn = !isPlayerTurn;
+
+        if (isPlayerTurn)
+        {
+            startPlayerTurnAudio.Play();
+        }
+        else
+        {
+            startEnemyTurnAudio.Play();
+        }
         
         OnTurnChanged?.Invoke(this, EventArgs.Empty);
     }
