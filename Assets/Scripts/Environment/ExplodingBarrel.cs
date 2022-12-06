@@ -4,10 +4,20 @@ using UnityEngine;
 public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
 {
     [SerializeField] private Transform explosionEffectPrefab;
+    [SerializeField] private AudioSource hitAudio;
 
     public static event EventHandler OnAnyBarrelExploded;
-    
-    private bool firedToExplode;
+
+    private enum State
+    {
+        Kalm,
+        FiredToExplode,
+        Exploding,
+    }
+
+    private State state = State.Kalm;
+    private float stateTimer;
+
     private Action onInteractComplete;
 
     protected override void OccupantStart()
@@ -16,18 +26,31 @@ public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
 
     protected override void OccupantUpdate()
     {
-        if (!firedToExplode)
+        if (state != State.FiredToExplode)
         {
             return;
         }
 
-        firedToExplode = false;
-        Explode();
-
-        if (onInteractComplete != null)
+        stateTimer -= Time.deltaTime;
+        if (stateTimer <= 0f)
         {
-            // This may be null when fired by projectile, instead of interaction
-            onInteractComplete();
+            NextState();
+        }
+    }
+
+    private void NextState()
+    {
+        if (state == State.FiredToExplode)
+        {
+            Explode();
+            
+            if (onInteractComplete != null)
+            {
+                // This may be null when fired by projectile, instead of interaction
+                onInteractComplete();
+            }
+
+            state = State.Exploding;
         }
     }
 
@@ -54,8 +77,11 @@ public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
 
     private void FireToExplode()
     {
-        // Prepares to fire - will explode in the next frame
-        firedToExplode = true;
+        state = State.FiredToExplode;
+        float firingTimer = 0.1f;
+        stateTimer = firingTimer;
+        
+        hitAudio.Play();
     }
     
     private void Explode()
@@ -73,7 +99,7 @@ public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
         
         Destroy(gameObject);
         ClearItselfFromGrid();
-
+        
         Vector3 offset = Vector3.up * 0.5f;
         Instantiate(explosionEffectPrefab, transform.position + offset, transform.rotation);
 
