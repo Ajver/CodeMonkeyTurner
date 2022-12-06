@@ -179,6 +179,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  grenadeExplosionAudio: {fileID: 0}
 --- !u!1 &5272752713740354174
 GameObject:
   m_ObjectHideFlags: 0

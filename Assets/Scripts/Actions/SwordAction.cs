@@ -10,7 +10,8 @@ public class SwordAction : BaseAction
     public event EventHandler OnSwordActionStarted; 
     public event EventHandler OnSwordActionCompleted;
 
-    [SerializeField] private AudioSource swordAudio;
+    [SerializeField] private AudioSource swordSwingAudio;
+    [SerializeField] private AudioSource swordHitAudio;
 
     private enum State
     {
@@ -36,7 +37,7 @@ public class SwordAction : BaseAction
         float beforeHitStateTime = 0.7f;
         stateTimer = beforeHitStateTime;
 
-        swordAudio.Play();
+        swordSwingAudio.Play();
         
         damageableTarget = LevelGrid.Instance.GetDamageableAtGridPosition(gridPosition);
         
@@ -138,18 +139,24 @@ public class SwordAction : BaseAction
             case State.SwingingSwordBeforeHit:
                 state = State.SwingingSwordAfterHit;
                 float afterHitStateTime = 0.1f;
-                stateTimer = afterHitStateTime; 
-                
-                damageableTarget.Damage(100);
-                
-                OnAnySwordHit?.Invoke(this, EventArgs.Empty);
-                
+                stateTimer = afterHitStateTime;
+
+                SwordHit();
                 break;
             case State.SwingingSwordAfterHit:
                 OnSwordActionCompleted?.Invoke(this, EventArgs.Empty);
                 ActionComplete();
                 break;
         }
+    }
+
+    private void SwordHit()
+    {
+        damageableTarget.Damage(100);
+
+        swordHitAudio.Play();
+        
+        OnAnySwordHit?.Invoke(this, EventArgs.Empty);
     }
     
     public int GetMaxSwordDistance()

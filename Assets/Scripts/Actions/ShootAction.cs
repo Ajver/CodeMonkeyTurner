@@ -8,6 +8,8 @@ public class ShootAction : BaseAction
     public static event EventHandler<OnShootEventArgs> OnAnyShoot;
 
     [SerializeField] private LayerMask obstaclesLayerMask;
+
+    [SerializeField] private AudioSource shootAudio;
     
     public class OnShootEventArgs : EventArgs
     {
@@ -86,6 +88,8 @@ public class ShootAction : BaseAction
         };
         OnShoot?.Invoke(this, eventArgs);
         OnAnyShoot?.Invoke(this, eventArgs);
+        
+        shootAudio.Play();
         
         int damageAmount = 50;
         damageableTarget.Damage(damageAmount);

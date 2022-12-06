@@ -10,6 +10,8 @@ public class GrenadeAction : BaseAction
     [SerializeField] private GrenadeProjectile grenadeProjectilePrefab;
     [SerializeField] private LayerMask obstaclesLayerMask;
 
+    [SerializeField] private AudioSource grenadeThrowAudio;
+
     [SerializeField] private int grenadesLeft = 1;
     
     private enum State
@@ -73,6 +75,8 @@ public class GrenadeAction : BaseAction
     {
         GrenadeProjectile grenade = Instantiate(grenadeProjectilePrefab, unit.transform.position, Quaternion.identity);
         grenade.Setup(targetGridPosition, OnGrenadeBehaviorComplete);
+
+        grenadeThrowAudio.Play();
     }
 
     public override void TakeAction(GridPosition gridPosition, Action callback)

@@ -9,6 +9,7 @@ public class Unit : GridOccupant, IDamageable
     public static event EventHandler OnAnyActionPointsChanged;
     public static event EventHandler OnAnyUnitSpawned;
     public static event EventHandler OnAnyUnitDead;
+    public static event EventHandler OnAnyUnitDamaged;
     
     private const int ACTION_POINTS_MAX = 2; 
 
@@ -100,6 +101,7 @@ public class Unit : GridOccupant, IDamageable
     public void Damage(int damageAmount)
     {
         healthSystem.Damage(damageAmount);
+        OnAnyUnitDamaged?.Invoke(this, EventArgs.Empty);
     }
 
     private void HealthSystem_OnDead(object sender, EventArgs e)
