@@ -1,6 +1,13 @@
 # TODO
 
 - [/] Different levels (missions)
+- [ ] Sound effects
+  - [ ] Aiming sound (when preparing to shoot)
+  - [ ] Music
+  - [ ] Menu sounds (shoot, door, etc)
+  - [ ] Door sounds
+  - [ ] Mission win/lose sounds
+- [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Fix bug with lighting when changing level
 - [ ] Invisible inactive level areas
 - [ ] Prevent grenades/barrels destroing stuff through walls
