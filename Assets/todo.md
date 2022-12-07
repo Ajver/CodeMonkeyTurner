@@ -1,14 +1,13 @@
 # TODO
 
-- [/] Different levels (missions)
+- [ ] 3rd mission
 - [ ] Sound effects
   - [ ] Aiming sound (when preparing to shoot)
-  - [ ] Music
+  - [x] Music
   - [ ] Menu sounds (shoot, door, etc)
   - [ ] Door sounds
   - [ ] Mission win/lose sounds
 - [ ] Scrolling mission buttons in Menu (animation)
-- [ ] Fix bug with lighting when changing level
 - [ ] Invisible inactive level areas
 - [ ] Prevent grenades/barrels destroing stuff through walls
 - [ ] Next unit button (selecting another unit with action points)
@@ -19,6 +18,7 @@
 
 ## Done
 
+- [x] Fix bug with lighting when changing level
 - [x] Space to move camera to selected Unit
 - [x] Rotate before other actions (i.e. Interact, Grenade, etc)
 - [x] Improve rotation before shooting (wait for unit to fully face target)
