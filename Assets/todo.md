@@ -6,7 +6,7 @@
   - [x] Music
   - [ ] Menu sounds (shoot, door, etc)
   - [ ] Door sounds
-  - [ ] Mission win/lose sounds
+  - [x] Mission win/lose sounds
 - [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Invisible inactive level areas
 - [ ] Prevent grenades/barrels destroing stuff through walls

@@ -14,6 +14,9 @@ public class MissionSystem : MonoBehaviour
     {
         AllUnitsDied,
         TreasureDestroyed,
+        
+        // Used in Testing scene
+        TestFailReason,
     }
     
     public event EventHandler<MissionCompleteReason> OnMissionComplete;
@@ -35,13 +38,16 @@ public class MissionSystem : MonoBehaviour
 
         UnitManager.Instance.OnAllFriendlyUnitsDied += UnitManager_OnAllFriendlyUnitsDied;
         UnitManager.Instance.OnAllEnemyUnitsDied += UnitManager_OnAllEnemyUnitsDied;
+
+        Testing.Instance.OnTestWinMission += Testing_OnTestWinMission;
+        Testing.Instance.OnTestLoseMission += Testing_OnTestLoseMission;
     }
 
     private void TableWithSuitcase_OnAnyTreasureCollected(object sender, EventArgs e)
     {
         if (missionGoal == MissionCompleteReason.CollectTreasure)
         {
-            OnMissionComplete?.Invoke(this, missionGoal);
+            CompleteMission();
         }
     }
 
@@ -49,8 +55,23 @@ public class MissionSystem : MonoBehaviour
     {
         if (missionGoal == MissionCompleteReason.KillEnemies)
         {
-            OnMissionComplete?.Invoke(this, missionGoal);
+            CompleteMission();
         }
+    }
+
+    private void Testing_OnTestWinMission(object sender, EventArgs e)
+    {
+        CompleteMission();
+    }
+    
+    private void Testing_OnTestLoseMission(object sender, EventArgs e)
+    {
+        FailMission(MissionFailReason.TestFailReason);
+    }
+
+    private void CompleteMission()
+    {
+        OnMissionComplete?.Invoke(this, missionGoal);
     }
     
     private void OnDestroy()

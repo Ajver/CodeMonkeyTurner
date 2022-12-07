@@ -65,9 +65,22 @@ public class MusicPlayer : MonoBehaviour
     private void PlayDelayed(float delay)
     {
         audioSource.PlayDelayed(delay);
-        
+
+        // Always run timer, and decided whether to loop or not, just after timer ends
+        // That approach simplifies the code when toggling `loop`
         playingTimer = musicClip.length + delay;
         isPlayingTimerRunning = true;
+    }
+
+    public void PlayClipNow(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        PlayDelayed(0f);
+    }
+
+    public void SetLoop(bool flag)
+    {
+        loop = flag;
     }
     
 }

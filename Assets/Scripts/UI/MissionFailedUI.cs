@@ -27,6 +27,9 @@ public class MissionFailedUI : MonoBehaviour
             case MissionSystem.MissionFailReason.TreasureDestroyed:
                 missionDescriptionText.text = "The Suitcase you were supposed to collect got destroyed";
                 break;
+            case MissionSystem.MissionFailReason.TestFailReason:
+                missionDescriptionText.text = "Mission failed";
+                break;
         }
 
         gameObject.SetActive(true);
