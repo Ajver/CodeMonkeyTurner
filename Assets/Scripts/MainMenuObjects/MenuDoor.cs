@@ -6,6 +6,9 @@ public class MenuDoor : MonoBehaviour, IInteractable
     [SerializeField] private Animator animator;
     [SerializeField] private Collider closedDoorCollider;
 
+    [SerializeField] private AudioSource doorOpenAudio;
+    [SerializeField] private AudioSource doorCloseAudio;
+
     private bool isOpen;
     
     private Action onActionComplete;
@@ -32,6 +35,8 @@ public class MenuDoor : MonoBehaviour, IInteractable
     {
         closedDoorCollider.enabled = false;
         isOpen = true;
+        
+        doorOpenAudio.Play();
         animator.SetBool("IsOpen", isOpen);
     }
     
@@ -39,6 +44,8 @@ public class MenuDoor : MonoBehaviour, IInteractable
     {
         closedDoorCollider.enabled = true;
         isOpen = false;
+        
+        doorCloseAudio.Play();
         animator.SetBool("IsOpen", isOpen);
     }
 

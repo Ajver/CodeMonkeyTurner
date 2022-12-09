@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MenuEnemyUnit : MonoBehaviour, IDamageable
 {
+    public static event EventHandler OnAnyUnitDamaged;
+    
     private HealthSystem healthSystem;
     
     private void Awake()
@@ -19,6 +21,7 @@ public class MenuEnemyUnit : MonoBehaviour, IDamageable
     public void Damage(int dmg)
     {
         healthSystem.Damage(dmg);
+        OnAnyUnitDamaged?.Invoke(this, EventArgs.Empty);
     }
 
     public GameTeam GetGameTeam()

@@ -5,7 +5,7 @@
   - [ ] Aiming sound (when preparing to shoot)
   - [x] Music
   - [ ] Menu sounds (shoot, door, etc)
-  - [ ] Door sounds
+  - [x] Door sounds
   - [x] Mission win/lose sounds
 - [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Invisible inactive level areas

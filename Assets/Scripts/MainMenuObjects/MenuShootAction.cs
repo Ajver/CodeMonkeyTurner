@@ -6,6 +6,7 @@ public class MenuShootAction: MonoBehaviour
     [SerializeField] private BulletProjectile bulletProjectilePrefab;
     [SerializeField] private Transform shootPointTransform;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource shootAudio;
     
     private enum State
     {
@@ -85,6 +86,8 @@ public class MenuShootAction: MonoBehaviour
         damageableTarget.Damage(100);
         
         animator.SetTrigger("Shoot");
+        
+        shootAudio.Play();
         
         ScreenShake.Instance.Shake(1f);
     }
