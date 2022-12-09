@@ -5,6 +5,9 @@ public class Door : GridOccupant, IInteractable
 {
     [SerializeField] private Animator animator;
 
+    [SerializeField] private AudioSource doorOpenAudio;
+    [SerializeField] private AudioSource doorCloseAudio;
+
     [SerializeField] private bool isOpen;
 
     public event EventHandler OnOpened;
@@ -17,11 +20,11 @@ public class Door : GridOccupant, IInteractable
     {
         if (isOpen)
         {
-            OpenDoor();
+            OpenDoor(true);
         }
         else
         {
-            CloseDoor();
+            CloseDoor(true);
         }
     }
 
@@ -68,17 +71,31 @@ public class Door : GridOccupant, IInteractable
         return transform;
     }
 
-    private void OpenDoor()
+    private void OpenDoor(bool quietly = false)
     {
         isOpen = true;
+        
         animator.SetBool("IsOpen", isOpen);
+
+        if (!quietly)
+        {
+            doorOpenAudio.Play();
+        }
+
         PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, isOpen);
     }
     
-    private void CloseDoor()
+    private void CloseDoor(bool quietly = false)
     {
         isOpen = false;
+        
         animator.SetBool("IsOpen", isOpen);
+        
+        if (!quietly)
+        {
+            doorCloseAudio.Play();
+        }
+        
         PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, isOpen);
     }
 }

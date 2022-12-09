@@ -39,8 +39,11 @@ public class MissionSystem : MonoBehaviour
         UnitManager.Instance.OnAllFriendlyUnitsDied += UnitManager_OnAllFriendlyUnitsDied;
         UnitManager.Instance.OnAllEnemyUnitsDied += UnitManager_OnAllEnemyUnitsDied;
 
-        Testing.Instance.OnTestWinMission += Testing_OnTestWinMission;
-        Testing.Instance.OnTestLoseMission += Testing_OnTestLoseMission;
+        if (Testing.Instance != null)
+        {
+            Testing.Instance.OnTestWinMission += Testing_OnTestWinMission;
+            Testing.Instance.OnTestLoseMission += Testing_OnTestLoseMission;   
+        }
     }
 
     private void TableWithSuitcase_OnAnyTreasureCollected(object sender, EventArgs e)
