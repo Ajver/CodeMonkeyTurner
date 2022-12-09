@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
@@ -8,6 +6,8 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
 
     [SerializeField] private GameObject treasureGameObject;
 
+    [SerializeField] private AudioSource interactAudio;
+    
     public static event EventHandler OnAnyTreasureCollected;
     public static event EventHandler OnAnyTreasureDestroyed;
     
@@ -71,6 +71,8 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
         onInteractionComplete = onInteractComplete;
         isActive = true;
         timer = 0.7f;
+
+        interactAudio.Play();
         
         // Remove from grid, but still make the spot not-walkable
         LevelGrid.Instance.ClearOccupantAtGridPosition(gridPosition);
