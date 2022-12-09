@@ -1,5 +1,3 @@
-using System;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public abstract class GridOccupant : MonoBehaviour

@@ -1,9 +1,11 @@
 # TODO
 
-- [ ] 3rd mission
-- [ ] Scrolling mission buttons in Menu (animation)
+- [ ] Exit to Windows in main menu
+- [ ] Pause screen with ability to restart level or back to menu
+- [ ] When completing level - go back to menu with the Missions camera selected
+- [ ] Prevent grenades/barrels destroying stuff through walls
 - [ ] Invisible inactive level areas
-- [ ] Prevent grenades/barrels destroing stuff through walls
+- [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Next unit button (selecting another unit with action points)
 - [ ] Hide actions UI when no more Action Point
 - [ ] Pick suitcase animation
@@ -12,6 +14,7 @@
 
 ## Done
 
+- [x] 3rd mission
 - [x] Sound effects
 - [x] Fix bug with lighting when changing level
 - [x] Space to move camera to selected Unit
