@@ -4,7 +4,7 @@
 - [ ] Sound effects
   - [ ] Aiming sound (when preparing to shoot)
   - [x] Music
-  - [ ] Menu sounds (shoot, door, etc)
+  - [x] Menu sounds (shoot, door, etc)
   - [x] Door sounds
   - [x] Mission win/lose sounds
 - [ ] Scrolling mission buttons in Menu (animation)

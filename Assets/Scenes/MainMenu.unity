@@ -4342,6 +4342,12 @@ AudioSource:
     type: 3}
   m_PrefabInstance: {fileID: 1180275901}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1852868970 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3846181816994747826, guid: 3af174e552a820fe0b55b2d4bf0a7058,
+    type: 3}
+  m_PrefabInstance: {fileID: 1180275901}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1888918962 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7068710491601792923, guid: 3af174e552a820fe0b55b2d4bf0a7058,
@@ -4364,6 +4370,7 @@ MonoBehaviour:
     type: 3}
   shootPointTransform: {fileID: 259225336}
   animator: {fileID: 1187300414}
+  aimAudio: {fileID: 1852868970}
   shootAudio: {fileID: 1826730458}
 --- !u!4 &1888918987 stripped
 Transform:

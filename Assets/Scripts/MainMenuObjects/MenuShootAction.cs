@@ -6,6 +6,7 @@ public class MenuShootAction: MonoBehaviour
     [SerializeField] private BulletProjectile bulletProjectilePrefab;
     [SerializeField] private Transform shootPointTransform;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource aimAudio;
     [SerializeField] private AudioSource shootAudio;
     
     private enum State
@@ -27,6 +28,8 @@ public class MenuShootAction: MonoBehaviour
     {
         damageableTarget = shootTarget;
         OnShootingFinished = completeCallback;
+        
+        aimAudio.Play();
         
         state = State.Aiming;
         float aimingStateTime = 0.6f;

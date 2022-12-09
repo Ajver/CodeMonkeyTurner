@@ -9,6 +9,7 @@ public class ShootAction : BaseAction
 
     [SerializeField] private LayerMask obstaclesLayerMask;
 
+    [SerializeField] private AudioSource aimAudio;
     [SerializeField] private AudioSource shootAudio;
     
     public class OnShootEventArgs : EventArgs
@@ -123,6 +124,8 @@ public class ShootAction : BaseAction
         state = State.Aiming;
         float aimingStateTime = 1f;
         stateTimer = aimingStateTime;
+        
+        aimAudio.Play();
         
         ActionStart(callback);
     }

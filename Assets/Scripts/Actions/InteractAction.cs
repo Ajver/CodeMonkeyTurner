@@ -68,8 +68,14 @@ public class InteractAction : BaseAction
         interactable = LevelGrid.Instance.GetInteractableAtGridPosition(gridPosition);
         
         state = State.LookingInto;
-        float lookingIntoTime = 1f;
-        stateTimer = lookingIntoTime;
+        float lookingIntoTime = .4f;
+        
+        Vector3 faceDirection = (interactable.GetTransform().position - unit.transform.position).normalized;
+        faceDirection.y = 0f;
+        float diff = Vector3.Distance(faceDirection, transform.forward);
+        
+        // The more Unit needs to rotate to the target, the longer timer is set
+        stateTimer = lookingIntoTime * diff;
         
         ActionStart(callback);
     }
