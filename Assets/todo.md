@@ -1,8 +1,10 @@
 # TODO
 
-- [ ] Exit to Windows in main menu
+- [ ] Fading between scenes
 - [ ] Pause screen with ability to restart level or back to menu
 - [ ] When completing level - go back to menu with the Missions camera selected
+- [ ] Save system
+- [ ] Enabling next levels when previous is finished
 - [ ] Prevent grenades/barrels destroying stuff through walls
 - [ ] Invisible inactive level areas
 - [ ] Scrolling mission buttons in Menu (animation)
@@ -14,6 +16,7 @@
 
 ## Done
 
+- [ ] Exit to Windows in main menu
 - [x] 3rd mission
 - [x] Sound effects
 - [x] Fix bug with lighting when changing level

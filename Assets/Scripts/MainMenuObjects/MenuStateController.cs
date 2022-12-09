@@ -22,5 +22,11 @@ public class MenuStateController : MonoBehaviour
     {
         OnMainMenuScreenEntered?.Invoke(this, EventArgs.Empty);
     }
+
+    public void OnExitGameBtnPressed()
+    {
+        Debug.Log("Quiting game...");
+        Application.Quit();
+    }
     
 }
