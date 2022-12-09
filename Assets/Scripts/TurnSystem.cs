@@ -29,6 +29,12 @@ public class TurnSystem : MonoBehaviour
 
     public void NextTurn()
     {
+        if (GameManager.Instance.IsGameEnded())
+        {
+            // This is to prevent ending Enemy turn, after killing all allies (the sound played in the background)
+            return;
+        }
+        
         turnNumber++;
         isPlayerTurn = !isPlayerTurn;
 
