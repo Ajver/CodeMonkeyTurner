@@ -14,7 +14,7 @@ public class MissionFailedUI : MonoBehaviour
 
     public void OnRetryBtnClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneFader.Instance.FadeToScene(SceneManager.GetActiveScene().name);
     }
 
     private void MissionSystem_OnMissionFailed(object sender, MissionSystem.MissionFailReason reason)

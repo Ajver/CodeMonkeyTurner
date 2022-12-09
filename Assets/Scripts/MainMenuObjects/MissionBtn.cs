@@ -33,7 +33,7 @@ public class MissionBtn : MonoBehaviour
 
     private void OnClick()
     {
-        SceneManager.LoadScene(missionSceneName);
+        SceneFader.Instance.FadeToScene(missionSceneName);
     }
     
     private void OnActivate()

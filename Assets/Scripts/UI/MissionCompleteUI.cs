@@ -20,7 +20,7 @@ public class MissionCompleteUI : MonoBehaviour
 
     public void OnContinueBtnClicked()
     {
-        SceneManager.LoadScene(mainMenuSceneName);
+        SceneFader.Instance.FadeToScene(mainMenuSceneName);
     }
 
     private void MissionSystem_OnMissionComplete(object sender, MissionSystem.MissionCompleteReason reason)
