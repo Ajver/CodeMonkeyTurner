@@ -7,13 +7,16 @@ public class MenuMissionPickVirtualCamera : MonoBehaviour
 {
 
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
-    
+
+    private void Awake()
+    {
+        virtualCamera.enabled = MenuStateStore.inMissionPick;
+    }
+
     private void Start()
     {
         MenuStateController.Instance.OnMissionPickEntered += MenuStateController_OnMissionPickEntered;
         MenuStateController.Instance.OnMainMenuScreenEntered += MenuStateController_OnMainMenuScreenEntered;
-        
-        virtualCamera.enabled = false;
     }
 
     private void MenuStateController_OnMissionPickEntered(object sender, EventArgs e)

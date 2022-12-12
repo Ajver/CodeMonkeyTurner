@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MissionCompleteUI : MonoBehaviour
 {
@@ -20,6 +16,8 @@ public class MissionCompleteUI : MonoBehaviour
 
     public void OnContinueBtnClicked()
     {
+        // Load in Mission Pick view
+        MenuStateStore.inMissionPick = true;
         SceneFader.Instance.FadeToScene(mainMenuSceneName);
     }
 
