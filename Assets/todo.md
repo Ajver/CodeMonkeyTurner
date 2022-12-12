@@ -1,5 +1,6 @@
 # TODO
 
+- [ ] Increase contrast between light-red and red (to make shootable targets better visible)
 - [ ] Save system
 - [ ] Enabling next levels when previous is finished
 - [ ] Prevent grenades/barrels destroying stuff through walls
