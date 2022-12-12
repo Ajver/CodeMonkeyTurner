@@ -1,13 +1,19 @@
 # CodeMonkeyTurner
 
+**Play the game on --> [itch.io](https://ajver.itch.io/turner) <--**
+
 Turn based game made with awesome CodeMonkey's course: https://www.gamedev.tv/p/unity-turn-based-strategy
 
-The game is now developed by myself, after I finished the course. I add new features and assets, 
-implement full game flow (menu systems, different levels, winning/loosing, etc.) - which were not part of the course.
+The game is finally in version 1.0!
 
-In this game player need to complete given missions (i.e. Find and collect a specific item, capture enemy instead of killing, etc.)
+In this game player must complete given missions (i.e. Find and collect a specific item, capture an enemy without killing him, etc.). The game is turn-based, you can choose from several actions, but you have limited action points. Then it's time for the Enemy's turn.
 
-![Gameplay gif](github-assets/gameplay.gif)
+I still improve the game, after I finished the course. I keep adding new features and assets. The course included only basic game mechanics. 
+
+Most of the assets (graphics, models, audio) are from public domain, some made by myself.
+
+## Screen shots
+
 ![Gameplay screenshot](github-assets/game-ss1.png)
 ![Gameplay screenshot](github-assets/game-ss2.png)
 ![Gameplay screenshot](github-assets/game-ss3.png)
