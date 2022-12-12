@@ -80,6 +80,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""09b88759-b73a-4f4e-873c-83e4f83fac49"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -236,6 +245,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""FocusOnUnit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""289d82fc-19e1-4d13-80f6-4ea8acaa7377"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +270,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
         m_Player_ChangeSelectedUnit = m_Player.FindAction("ChangeSelectedUnit", throwIfNotFound: true);
         m_Player_FocusOnUnit = m_Player.FindAction("FocusOnUnit", throwIfNotFound: true);
+        m_Player_PauseGame = m_Player.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +336,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Click;
     private readonly InputAction m_Player_ChangeSelectedUnit;
     private readonly InputAction m_Player_FocusOnUnit;
+    private readonly InputAction m_Player_PauseGame;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -325,6 +347,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Click => m_Wrapper.m_Player_Click;
         public InputAction @ChangeSelectedUnit => m_Wrapper.m_Player_ChangeSelectedUnit;
         public InputAction @FocusOnUnit => m_Wrapper.m_Player_FocusOnUnit;
+        public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -352,6 +375,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @FocusOnUnit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFocusOnUnit;
                 @FocusOnUnit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFocusOnUnit;
                 @FocusOnUnit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFocusOnUnit;
+                @PauseGame.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
+                @PauseGame.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
+                @PauseGame.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -374,6 +400,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @FocusOnUnit.started += instance.OnFocusOnUnit;
                 @FocusOnUnit.performed += instance.OnFocusOnUnit;
                 @FocusOnUnit.canceled += instance.OnFocusOnUnit;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
         }
     }
@@ -386,5 +415,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnChangeSelectedUnit(InputAction.CallbackContext context);
         void OnFocusOnUnit(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }

@@ -151,5 +151,14 @@ public class InputManager : MonoBehaviour
         return zoomAmount;
 #endif
     }
+
+    public bool IsPauseButtonPressedThisFrame()
+    {
+#if USE_NEW_INPUT_SYSTEM
+        return playerInputActions.Player.PauseGame.WasPressedThisFrame();
+#else
+        return Input.GetKeyDown(KeyCode.Escape);
+#endif
+    }
     
 }

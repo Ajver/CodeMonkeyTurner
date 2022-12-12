@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] Pause screen with ability to restart level or back to menu
 - [ ] Save system
 - [ ] Enabling next levels when previous is finished
 - [ ] Prevent grenades/barrels destroying stuff through walls
@@ -14,6 +13,7 @@
 
 ## Done
 
+- [x] Pause screen with ability to restart level or back to menu
 - [x] When completing level - go back to menu with the Missions camera selected
 - [x] Fading between scenes
 - [x] Exit to Windows in main menu
