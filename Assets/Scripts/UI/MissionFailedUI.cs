@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class MissionFailedUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI missionDescriptionText;
+    [SerializeField] private string mainMenuSceneName;
+    
     private void Start()
     {
         MissionSystem.Instance.OnMissionFailed += MissionSystem_OnMissionFailed;
@@ -15,6 +17,11 @@ public class MissionFailedUI : MonoBehaviour
     public void OnRetryBtnClicked()
     {
         SceneFader.Instance.FadeToScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnReturnToMenuBtnClicked()
+    {
+        SceneFader.Instance.FadeToScene(mainMenuSceneName);
     }
 
     private void MissionSystem_OnMissionFailed(object sender, MissionSystem.MissionFailReason reason)
