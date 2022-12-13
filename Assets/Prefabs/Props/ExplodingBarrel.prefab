@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWalkable: 0
-  explosionEffectPrefab: {fileID: 669285643184660720, guid: 61f701f428158e972994ab3664ea322f,
+  explosionPrefab: {fileID: 7283482390824545801, guid: 328cf14709934e209a2d9456c970182c,
     type: 3}
   hitAudio: {fileID: 4836048032071424635}
 --- !u!65 &9097087167421943778

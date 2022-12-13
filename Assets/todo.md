@@ -1,9 +1,7 @@
 # TODO
 
-- [ ] Increase contrast between light-red and red (to make shootable targets better visible)
 - [ ] Save system
 - [ ] Enabling next levels when previous is finished
-- [ ] Prevent grenades/barrels destroying stuff through walls
 - [ ] Invisible inactive level areas
 - [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Next unit button (selecting another unit with action points)
@@ -14,6 +12,8 @@
 
 ## Done
 
+- [x] Prevent grenades/barrels destroying stuff through walls
+- [x] Increase contrast between light-red and red (to make shootable targets better visible)
 - [x] Pause screen with ability to restart level or back to menu
 - [x] When completing level - go back to menu with the Missions camera selected
 - [x] Fading between scenes

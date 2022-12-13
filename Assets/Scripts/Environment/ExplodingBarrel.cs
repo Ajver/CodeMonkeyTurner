@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
 {
-    [SerializeField] private Transform explosionEffectPrefab;
+    [SerializeField] private Explosion explosionPrefab;
     [SerializeField] private AudioSource hitAudio;
 
     public static event EventHandler OnAnyBarrelExploded;
@@ -86,23 +86,15 @@ public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
     
     private void Explode()
     {
+        int damage = 150;
         float radius = 5f;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 
-        foreach (Collider collider in colliders)
-        {
-            if (collider.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.Damage(150);
-            }
-        }
+        Explosion explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+        explosion.Setup(damage, radius);
         
         Destroy(gameObject);
         ClearItselfFromGrid();
         
-        Vector3 offset = Vector3.up * 0.5f;
-        Instantiate(explosionEffectPrefab, transform.position + offset, transform.rotation);
-
         OnAnyBarrelExploded?.Invoke(this, EventArgs.Empty);
     }
  

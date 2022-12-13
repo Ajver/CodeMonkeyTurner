@@ -6,7 +6,7 @@ public class GrenadeProjectile : MonoBehaviour
 
     public static event EventHandler OnAnyGrenadeExploded;
 
-    [SerializeField] private Transform explosionEffectPrefab;
+    [SerializeField] private Explosion explosionPrefab;
     [SerializeField] private Transform trailRenderer;
     [SerializeField] private AnimationCurve arcYAnimationCurve;
     
@@ -59,20 +59,13 @@ public class GrenadeProjectile : MonoBehaviour
 
     private void Kaboom()
     {
+        int damage = 100;
         float radius = 3f;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.TryGetComponent(out IDamageable damageable))
-            {
-                int damage = 100;
-                damageable.Damage(damage);
-            }
-        }
+        
+        Explosion explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+        explosion.Setup(damage, radius);
 
         trailRenderer.parent = null;
-        Instantiate(explosionEffectPrefab, transform.position + Vector3.up * 1f, Quaternion.identity);
         
         onGrenadeBehaviorComplete();
         OnAnyGrenadeExploded?.Invoke(this, EventArgs.Empty);

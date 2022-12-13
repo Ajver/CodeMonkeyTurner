@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f797ea02748c0bd129ca94915313a78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionEffectPrefab: {fileID: 669285643184660720, guid: 61f701f428158e972994ab3664ea322f,
+  explosionPrefab: {fileID: 7283482390824545801, guid: 328cf14709934e209a2d9456c970182c,
     type: 3}
   trailRenderer: {fileID: 4532949505446861938}
   arcYAnimationCurve:
@@ -179,7 +179,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  grenadeExplosionAudio: {fileID: 0}
 --- !u!1 &5272752713740354174
 GameObject:
   m_ObjectHideFlags: 0
