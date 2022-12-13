@@ -173,7 +173,7 @@ public class UnitActionSystem : MonoBehaviour
         }
     }
     
-    private void SetSelectedUnit(Unit unit, bool focusOnUnit)
+    public void SetSelectedUnit(Unit unit, bool focusOnUnit)
     {
         selectedUnit = unit;
         OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
@@ -203,7 +203,7 @@ public class UnitActionSystem : MonoBehaviour
         selectedAction = action;
         OnSelectedActionChanged?.Invoke(this, EventArgs.Empty);
     }
-
+    
     public Unit GetSelectedUnit()
     {
         return selectedUnit;

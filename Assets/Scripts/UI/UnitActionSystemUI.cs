@@ -10,6 +10,9 @@ public class UnitActionSystemUI : MonoBehaviour
     [SerializeField] private Transform actionButtonContainerTransform;
     [SerializeField] private TextMeshProUGUI actionPointsText;
     [SerializeField] private GameObject noUnitSelectedGameObject;
+    
+    [SerializeField] private GameObject currentUnitOutOfActionPointsUI;
+    [SerializeField] private GameObject noUnitHasActionPointsUI;
 
     private List<ActionButtonUI> actionButtonsUi;
 
@@ -33,6 +36,9 @@ public class UnitActionSystemUI : MonoBehaviour
         {
             ShowNoUnitSelectedUI();
         }
+        
+        HideNoUnitHasActionPointsUI();
+        HideCurrentUnitOutOfActionPointsUI();
     }
 
     private void CreateUnitActionButtons()
@@ -68,6 +74,8 @@ public class UnitActionSystemUI : MonoBehaviour
         {
             ShowNoUnitSelectedUI();
         }
+
+        UpdateNoActionPointsUIsVisibility();
     }
 
     private void ShowNoUnitSelectedUI()
@@ -79,7 +87,67 @@ public class UnitActionSystemUI : MonoBehaviour
     {
         noUnitSelectedGameObject.SetActive(false);
     }
+
+    private void UpdateNoActionPointsUIsVisibility()
+    {
+        // By default hide both of them (then they are optionally shown)
+        HideNoUnitHasActionPointsUI();
+        HideCurrentUnitOutOfActionPointsUI();
+
+        if (!TurnSystem.Instance.IsPlayerTurn())
+        {
+            // Don't show these on Enemy turn
+            return;
+        }
+        
+        if (!HasAnyUnitWithActionPoints())
+        {
+            // Literally no action points on any unit
+            ShowNoUnitHasActionPointsUI();
+            return;
+        }
+
+        Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
+
+        if (selectedUnit != null && selectedUnit.GetActionPoints() <= 0)
+        {
+            ShowCurrentUnitOutOfActionPointsUI();
+        }
+    }
+
+    private bool HasAnyUnitWithActionPoints()
+    {
+        foreach (Unit unit in UnitManager.Instance.GetFriendlyUnitList())
+        {
+            if (unit.GetActionPoints() > 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     
+    private void ShowCurrentUnitOutOfActionPointsUI()
+    {
+        currentUnitOutOfActionPointsUI.SetActive(true);
+    }
+    
+    private void HideCurrentUnitOutOfActionPointsUI()
+    {
+        currentUnitOutOfActionPointsUI.SetActive(false);
+    }
+    
+    private void ShowNoUnitHasActionPointsUI()
+    {
+        noUnitHasActionPointsUI.SetActive(true);
+    }
+    
+    private void HideNoUnitHasActionPointsUI()
+    {
+        noUnitHasActionPointsUI.SetActive(false);
+    }
+
     private void UnitActionSystem_OnSelectedActionChanged(object sender, EventArgs e)
     {
         UpdateButtonsSelectedVisuals();
@@ -99,6 +167,7 @@ public class UnitActionSystemUI : MonoBehaviour
     private void Unit_OnAnyActionPointsChanged(object sender, EventArgs e)
     {
         UpdateActionPoints();
+        UpdateNoActionPointsUIsVisibility();
     }
 
     private void UpdateButtonsSelectedVisuals()
