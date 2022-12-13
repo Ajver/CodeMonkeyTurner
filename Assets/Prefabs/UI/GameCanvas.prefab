@@ -212,7 +212,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 2
+  m_Spacing: 1
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -555,10 +555,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -769,8 +769,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 20.6}
-  m_SizeDelta: {x: 200, y: 206.0629}
+  m_AnchoredPosition: {x: 0, y: 10.7666}
+  m_SizeDelta: {x: 200, y: 215.8963}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &3881948687342533144
 MonoBehaviour:
@@ -943,7 +943,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 2
+  m_Spacing: 1
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
@@ -1477,7 +1477,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7947727237710849635}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3881948687342533144}
+        m_TargetAssemblyTypeName: SelectedUnitUI, Assembly-CSharp
+        m_MethodName: OnPreviousUnitBtnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6489702076536412886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,7 +1611,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9098140414756145958}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3881948687342533144}
+        m_TargetAssemblyTypeName: SelectedUnitUI, Assembly-CSharp
+        m_MethodName: OnFocusBtnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6928801919880258121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,7 +1784,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6204978757612534013}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3881948687342533144}
+        m_TargetAssemblyTypeName: SelectedUnitUI, Assembly-CSharp
+        m_MethodName: OnNextUnitBtnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7041567369836988265
 GameObject:
   m_ObjectHideFlags: 0

@@ -140,7 +140,7 @@ public class UnitActionSystem : MonoBehaviour
         return true;
     }
 
-    private void ChangeSelectedUnit(int dir)
+    public void ChangeSelectedUnit(int dir)
     {
         List<Unit> units = UnitManager.Instance.GetFriendlyUnitList();
         int count = units.Count; 
@@ -189,10 +189,15 @@ public class UnitActionSystem : MonoBehaviour
 
         if (focusOnUnit && unit != null)
         {
-            OnFocusOnSelectedUnitRequested?.Invoke(this, EventArgs.Empty);
+            FocusOnUnit();
         }
     }
 
+    public void FocusOnUnit()
+    {
+        OnFocusOnSelectedUnitRequested?.Invoke(this, EventArgs.Empty);
+    }
+    
     public void SetSelectedAction(BaseAction action)
     {
         selectedAction = action;

@@ -24,4 +24,19 @@ public class SelectedUnitUI : MonoBehaviour
         gameObject.SetActive(shouldBeVisible);
     }
 
+    public void OnFocusBtnClicked()
+    {
+        UnitActionSystem.Instance.FocusOnUnit();
+    }
+
+    public void OnPreviousUnitBtnClicked()
+    {
+        UnitActionSystem.Instance.ChangeSelectedUnit(-1);
+    }
+    
+    public void OnNextUnitBtnClicked()
+    {
+        UnitActionSystem.Instance.ChangeSelectedUnit(+1);
+    }
+    
 }
