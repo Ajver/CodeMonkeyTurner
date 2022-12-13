@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class UnitPortraitUI : MonoBehaviour
+public class SelectedUnitUI : MonoBehaviour
 {
     
     void Start()
@@ -23,4 +23,5 @@ public class UnitPortraitUI : MonoBehaviour
         bool shouldBeVisible = unit != null;
         gameObject.SetActive(shouldBeVisible);
     }
+
 }
