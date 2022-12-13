@@ -1,17 +1,19 @@
 # TODO
 
-- [ ] Save system
-- [ ] Enabling next levels when previous is finished
-- [ ] Invisible inactive level areas
-- [ ] Scrolling mission buttons in Menu (animation)
-- [ ] Next unit button (selecting another unit with action points)
 - [ ] Hide actions UI when no more Action Point
+  - [ ] Next unit button (selecting another unit with action points)
+  - [ ] When no unit has any action points - show button to end the turn
+- [ ] Save system
+  - [ ] Enabling next levels when previous is finished
+- [ ] Invisible inactive level areas
 - [ ] Pick suitcase animation
+- [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Central GameEvents singleton to replace static Events from classes
-- [ ] Displaying selected unit data in the corner + camera showing his face 
+
 
 ## Done
 
+- [x] Displaying selected unit data in the corner + camera showing his face 
 - [x] Prevent grenades/barrels destroying stuff through walls
 - [x] Increase contrast between light-red and red (to make shootable targets better visible)
 - [x] Pause screen with ability to restart level or back to menu
