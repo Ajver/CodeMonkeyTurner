@@ -5117,7 +5117,7 @@ Camera:
   field of view: 50
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 10
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -22215,18 +22215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35456528e9364d4f9bfc2058f32a4ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1584555929 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7068710491601792925, guid: 3af174e552a820fe0b55b2d4bf0a7058,
-    type: 3}
-  m_PrefabInstance: {fileID: 858829691}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ac0c70c420b610ca88e89ea8f3d6d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1584555940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7068710491601792924, guid: 3af174e552a820fe0b55b2d4bf0a7058,
@@ -32255,11 +32243,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.000000005172915
       objectReference: {fileID: 0}
-    - target: {fileID: 6263642878201200093, guid: c33afc4f7a47533fd8c6bcaa2c3b87a1,
-        type: 3}
-      propertyPath: selectedUnit
-      value: 
-      objectReference: {fileID: 1584555929}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33afc4f7a47533fd8c6bcaa2c3b87a1, type: 3}
 --- !u!1001 &7728640696155246651
