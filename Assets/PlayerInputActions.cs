@@ -89,6 +89,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectActionKey"",
+                    ""type"": ""Value"",
+                    ""id"": ""3982e8ac-f46a-4afb-8453-729c8226a6b6"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -256,6 +265,61 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""PauseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""588a3d11-22da-4ac2-a79d-d4123a6a1f06"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=0)"",
+                    ""groups"": """",
+                    ""action"": ""SelectActionKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bc43a3c-e0c4-4dcf-9c69-9e6c08a6debf"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": """",
+                    ""action"": ""SelectActionKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28c2852a-5d06-4cb3-ad9f-8637dcf64f42"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""SelectActionKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07dbafd3-1c03-431b-a052-415a8a9f744b"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""SelectActionKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6e5f525-716e-465b-9b51-aff83bcb7ddc"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": """",
+                    ""action"": ""SelectActionKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -271,6 +335,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_ChangeSelectedUnit = m_Player.FindAction("ChangeSelectedUnit", throwIfNotFound: true);
         m_Player_FocusOnUnit = m_Player.FindAction("FocusOnUnit", throwIfNotFound: true);
         m_Player_PauseGame = m_Player.FindAction("PauseGame", throwIfNotFound: true);
+        m_Player_SelectActionKey = m_Player.FindAction("SelectActionKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,6 +402,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ChangeSelectedUnit;
     private readonly InputAction m_Player_FocusOnUnit;
     private readonly InputAction m_Player_PauseGame;
+    private readonly InputAction m_Player_SelectActionKey;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -348,6 +414,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @ChangeSelectedUnit => m_Wrapper.m_Player_ChangeSelectedUnit;
         public InputAction @FocusOnUnit => m_Wrapper.m_Player_FocusOnUnit;
         public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
+        public InputAction @SelectActionKey => m_Wrapper.m_Player_SelectActionKey;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -378,6 +445,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @PauseGame.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
                 @PauseGame.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
                 @PauseGame.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseGame;
+                @SelectActionKey.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectActionKey;
+                @SelectActionKey.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectActionKey;
+                @SelectActionKey.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectActionKey;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -403,6 +473,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @PauseGame.started += instance.OnPauseGame;
                 @PauseGame.performed += instance.OnPauseGame;
                 @PauseGame.canceled += instance.OnPauseGame;
+                @SelectActionKey.started += instance.OnSelectActionKey;
+                @SelectActionKey.performed += instance.OnSelectActionKey;
+                @SelectActionKey.canceled += instance.OnSelectActionKey;
             }
         }
     }
@@ -416,5 +489,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnChangeSelectedUnit(InputAction.CallbackContext context);
         void OnFocusOnUnit(InputAction.CallbackContext context);
         void OnPauseGame(InputAction.CallbackContext context);
+        void OnSelectActionKey(InputAction.CallbackContext context);
     }
 }

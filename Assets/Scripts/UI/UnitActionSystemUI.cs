@@ -51,13 +51,17 @@ public class UnitActionSystemUI : MonoBehaviour
         actionButtonsUi = new List<ActionButtonUI>();
         
         Unit unit = UnitActionSystem.Instance.GetSelectedUnit();
+        
+        int actionNumber = 1;
 
         foreach (BaseAction action in unit.GetBaseActionsArray())
         {
             Transform actionButtonTransform = Instantiate(actionButtonPrefab, actionButtonContainerTransform);
             ActionButtonUI button = actionButtonTransform.GetComponent<ActionButtonUI>();
-            button.SetBaseAction(action);
+            button.Setup(action, actionNumber);
             actionButtonsUi.Add(button);
+
+            actionNumber++;
         }
     }
 

@@ -7,6 +7,7 @@ public class ActionButtonUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private TextMeshProUGUI usagesLeftText;
+    [SerializeField] private TextMeshProUGUI hotkeyText;
     [SerializeField] private Button button;
     [SerializeField] private Image selectedImg;
 
@@ -15,11 +16,13 @@ public class ActionButtonUI : MonoBehaviour
 
     private BaseAction action;
 
-    public void SetBaseAction(BaseAction action)
+    public void Setup(BaseAction action, int actionNumber)
     {
         this.action = action;
         
         text.text = action.GetActionName();
+
+        hotkeyText.text = $"[ {actionNumber} ]";
 
         UpdateUsagesLeft();
         

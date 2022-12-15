@@ -1,15 +1,15 @@
 # TODO
 
-- [ ] Selecting actions using Num keys
 - [ ] Invisible inactive level areas
 - [ ] Pick suitcase animation
 - [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
 - [ ] Central GameEvents singleton to replace static Events from classes
-
+- [ ] Allow selecting grid for action by clicking on object on this position (i.e. Enemy/Crate)
 
 ## Done
 
+- [x] Selecting actions using Num keys
 - [x] Save system
   - [x] Enabling next levels when previous is finished
 - [x] Hide actions UI when no more Action Point

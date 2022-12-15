@@ -1,5 +1,6 @@
 #define USE_NEW_INPUT_SYSTEM
 
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Composites;
@@ -158,6 +159,20 @@ public class InputManager : MonoBehaviour
         return playerInputActions.Player.PauseGame.WasPressedThisFrame();
 #else
         return Input.GetKeyDown(KeyCode.Escape);
+#endif
+    }
+
+    public int GetKeySelectedActionIndex()
+    {
+#if USE_NEW_INPUT_SYSTEM
+        if (playerInputActions.Player.SelectActionKey.WasPressedThisFrame())
+        {
+            return (int)playerInputActions.Player.SelectActionKey.ReadValue<float>();
+        }
+
+        return -1;
+#else
+        return -1;
 #endif
     }
     
