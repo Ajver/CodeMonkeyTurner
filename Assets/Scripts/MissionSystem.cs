@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class MissionSystem : MonoBehaviour
 {
+    
     public enum MissionCompleteReason
     {
         CollectTreasure,
@@ -23,7 +24,7 @@ public class MissionSystem : MonoBehaviour
     public event EventHandler<MissionFailReason> OnMissionFailed;
 
     [SerializeField] private MissionCompleteReason missionGoal;
-    
+
     public static MissionSystem Instance { get; private set; }
 
     private void Awake()
@@ -44,6 +45,8 @@ public class MissionSystem : MonoBehaviour
             Testing.Instance.OnTestWinMission += Testing_OnTestWinMission;
             Testing.Instance.OnTestLoseMission += Testing_OnTestLoseMission;   
         }
+        
+        CompleteMission();
     }
 
     private void TableWithSuitcase_OnAnyTreasureCollected(object sender, EventArgs e)
@@ -74,6 +77,7 @@ public class MissionSystem : MonoBehaviour
 
     private void CompleteMission()
     {
+        MissionsStateStore.EnableNextMission();
         OnMissionComplete?.Invoke(this, missionGoal);
     }
     

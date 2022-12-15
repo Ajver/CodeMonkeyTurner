@@ -1,7 +1,5 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MissionBtn : MonoBehaviour
@@ -9,6 +7,7 @@ public class MissionBtn : MonoBehaviour
 
     [SerializeField] private string missionSceneName;
     [SerializeField] private string missionDisplayName;
+    [SerializeField] private int missionIdx;
     
     [SerializeField] private Image outlineImage;
     [SerializeField] private GameObject lockGameObject;
@@ -27,12 +26,17 @@ public class MissionBtn : MonoBehaviour
         button.onClick.AddListener(OnClick);
 
         missionDisplayNameText.text = missionDisplayName;
-        
-        SetIsActive(isActive);
+    }
+
+    private void Start()
+    {
+        bool shouldBeActive = MissionsStateStore.GetMissionEnabled(missionIdx);
+        SetIsActive(shouldBeActive);
     }
 
     private void OnClick()
     {
+        MissionsStateStore.SetCurrentMissionIdx(missionIdx);
         SceneFader.Instance.FadeToScene(missionSceneName);
     }
     

@@ -1,7 +1,6 @@
 # TODO
 
-- [ ] Save system
-  - [ ] Enabling next levels when previous is finished
+- [ ] Selecting actions using Num keys
 - [ ] Invisible inactive level areas
 - [ ] Pick suitcase animation
 - [ ] Scrolling mission buttons in Menu (animation)
@@ -11,6 +10,8 @@
 
 ## Done
 
+- [x] Save system
+  - [x] Enabling next levels when previous is finished
 - [x] Hide actions UI when no more Action Point
   - [x] Next unit button (selecting another unit with action points)
   - [x] When no unit has any action points - show button to end the turn
