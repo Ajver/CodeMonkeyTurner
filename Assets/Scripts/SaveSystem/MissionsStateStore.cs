@@ -12,23 +12,20 @@ public static class MissionsStateStore
     
     private static int currentMissionIdx;
 
+    // Flag used to aboard editing source file, if wasn't loaded initially
+    // This may not be loaded, when a mission scene was loaded directly, without going through MainMenu scene
+    private static bool loaded = false;
+    
     public static void Load()
     {
+        loaded = true;
+        
         MissionsSaveData data = SaveLoadUtil.TryLoadMissionData();
 
         if (data != null)
         {
             missionsEnabled = data.missionEnabled;
         }
-        
-        Debug.Log("Loaded!");
-
-        foreach (bool enabled in missionsEnabled)
-        {
-            Debug.Log($"> {enabled}");
-        }
-            
-        Debug.Log("------------");
     }
 
     public static void SetMissionEnabled(int missionIdx, bool enabled)
@@ -53,6 +50,13 @@ public static class MissionsStateStore
     
     private static void Save()
     {
+        if (!loaded)
+        {
+            // Don't save to file, if wasn't loaded from this file originally,
+            // to avoid overriding changes
+            return;
+        }
+        
         MissionsSaveData data = new MissionsSaveData(missionsEnabled);
         SaveLoadUtil.SaveMissionsData(data);
     }

@@ -159,7 +159,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6209806524225479132}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -168,7 +168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000009536743, y: -0.0000009536743}
+  m_AnchoredPosition: {x: 0, y: -0}
   m_SizeDelta: {x: 79.65, y: 79.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6209806524225479129
@@ -382,6 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionSceneName: 
   missionDisplayName: 
+  missionIdx: 0
   outlineImage: {fileID: 6209806525221728050}
   lockGameObject: {fileID: 6209806525978417820}
   activeOutlineColor: {r: 0.4117647, g: 0.7647059, b: 0.3529412, a: 1}

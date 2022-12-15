@@ -45,8 +45,6 @@ public class MissionSystem : MonoBehaviour
             Testing.Instance.OnTestWinMission += Testing_OnTestWinMission;
             Testing.Instance.OnTestLoseMission += Testing_OnTestLoseMission;   
         }
-        
-        CompleteMission();
     }
 
     private void TableWithSuitcase_OnAnyTreasureCollected(object sender, EventArgs e)
