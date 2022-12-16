@@ -5148,7 +5148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1587152672218357868}
+  - {fileID: 128550844107093460}
   - {fileID: 1848980613}
   m_Father: {fileID: 1587152672726090710}
   m_RootOrder: 2
@@ -5228,78 +5228,78 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 690549481702816208}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5378792420219559477
+--- !u!1001 &5268770917338447659
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 4062594360793057788}
     m_Modifications:
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 3085090531026704140, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
+        type: 3}
+      propertyPath: m_Name
+      value: DollarsSuitcase
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.10899925
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.877
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.0050001144
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.94264156
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.33380687
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 39
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+    - target: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6675458105849101914, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
-        type: 3}
-      propertyPath: m_Name
-      value: Suitcase
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 85d20fb6462e76d48b3ae9e6786a2e94, type: 3}
---- !u!4 &1587152672218357868 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 5fcf23ff68fe126ac89df9d7dee8ee18, type: 3}
+--- !u!4 &128550844107093460 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6675458105849101913, guid: 85d20fb6462e76d48b3ae9e6786a2e94,
+  m_CorrespondingSourceObject: {fileID: 5248623707886815999, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
     type: 3}
-  m_PrefabInstance: {fileID: 5378792420219559477}
+  m_PrefabInstance: {fileID: 5268770917338447659}
   m_PrefabAsset: {fileID: 0}
