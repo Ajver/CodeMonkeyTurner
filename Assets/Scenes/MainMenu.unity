@@ -2310,8 +2310,13 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 9eebf1466e19e9c7ebceddb6efd09105, type: 3}
     - target: {fileID: 5623015238050101311, guid: fc40eee4dc39987ddb995c6b79742255,
         type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623015238050101311, guid: fc40eee4dc39987ddb995c6b79742255,
+        type: 3}
       propertyPath: initialDelay
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc40eee4dc39987ddb995c6b79742255, type: 3}

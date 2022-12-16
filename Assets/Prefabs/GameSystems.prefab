@@ -454,8 +454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05728cd93ddacbef88cd59b2915145ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionCompleteClip: {fileID: 8300000, guid: ca771dc27a6a16b9b81a4d592a712e2d, type: 3}
-  missionFailClip: {fileID: 8300000, guid: 4fc601e5d186c58b09ce26192ef58177, type: 3}
+  missionCompleteClip: {fileID: 8300000, guid: d39c7ee7a501b343fa92607e22110a50, type: 3}
+  missionFailClip: {fileID: 8300000, guid: 0d014ab7966010b9882db765e68f6cd2, type: 3}
   musicPlayer: {fileID: 2821545004523422002}
 --- !u!1 &6263642876435833749
 GameObject:
@@ -1947,7 +1947,7 @@ PrefabInstance:
         type: 3}
       propertyPath: musicClip
       value: 
-      objectReference: {fileID: 8300000, guid: e7ecd43405de5d5aaab6dced75b5cb3b, type: 3}
+      objectReference: {fileID: 8300000, guid: a8e9e4549bfeb19a4a6e08f7771ccaa7, type: 3}
     - target: {fileID: 5623015238050101311, guid: fc40eee4dc39987ddb995c6b79742255,
         type: 3}
       propertyPath: initialDelay
