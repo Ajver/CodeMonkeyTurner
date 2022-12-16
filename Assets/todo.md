@@ -1,11 +1,18 @@
 # TODO
 
+- [ ] Tips on how to control camera
+- [ ] Graphics to Mission Goal popup (so one knows what to look for)
+  - [ ] For Suitcase add tip to use Interact
+- [ ] Complete tutorial, with explanation on how to use Interact etc.
+- [ ] Allow selecting grid for action by clicking on object on this position (i.e. Enemy/Crate)
 - [ ] Invisible inactive level areas
 - [ ] Pick suitcase animation
 - [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
 - [ ] Central GameEvents singleton to replace static Events from classes
-- [ ] Allow selecting grid for action by clicking on object on this position (i.e. Enemy/Crate)
+- [ ] Better AI
+  - [ ] Smart using grenades
+  - [ ] Smart moving (closer to player units, even if not in shoot range)
 
 ## Done
 
