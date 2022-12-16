@@ -5106,6 +5106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWalkable: 0
   treasureGameObject: {fileID: 5100856554879954970}
+  suitcase: {fileID: 1513146361824386141}
   interactAudio: {fileID: 7145116908805740862}
 --- !u!65 &8218552407874931138
 BoxCollider:
@@ -5303,3 +5304,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5268770917338447659}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1513146361824386141 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6764874631479976822, guid: 5fcf23ff68fe126ac89df9d7dee8ee18,
+    type: 3}
+  m_PrefabInstance: {fileID: 5268770917338447659}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52d2a2186b64b53b2a20a38826a1987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

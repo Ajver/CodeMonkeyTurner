@@ -4,7 +4,7 @@ using UnityEngine;
 public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
 {
 
-    [SerializeField] private GameObject treasureGameObject;
+    [SerializeField] private Suitcase suitcase;
 
     [SerializeField] private AudioSource interactAudio;
     
@@ -36,7 +36,6 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
 
     private void CollectTreasure()
     {
-        treasureGameObject.SetActive(false);
         onInteractionComplete();
         
         OnAnyTreasureCollected?.Invoke(this, EventArgs.Empty);
@@ -73,9 +72,11 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
         timer = 0.7f;
 
         interactAudio.Play();
+        suitcase.Open();
         
         // Remove from grid, but still make the spot not-walkable
         LevelGrid.Instance.ClearOccupantAtGridPosition(gridPosition);
         PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, false);
     }
+
 }

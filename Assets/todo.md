@@ -6,7 +6,6 @@
 - [ ] Complete tutorial, with explanation on how to use Interact etc.
 - [ ] Allow selecting grid for action by clicking on object on this position (i.e. Enemy/Crate)
 - [ ] Invisible inactive level areas
-- [ ] Pick suitcase animation
 - [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
 - [ ] Central GameEvents singleton to replace static Events from classes
@@ -19,6 +18,7 @@
 
 ## Done
 
+- [x] Pick suitcase animation
 - [x] Selecting actions using Num keys
 - [x] Save system
   - [x] Enabling next levels when previous is finished
