@@ -1,8 +1,6 @@
 # TODO
 
 - [ ] Tips on how to control camera
-- [ ] Graphics to Mission Goal popup (so one knows what to look for)
-  - [ ] For Suitcase add tip to use Interact
 - [ ] Complete tutorial, with explanation on how to use Interact etc.
 - [ ] Allow selecting grid for action by clicking on object on this position (i.e. Enemy/Crate)
 - [ ] Invisible inactive level areas
@@ -18,6 +16,8 @@
 
 ## Done
 
+- [x] Graphics to Mission Goal popup (so one knows what to look for)
+  - [x] For Suitcase add tip to use Interact
 - [x] Pick suitcase animation
 - [x] Selecting actions using Num keys
 - [x] Save system
