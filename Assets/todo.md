@@ -1,8 +1,9 @@
 # TODO
 
+- [ ] Allow selecting grid for action by clicking on object on this position (i.e. Enemy/Crate)
+- [ ] Re-create Crate Destroyed elements (it's a bit glitched because the parts overlap) - and add destroy force
 - [ ] Tips on how to control camera
 - [ ] Complete tutorial, with explanation on how to use Interact etc.
-- [ ] Allow selecting grid for action by clicking on object on this position (i.e. Enemy/Crate)
 - [ ] Invisible inactive level areas
 - [ ] Scrolling mission buttons in Menu (animation)
 - [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
