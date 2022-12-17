@@ -12,14 +12,19 @@ public class UnitActionSystem : MonoBehaviour
     public event EventHandler OnFocusOnSelectedUnitRequested; 
     public event EventHandler OnSelectedActionChanged; 
     public event EventHandler<bool> OnBusyChanged; 
-    public event EventHandler OnActionStarted; 
-
+    public event EventHandler OnActionStarted;
+    public event EventHandler OnHighlightedGridPositionChanged;
+    
     [SerializeField] private Unit selectedUnit;
     [SerializeField] private LayerMask unitLayerMask;
+
+    [SerializeField] private LayerMask allGridOcupantsMasks;
 
     private BaseAction selectedAction;
     private Unit previousSelectedUnit;
 
+    private GridPosition lastHighlightedGridPosition;
+    
     private bool isBusy;
     
     private void Awake()
@@ -66,8 +71,17 @@ public class UnitActionSystem : MonoBehaviour
         {
             return;
         }
+
+        if (selectedAction == null)
+        {
+            return;
+        }
         
-        HandleSelectedAction();
+        if (TryToGetTargetPositionForAction(out GridPosition targetPosition))
+        {
+            HandleActionGridPositionHighlight(targetPosition);
+            HandleSelectedAction(targetPosition);
+        }
     }
 
     private void SetBusy()
@@ -214,18 +228,39 @@ public class UnitActionSystem : MonoBehaviour
         return selectedAction;
     }
     
-    private void HandleSelectedAction()
+    private bool TryToGetTargetPositionForAction(out GridPosition gridPosition)
     {
-        if (selectedAction == null)
+        gridPosition = new GridPosition(0, 0);
+        
+        Ray ray = Camera.main.ScreenPointToRay(InputManager.Instance.GetMouseScreenPosition());
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, float.MaxValue, allGridOcupantsMasks))
         {
-            return;
+            if (hitInfo.collider.TryGetComponent(out GridOccupant occupant))
+            {
+                gridPosition = occupant.GetGridPosition();
+                return true;
+            }
         }
 
+        // If didn't found GridOccupant, try to get position from the ground
+        gridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
+        return true;
+    }
+
+    private void HandleActionGridPositionHighlight(GridPosition targetPosition)
+    {
+        if (targetPosition != lastHighlightedGridPosition)
+        {
+            lastHighlightedGridPosition = targetPosition;
+            OnHighlightedGridPositionChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    
+    private void HandleSelectedAction(GridPosition targetPosition)
+    {
         if (InputManager.Instance.IsMouseButtonDownThisFrame())
         {
-            GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
-
-            if (!selectedAction.IsValidActionGridPosition(mouseGridPosition))
+            if (!selectedAction.IsValidActionGridPosition(targetPosition))
             {
                 return;
             }
@@ -236,7 +271,7 @@ public class UnitActionSystem : MonoBehaviour
             }
 
             SetBusy();
-            selectedAction.TakeAction(mouseGridPosition, ClearBusy);   
+            selectedAction.TakeAction(targetPosition, ClearBusy);   
             OnActionStarted?.Invoke(this, EventArgs.Empty);
 
             if (!selectedAction.CanBeTaken())
@@ -283,6 +318,11 @@ public class UnitActionSystem : MonoBehaviour
                 DeselectUnit();   
             }
         }
+    }
+
+    public GridPosition GetHighlightedGridPosition()
+    {
+        return lastHighlightedGridPosition;
     }
     
     public void DeselectUnit()

@@ -43,6 +43,7 @@ public class GridSystemVisual : MonoBehaviour
     private void Start()
     {
         UnitActionSystem.Instance.OnSelectedActionChanged += UnitActionSystem_OnSelectedActionChanged;
+        
         LevelGrid.Instance.OnAnyOccupantMovedGridPosition += LevelGrid_OnAnyOccupantMovedGridPosition;
         LevelGrid.Instance.OnAnyOccupantClears += LevelGrid_OnAnyOccupantClears;
         
@@ -208,5 +209,5 @@ public class GridSystemVisual : MonoBehaviour
         Debug.LogError("Could not find GridVisualTypeMaterial for GridVisualType: " + gridVisualType);
         return null;
     }
-    
+
 }
