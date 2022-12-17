@@ -1587,7 +1587,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6263642877964899038}
-  m_LocalRotation: {x: 0.23479207, y: 0.5956678, z: -0.18776771, w: 0.7448462}
+  m_LocalRotation: {x: 0.23479202, y: 0.59566784, z: -0.18776773, w: 0.7448462}
   m_LocalPosition: {x: 6.294654, y: 7, z: 1.9415362}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1753,7 +1753,7 @@ MonoBehaviour:
     m_Bits: 128
   allGridOcupantsMasks:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
 --- !u!114 &3358790570082441156
 MonoBehaviour:
   m_ObjectHideFlags: 0

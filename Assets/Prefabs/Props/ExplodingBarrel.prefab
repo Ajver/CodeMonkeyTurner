@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7486046128533082939}
   - component: {fileID: 4836048032071424635}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: HitSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 5445511777275667912}
   - component: {fileID: 3378503106751311934}
   - component: {fileID: 9097087167421943778}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: ExplodingBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1547116696582102, guid: f750d5f061e724f4c827ab6b376e2550, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4483658618797090, guid: f750d5f061e724f4c827ab6b376e2550, type: 3}
       propertyPath: m_RootOrder
