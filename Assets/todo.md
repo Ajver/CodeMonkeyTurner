@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] Re-create Crate Destroyed elements (it's a bit glitched because the parts overlap) - and add destroy force
 - [ ] Tips on how to control camera
 - [ ] Complete tutorial, with explanation on how to use Interact etc.
 - [ ] Invisible inactive level areas
@@ -17,6 +16,7 @@
 
 ## Done
 
+- [x] Re-create Crate Destroyed elements (it's a bit glitched because the parts overlap) - and add destroy force
 - [x] Allow selecting grid for action by clicking on object on this position (i.e. Enemy/Crate)
 - [x] Graphics to Mission Goal popup (so one knows what to look for)
   - [x] For Suitcase add tip to use Interact

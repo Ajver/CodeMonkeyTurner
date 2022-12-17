@@ -10,8 +10,9 @@ public class DestructibleCrate : GridOccupant, IDamageable
 
     public void Damage(int dmg)
     {
-        Instantiate(crateDestroyedPrefab, transform.position, transform.rotation);
-
+        Transform destroyedCrateObject = Instantiate(crateDestroyedPrefab, transform.position, transform.rotation);
+        ApplyExplosionToChildren(destroyedCrateObject, 150f, transform.position, 10f);
+            
         Destroy(gameObject);
         ClearItselfFromGrid();
         
@@ -34,5 +35,18 @@ public class DestructibleCrate : GridOccupant, IDamageable
     public Transform GetTransform()
     {
         return transform;
+    }
+    
+    private void ApplyExplosionToChildren(Transform root, float explosionForce, Vector3 explosionPosition, float explosionRange)
+    {
+        foreach (Transform child in root)
+        {
+            if (child.TryGetComponent(out Rigidbody childRigidbody))
+            {
+                childRigidbody.AddExplosionForce(explosionForce, explosionPosition, explosionRange);
+            }
+
+            ApplyExplosionToChildren(child, explosionForce, explosionPosition, explosionRange);
+        }
     }
 }
