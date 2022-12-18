@@ -90,7 +90,7 @@ public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
         float radius = 5f;
 
         Explosion explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
-        explosion.Setup(damage, radius);
+        explosion.Explode(damage, radius);
         
         Destroy(gameObject);
         ClearItselfFromGrid();

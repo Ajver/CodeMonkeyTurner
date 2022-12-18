@@ -77,11 +77,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b45269b5bd21c31ea67901478a51807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originTransform: {fileID: 1776567016620907366}
-  obstaclesLayerMast:
-    serializedVersion: 2
-    m_Bits: 256
-  wallTag: Wall
 --- !u!1001 &7283482390778342964
 PrefabInstance:
   m_ObjectHideFlags: 0

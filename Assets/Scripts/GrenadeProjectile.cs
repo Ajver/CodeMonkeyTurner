@@ -6,6 +6,8 @@ public class GrenadeProjectile : MonoBehaviour
 
     public static event EventHandler OnAnyGrenadeExploded;
 
+    public const float EXPLOSION_RANGE = 3f;
+    
     [SerializeField] private Explosion explosionPrefab;
     [SerializeField] private Transform trailRenderer;
     [SerializeField] private AnimationCurve arcYAnimationCurve;
@@ -60,10 +62,9 @@ public class GrenadeProjectile : MonoBehaviour
     private void Kaboom()
     {
         int damage = 100;
-        float radius = 3f;
         
         Explosion explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
-        explosion.Setup(damage, radius);
+        explosion.Explode(damage, EXPLOSION_RANGE);
 
         trailRenderer.parent = null;
         

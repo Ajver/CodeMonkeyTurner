@@ -153,10 +153,58 @@ public class GrenadeAction : BaseAction
 
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
+        Vector3 worldTargetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        float range = GrenadeProjectile.EXPLOSION_RANGE;
+        List<IDamageable> damageables =
+            ExplosionUtil.Instance.GetDamagableTargetsWithinRange(worldTargetPosition, range);
+
+        int balance = 0;
+
+        // How much hitting barrel is risky. It's added to the final balance
+        int barrelRisk = -5;
+        
+        // We never want to destroy suitcase
+        int suitcaseHitValue = -100;
+        
+        foreach (IDamageable damageable in damageables)
+        {
+            if (damageable.GetGameTeam() == GameTeam.Neutral)
+            {
+                // This is Crate or so. Doesn't count to the balance...
+                
+                if (damageable.GetTransform().TryGetComponent(out ExplodingBarrel barrel))
+                {
+                    // Better not hit barrel...
+                    balance += barrelRisk;
+                }
+                
+                continue;
+            }
+            
+            if (damageable.GetGameTeam() == unit.GetGameTeam())
+            {
+                // This target is in my team.
+                balance--;
+            }
+            else
+            {
+                // It's my opponent!
+                balance++;
+                
+                if (damageable.GetTransform().TryGetComponent(out TableWithSuitcase table))
+                {
+                    // Better not hit barrel...
+                    balance += suitcaseHitValue;
+                }
+            }
+        }
+
+        int valuePerUnit = 100;
+        
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValue = 0,
+            actionValue = balance * valuePerUnit,
         };
     }
 

@@ -46,12 +46,16 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
         BreakIntoParts();
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     private void BreakIntoParts()
     {
+        ClearItselfFromGrid();
+
+        Destroy(gameObject);
+        
         // TODO: visuals
         OnAnyTreasureDestroyed?.Invoke(this, EventArgs.Empty);
-        
-        Destroy(gameObject);
+
     }
     
     public GameTeam GetGameTeam()
