@@ -1,20 +1,27 @@
 # TODO
 
+### Tutorial
 - [ ] Tips on how to control camera
 - [ ] Complete tutorial, with explanation on how to use Interact etc.
-- [ ] Invisible inactive level areas
+
+### UI
 - [ ] Scrolling mission buttons in Menu (animation)
-- [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
-- [ ] Central GameEvents singleton to replace static Events from classes
+
+### Gameplay
+- [ ] Invisible inactive level areas
 - [ ] Better AI
   - [ ] Smart using grenades
   - [ ] Smart moving (closer to player units, even if not in shoot range)
   - [ ] Opening doors
-  - [ ] Random choosing actions with the same value
+  - [x] Random choosing actions with the same value
 - [ ] Things dropping out of Crates
 - [ ] Ammo packs (with grenades) to collect
 - [ ] Mission to free the hostage from prison (?)
-- [ ] Show grenade explosion range (and barrel) 
+- [ ] Show grenade explosion range (and barrel)
+
+### Refactor
+- [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
+- [ ] Central GameEvents singleton to replace static Events from classes
 
 ## Done
 
