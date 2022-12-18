@@ -9,6 +9,8 @@
 - [ ] Better AI
   - [ ] Smart using grenades
   - [ ] Smart moving (closer to player units, even if not in shoot range)
+  - [ ] Opening doors
+  - [ ] Random choosing actions with the same value
 - [ ] Things dropping out of Crates
 - [ ] Ammo packs (with grenades) to collect
 - [ ] Mission to free the hostage from prison (?)

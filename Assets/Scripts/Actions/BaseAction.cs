@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public abstract class BaseAction : MonoBehaviour
 {
@@ -92,7 +93,22 @@ public abstract class BaseAction : MonoBehaviour
         if (enemyAIActions.Count > 0)
         {
             enemyAIActions.Sort((EnemyAIAction a, EnemyAIAction b) => b.actionValue - a.actionValue);
-            return enemyAIActions[0];
+
+            int theBestValue = enemyAIActions[0].actionValue;
+            int asGoodActionsCount = 1;
+            
+            for (int i = 1; i < enemyAIActions.Count; i++)
+            {
+                if (enemyAIActions[i].actionValue < theBestValue)
+                {
+                    asGoodActionsCount = i;
+                    break;
+                }
+            }
+
+            Random rnd = new Random();
+            int randomIdx = rnd.Next(asGoodActionsCount);
+            return enemyAIActions[randomIdx];
         }
         else
         {

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -95,9 +96,8 @@ public class EnemyAI : MonoBehaviour
 
     private bool TryTakeEnemyAIAction(Unit enemyUnit, Action onEnemyAIActionComplete)
     {
-        EnemyAIAction bestEnemyAIAction = null;
-        BaseAction bestBaseAction = null;
-        
+        List<EnemyAIAction> bestEnemyAIActions = new List<EnemyAIAction>();
+
         foreach (BaseAction baseAction in enemyUnit.GetBaseActionsArray())
         {
             if (!enemyUnit.CanSpendActionPointsToTakeAction(baseAction))
@@ -107,25 +107,49 @@ public class EnemyAI : MonoBehaviour
 
             EnemyAIAction testEnemyAIAction = baseAction.GetBestEnemyAIAction();
 
-            if (bestEnemyAIAction == null)
+            if (testEnemyAIAction == null)
+            {
+                continue;
+            }
+            
+            testEnemyAIAction.action = baseAction;
+
+            if (bestEnemyAIActions.Count == 0)
             {
                 // It's the first action we're checking, so just set it as the best
-                bestEnemyAIAction = testEnemyAIAction;
-                bestBaseAction = baseAction;
+                bestEnemyAIActions.Add(testEnemyAIAction);
             }
             else
             {
-                if (testEnemyAIAction != null && testEnemyAIAction.actionValue > bestEnemyAIAction.actionValue)
+                EnemyAIAction bestEnemyAIAction = bestEnemyAIActions[0];
+                if (testEnemyAIAction.actionValue > bestEnemyAIAction.actionValue)
                 {
-                    bestEnemyAIAction = testEnemyAIAction;
-                    bestBaseAction = baseAction;
+                    bestEnemyAIActions.Clear();
+                    bestEnemyAIActions.Add(testEnemyAIAction);
+                }
+                else if (testEnemyAIAction.actionValue == bestEnemyAIAction.actionValue)
+                {
+                    // It's as good as the current best action. Let's add it to the list,
+                    // and later we'll choose random from these
+                    bestEnemyAIActions.Add(testEnemyAIAction);
                 }
             }
         }
 
-        if (bestEnemyAIAction != null && enemyUnit.TrySpendActionPointsToTakeAction(bestBaseAction))
+        if (bestEnemyAIActions.Count == 0)
         {
-            bestBaseAction.TakeAction(bestEnemyAIAction.gridPosition, onEnemyAIActionComplete);
+            return false;
+        }
+
+        Random rnd = new Random();
+        int randomIdx = rnd.Next(bestEnemyAIActions.Count);
+        
+        EnemyAIAction randomBestAction = bestEnemyAIActions[randomIdx];
+        BaseAction action = randomBestAction.action;
+        
+        if (enemyUnit.TrySpendActionPointsToTakeAction(action))
+        {
+            action.TakeAction(randomBestAction.gridPosition, onEnemyAIActionComplete);
             return true;
         }
 
