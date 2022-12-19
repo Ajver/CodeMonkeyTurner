@@ -236,16 +236,22 @@ public class ShootAction : BaseAction
         }
     }
 
-    public int GetUnitsCountAtPosition(GridPosition gridPosition)
+    public int GetTargetUnitsCountAtPosition(GridPosition gridPosition)
     {
         List<GridPosition> targetsPositions = GetValidActionGridPositionList(gridPosition);
 
         int unitsCount = 0;
         foreach (GridPosition testPos in targetsPositions)
         {
-            if (LevelGrid.Instance.HasUnitOnGridPosition(testPos))
+            GridOccupant occupant = LevelGrid.Instance.GetOccupantAtGridPosition(testPos);
+            if (occupant is Unit)
             {
-                unitsCount++;
+                Unit targetUnit = occupant as Unit;
+
+                if (targetUnit.GetGameTeam() != unit.GetGameTeam())
+                {
+                    unitsCount++;
+                }
             }
         }
         
