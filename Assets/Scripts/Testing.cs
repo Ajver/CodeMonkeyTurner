@@ -31,16 +31,14 @@ public class Testing : MonoBehaviour
     {
         OnTestLoseMission?.Invoke(this, EventArgs.Empty);
     }
-
-    private void Update()
-    {
-        if (InputManager.Instance.IsTestActionPressedThisFrame())
-        {
-            Debug.Log("TEST ACTION PRESSED!");
-            
-            HandleTestEnemyAIAction();
-        }
-    }
+    
+    // private void Update()
+    // {
+    //     if (InputManager.Instance.IsTestActionPressedThisFrame())
+    //     {
+    //         Debug.Log("TEST ACTION PRESSED!");
+    //     }
+    // }
 
     private void UnitActionSystem_OnSelectedActionChanged(object sender, EventArgs e)
     {
