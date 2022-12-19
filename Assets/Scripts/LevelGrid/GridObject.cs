@@ -61,5 +61,5 @@ public class GridObject
     {
         return damageable;
     }
-    
+
 }

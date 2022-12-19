@@ -57,7 +57,6 @@ public class EnemyAI : MonoBehaviour
             case State.Busy:
                 break;
         }
-        
     }
 
     private void SetStateTakingTurn()
@@ -160,4 +159,5 @@ public class EnemyAI : MonoBehaviour
 
         return false;
     }
+    
 }

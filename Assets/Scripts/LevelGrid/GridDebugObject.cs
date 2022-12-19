@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -6,9 +5,15 @@ public class GridDebugObject : MonoBehaviour
 {
 
     [SerializeField] private TextMeshPro text;
-    
+
+    protected GridPosition gridPosition;
     private object gridObject;
 
+    public void SetGridPosition(GridPosition gridPosition)
+    {
+        this.gridPosition = gridPosition;
+    }
+    
     public virtual void SetGridObject(object gridObject)
     {
         this.gridObject = gridObject;

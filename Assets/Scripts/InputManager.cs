@@ -175,5 +175,14 @@ public class InputManager : MonoBehaviour
         return -1;
 #endif
     }
+
+    public bool IsTestActionPressedThisFrame()
+    {
+#if USE_NEW_INPUT_SYSTEM
+        return playerInputActions.Player.TestAction.WasPressedThisFrame();
+#else
+        return Input.GetKeyDown(KeyCode.T);
+#endif
+    }
     
 }

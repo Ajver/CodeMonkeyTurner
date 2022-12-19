@@ -80,16 +80,8 @@ public abstract class BaseAction : MonoBehaviour
 
     public EnemyAIAction GetBestEnemyAIAction()
     {
-        List<EnemyAIAction> enemyAIActions = new List<EnemyAIAction>();
-
-        List<GridPosition> validGridPositions = GetValidActionGridPositionList();
-
-        foreach (GridPosition gridPosition in validGridPositions)
-        {
-            EnemyAIAction enemyAIAction = GetEnemyAIAction(gridPosition);
-            enemyAIActions.Add(enemyAIAction);
-        }
-
+        List<EnemyAIAction> enemyAIActions = GetAllPossibleEnemyAIActions();
+        
         if (enemyAIActions.Count > 0)
         {
             enemyAIActions.Sort((EnemyAIAction a, EnemyAIAction b) => b.actionValue - a.actionValue);
@@ -115,6 +107,21 @@ public abstract class BaseAction : MonoBehaviour
             // No possible Enemy AI actions
             return null;
         }
+    }
+
+    public List<EnemyAIAction> GetAllPossibleEnemyAIActions()
+    {
+        List<EnemyAIAction> enemyAIActions = new List<EnemyAIAction>();
+
+        List<GridPosition> validGridPositions = GetValidActionGridPositionList();
+
+        foreach (GridPosition gridPosition in validGridPositions)
+        {
+            EnemyAIAction enemyAIAction = GetEnemyAIAction(gridPosition);
+            enemyAIActions.Add(enemyAIAction);
+        }
+
+        return enemyAIActions;
     }
     
     public abstract EnemyAIAction GetEnemyAIAction(GridPosition gridPosition);

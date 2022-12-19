@@ -98,6 +98,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""TestAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""775ab12c-d898-45a9-8032-0d2e802082eb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""SelectActionKey"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6df3c628-690c-4dd9-98c4-1c8e5164253a"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TestAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -336,6 +356,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_FocusOnUnit = m_Player.FindAction("FocusOnUnit", throwIfNotFound: true);
         m_Player_PauseGame = m_Player.FindAction("PauseGame", throwIfNotFound: true);
         m_Player_SelectActionKey = m_Player.FindAction("SelectActionKey", throwIfNotFound: true);
+        m_Player_TestAction = m_Player.FindAction("TestAction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -403,6 +424,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_FocusOnUnit;
     private readonly InputAction m_Player_PauseGame;
     private readonly InputAction m_Player_SelectActionKey;
+    private readonly InputAction m_Player_TestAction;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -415,6 +437,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @FocusOnUnit => m_Wrapper.m_Player_FocusOnUnit;
         public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
         public InputAction @SelectActionKey => m_Wrapper.m_Player_SelectActionKey;
+        public InputAction @TestAction => m_Wrapper.m_Player_TestAction;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -448,6 +471,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SelectActionKey.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectActionKey;
                 @SelectActionKey.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectActionKey;
                 @SelectActionKey.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectActionKey;
+                @TestAction.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTestAction;
+                @TestAction.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTestAction;
+                @TestAction.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTestAction;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -476,6 +502,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @SelectActionKey.started += instance.OnSelectActionKey;
                 @SelectActionKey.performed += instance.OnSelectActionKey;
                 @SelectActionKey.canceled += instance.OnSelectActionKey;
+                @TestAction.started += instance.OnTestAction;
+                @TestAction.performed += instance.OnTestAction;
+                @TestAction.canceled += instance.OnTestAction;
             }
         }
     }
@@ -490,5 +519,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnFocusOnUnit(InputAction.CallbackContext context);
         void OnPauseGame(InputAction.CallbackContext context);
         void OnSelectActionKey(InputAction.CallbackContext context);
+        void OnTestAction(InputAction.CallbackContext context);
     }
 }

@@ -14,18 +14,22 @@ public class UnitActionSystem : MonoBehaviour
     public event EventHandler<bool> OnBusyChanged; 
     public event EventHandler OnActionStarted;
     public event EventHandler OnHighlightedGridPositionChanged;
-    
-    [SerializeField] private Unit selectedUnit;
+
     [SerializeField] private LayerMask unitLayerMask;
 
     [SerializeField] private LayerMask allGridOcupantsMasks;
 
+    private Unit selectedUnit;
+    
     private BaseAction selectedAction;
     private Unit previousSelectedUnit;
 
     private GridPosition lastHighlightedGridPosition;
     
     private bool isBusy;
+    
+    // Used only in Testing mode
+    private bool canSelectEnemyUnits = false;
     
     private void Awake()
     {
@@ -44,10 +48,7 @@ public class UnitActionSystem : MonoBehaviour
         Unit.OnAnyUnitDead += Unit_OnAnyUnitDead;
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
 
-        if (selectedUnit != null)
-        {
-            SetSelectedUnit(selectedUnit, false);
-        }
+        canSelectEnemyUnits = Testing.IsTestingEnvironment();
     }
 
     private void Update()
@@ -123,7 +124,7 @@ public class UnitActionSystem : MonoBehaviour
 
         if (hitInfo.collider.TryGetComponent<Unit>(out Unit unit))
         {
-            if (unit.IsEnemy())
+            if (!canSelectEnemyUnits && unit.IsEnemy())
             {
                 return false;
             }

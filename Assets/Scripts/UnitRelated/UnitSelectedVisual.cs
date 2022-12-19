@@ -5,8 +5,7 @@ public class UnitSelectedVisual : MonoBehaviour
 {
 
     [SerializeField] private Unit unit;
-    [SerializeField] private MeshRenderer meshRenderer;
-
+    private MeshRenderer meshRenderer;
 
     private void Awake()
     {

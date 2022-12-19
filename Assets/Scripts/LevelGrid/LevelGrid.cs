@@ -7,7 +7,7 @@ public class LevelGrid : MonoBehaviour
     public event EventHandler OnAnyOccupantMovedGridPosition;
     public event EventHandler OnAnyOccupantClears;
     
-    [SerializeField] private Transform debugObjectPrefab; 
+    [SerializeField] private GridDebugObject debugObjectPrefab; 
     
     public static LevelGrid Instance { get; private set; }
     
@@ -29,12 +29,16 @@ public class LevelGrid : MonoBehaviour
         Instance = this;
         
         gridSystem = new GridSystem<GridObject>(width, height, cellSize, (position) => new GridObject(position));
-        // gridSystem.CreateDebugObjects(debugObjectPrefab);
     }
 
     private void Start()
     {
         PathFinding.Instance.Setup(width, height, cellSize);
+
+        if (Testing.IsTestingEnvironment())
+        {
+            gridSystem.CreateDebugObjects(debugObjectPrefab);
+        }
     }
 
     public void OccupantMovedGridPosition(GridOccupant occupant, GridPosition fromGridPosition, GridPosition toGridPosition)

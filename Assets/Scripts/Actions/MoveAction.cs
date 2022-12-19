@@ -129,10 +129,54 @@ public class MoveAction : BaseAction
     {
         int targetCountAtGridPos = unit.GetComponent<ShootAction>().GetUnitsCountAtPosition(gridPosition);
 
+        // Used when no target within shoot range, at the target position 
+        int defaultValueAction = 10;
+        
+        int actionValue;
+
+        if (targetCountAtGridPos > 0)
+        {
+            actionValue = defaultValueAction + targetCountAtGridPos;
+        }
+        else 
+        {
+            // No units at this target. Let's find the distance to the closest target anyway,
+            // to see how good this direction is
+
+            const float VERY_FAR_DISTANCE = 100f;
+            
+            float closestDistance = VERY_FAR_DISTANCE;
+            foreach (Unit testUnit in UnitManager.Instance.GetFriendlyUnitList())
+            { 
+                float dist = Vector3.Distance(transform.position, testUnit.transform.position);
+                if (dist < closestDistance)
+                {
+                    closestDistance = dist;
+                }
+            }
+
+            // Inverting distance, so the closer it is, the bigger the value is (and the position is worth more)
+            float invertedDistance = VERY_FAR_DISTANCE - closestDistance;
+            
+            // Check how close the closest target was, compared to Very Far, which is 100
+            float ratio = invertedDistance / VERY_FAR_DISTANCE;
+            
+            // Returns value between 0-10
+            // This is mapped based on the How Close Ratio, which is distance in units.
+            // Since we use invertedDistance, the closer it is, the bigger ratio is (and then the mapped value)
+            float mappedValueF = Mathf.Lerp(0f, defaultValueAction, ratio);
+            
+            actionValue = Mathf.RoundToInt(mappedValueF);
+            
+            // Make sure it's never bigger than default value,
+            // so the move targets with any player unit within shoot range, are worth more (as they are default + ...)
+            actionValue = Math.Clamp(actionValue, 0, defaultValueAction);
+        }
+        
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValue = targetCountAtGridPos + 1,
+            actionValue = actionValue,
         };
     }
 }

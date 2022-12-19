@@ -9,11 +9,13 @@
 
 ### Gameplay
 - [ ] Invisible inactive level areas
+- [ ] Action camera when opening suitcase (zoom camera on it)
 - [ ] Better AI
-  - [ ] Smart using grenades
+  - [x] Smart usmoving grenades
   - [ ] Smart moving (closer to player units, even if not in shoot range)
   - [ ] Opening doors
   - [x] Random choosing actions with the same value
+  - [ ] Debug Tool: add a way to preview the values of different action targets for given action for given enemy 
 - [ ] Things dropping out of Crates
 - [ ] Ammo packs (with grenades) to collect
 - [ ] Mission to free the hostage from prison (?)

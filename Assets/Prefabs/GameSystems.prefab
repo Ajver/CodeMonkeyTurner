@@ -1270,7 +1270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4344323aa23817bb794ec9a42011bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugObjectPrefab: {fileID: 4486440069603274062, guid: 2be748da50b85479fa57d71aa7bc106e,
+  debugObjectPrefab: {fileID: 6712367413868209642, guid: 2be748da50b85479fa57d71aa7bc106e,
     type: 3}
   width: 18
   height: 11
@@ -1637,7 +1637,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6263642877964899038}
-  m_LocalRotation: {x: 0.23479207, y: 0.5956678, z: -0.18776771, w: 0.7448462}
+  m_LocalRotation: {x: 0.23479207, y: 0.5956678, z: -0.18776773, w: 0.7448463}
   m_LocalPosition: {x: 6.294654, y: 7, z: 1.9415362}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1860,7 +1860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4e795eca2c940ddb5197e9ac925ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridDebugObjectPrefab: {fileID: 4486440069603274062, guid: a96100425ffad851d8f21dba2c4d6ff8,
+  gridDebugObjectPrefab: {fileID: 4384361525598308256, guid: a96100425ffad851d8f21dba2c4d6ff8,
     type: 3}
   obstaclesLayerMask:
     serializedVersion: 2
