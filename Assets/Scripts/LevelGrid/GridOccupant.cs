@@ -9,7 +9,7 @@ public abstract class GridOccupant : MonoBehaviour
     protected void Start()
     {
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        LevelGrid.Instance.SetOccupantAtGridPosition(gridPosition, this);
+        AddItselfToGrid();
 
         OccupantStart();
     }
@@ -31,6 +31,11 @@ public abstract class GridOccupant : MonoBehaviour
     }
 
     protected abstract void OccupantUpdate();
+    
+    protected void AddItselfToGrid()
+    {
+        LevelGrid.Instance.SetOccupantAtGridPosition(gridPosition, this);
+    }
     
     protected void ClearItselfFromGrid()
     {

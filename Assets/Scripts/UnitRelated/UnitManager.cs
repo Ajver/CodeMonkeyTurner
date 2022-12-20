@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitManager : MonoBehaviour
@@ -33,11 +34,41 @@ public class UnitManager : MonoBehaviour
     {
         Unit.OnAnyUnitSpawned += Unit_OnAnyUnitSpawned;
         Unit.OnAnyUnitDead += Unit_OnAnyUnitDead;
+        Unit.OnAnyUnitActivated += Unit_OnAnyUnitActivated;
+        Unit.OnAnyUnitDeactivated += Unit_OnAnyUnitDeactivated;
+    }
+
+    private void Unit_OnAnyUnitActivated(object sender, EventArgs e)
+    {
+        Unit unit = sender as Unit;
+        AddUnit(unit);
+    }
+    
+    private void Unit_OnAnyUnitDeactivated(object sender, EventArgs e)
+    {
+        Unit unit = sender as Unit;
+        RemoveUnit(unit);
     }
 
     private void Unit_OnAnyUnitSpawned(object sender, EventArgs e)
     {
         Unit unit = sender as Unit;
+        AddUnit(unit);
+    }
+
+    private void Unit_OnAnyUnitDead(object sender, EventArgs e)
+    {
+        Unit unit = sender as Unit;
+        RemoveUnit(unit);
+    }
+
+    private void AddUnit(Unit unit)
+    {
+        if (unitList.Contains(unit))
+        {
+            // Unit already added
+            return;
+        }
         
         unitList.Add(unit);
         
@@ -51,10 +82,8 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    private void Unit_OnAnyUnitDead(object sender, EventArgs e)
+    private void RemoveUnit(Unit unit)
     {
-        Unit unit = sender as Unit;
-        
         unitList.Remove(unit);
         
         if (unit.IsEnemy())

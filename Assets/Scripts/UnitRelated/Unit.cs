@@ -10,6 +10,8 @@ public class Unit : GridOccupant, IDamageable
     public static event EventHandler OnAnyUnitSpawned;
     public static event EventHandler OnAnyUnitDead;
     public static event EventHandler OnAnyUnitDamaged;
+    public static event EventHandler OnAnyUnitActivated;
+    public static event EventHandler OnAnyUnitDeactivated;
     
     private const int ACTION_POINTS_MAX = 2; 
 
@@ -131,4 +133,17 @@ public class Unit : GridOccupant, IDamageable
         return transform;
     }
 
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+        OnAnyUnitActivated?.Invoke(this, EventArgs.Empty);
+        AddItselfToGrid();
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+        OnAnyUnitDeactivated?.Invoke(this, EventArgs.Empty);
+        ClearItselfFromGrid();
+    }
 }

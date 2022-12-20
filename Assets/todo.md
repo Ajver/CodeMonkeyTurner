@@ -12,10 +12,11 @@
 - [ ] Action camera when opening suitcase (zoom camera on it)
 - [ ] Better AI
   - [x] Smart usmoving grenades
-  - [ ] Smart moving (closer to player units, even if not in shoot range)
+  - [x] Smart moving (closer to player units, even if not in shoot range)
   - [ ] Opening doors
   - [x] Random choosing actions with the same value
-  - [ ] Debug Tool: add a way to preview the values of different action targets for given action for given enemy 
+  - [x] Debug Tool: add a way to preview the values of different action targets for given action for given enemy 
+  - [ ] Make UnitManager only return Units which are active
 - [ ] Things dropping out of Crates
 - [ ] Ammo packs (with grenades) to collect
 - [ ] Mission to free the hostage from prison (?)

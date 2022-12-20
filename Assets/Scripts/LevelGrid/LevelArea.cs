@@ -19,11 +19,20 @@ public class LevelArea : MonoBehaviour
         boundsRect = GetBoundsRect();
         units = new List<Unit>();
 
-        foreach (Unit unit in UnitManager.Instance.GetEnemyUnitList())
+        List<Unit> allEnemyUnits = UnitManager.Instance.GetEnemyUnitList();
+
+        // Loop backwards, because we remove units from the list 
+        for (int i = allEnemyUnits.Count - 1; i >= 0; i--)
         {
+            Unit unit = allEnemyUnits[i];
+            
             if (IsUnitInside(unit))
             {
-                unit.gameObject.SetActive(isAreaActive);
+                if (!isAreaActive)
+                {
+                    unit.Deactivate();    
+                }
+                
                 units.Add(unit);
             }
         }
@@ -75,7 +84,7 @@ public class LevelArea : MonoBehaviour
         
         foreach (Unit unit in units)
         {
-            unit.gameObject.SetActive(true);
+            unit.Activate();
         }
     }
 
