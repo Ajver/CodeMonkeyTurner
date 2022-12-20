@@ -6,12 +6,14 @@
 
 ### UI
 - [ ] Scrolling mission buttons in Menu (animation)
+- [ ] custom game cursor
+  - [ ] different cursors for different actions (or different icons?)
 
 ### Gameplay
 - [ ] Invisible inactive level areas
 - [ ] Action camera when opening suitcase (zoom camera on it)
-- [ ] Show grenade explosion range (and barrel)
 - [ ] Make Enemy AI opening the doors 
+- [ ] remember last action for each Unit
 
 ### Refactor
 - [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
@@ -19,7 +21,8 @@
 
 ## Done
 
-- [ ] Better AI
+- [x] Show grenade explosion range (and barrel)
+- [x] Better AI
   - [x] Smart usmoving grenades
   - [x] Smart moving (closer to player units, even if not in shoot range)
   - [x] Random choosing actions with the same value

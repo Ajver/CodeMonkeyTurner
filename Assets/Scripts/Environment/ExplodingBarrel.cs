@@ -8,6 +8,8 @@ public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
 
     public static event EventHandler OnAnyBarrelExploded;
 
+    public const float EXPLOSION_RANGE = 5f;
+
     private enum State
     {
         Kalm,
@@ -87,10 +89,9 @@ public class ExplodingBarrel : GridOccupant, IInteractable, IDamageable
     private void Explode()
     {
         int damage = 150;
-        float radius = 5f;
-
+        
         Explosion explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
-        explosion.Explode(damage, radius);
+        explosion.Explode(damage, EXPLOSION_RANGE);
         
         Destroy(gameObject);
         ClearItselfFromGrid();

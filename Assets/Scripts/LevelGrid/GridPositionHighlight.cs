@@ -5,6 +5,7 @@ public class GridPositionHighlight : MonoBehaviour
 {
     [SerializeField] private GameObject visualsGameObject;
     [SerializeField] private Transform spinnerTransform;
+    [SerializeField] private Transform explosionRange;
 
     private bool isSpinningFast;
     
@@ -68,6 +69,41 @@ public class GridPositionHighlight : MonoBehaviour
         shouldBeActive = shouldBeActive && selectedAction.IsValidActionGridPosition(highlightedGridPosition);
         
         visualsGameObject.SetActive(shouldBeActive);
+
+        if (shouldBeActive)
+        {
+            UpdateExplosionRange();
+        }
+    }
+
+    private void UpdateExplosionRange()
+    {
+        BaseAction selectedAction = UnitActionSystem.Instance.GetSelectedAction();
+        
+        bool shouldBeActive = false;
+        float range = 0f;
+        
+        if (selectedAction is GrenadeAction)
+        {
+            shouldBeActive = true;
+            range = GrenadeProjectile.EXPLOSION_RANGE;
+        }
+        else
+        {
+            GridPosition highlightedGridPosition = UnitActionSystem.Instance.GetHighlightedGridPosition();
+            if (LevelGrid.Instance.GetOccupantAtGridPosition(highlightedGridPosition) is ExplodingBarrel)
+            {
+                shouldBeActive = true;
+                range = ExplodingBarrel.EXPLOSION_RANGE;
+            }
+        }
+        
+        explosionRange.gameObject.SetActive(shouldBeActive);
+
+        if (shouldBeActive)
+        {
+            explosionRange.transform.localScale = new Vector3(range, range, range);
+        }
     }
 
 }
