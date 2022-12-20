@@ -125,5 +125,7 @@ public class UnitManager : MonoBehaviour
     {
         Unit.OnAnyUnitSpawned -= Unit_OnAnyUnitSpawned;
         Unit.OnAnyUnitDead -= Unit_OnAnyUnitDead;
+        Unit.OnAnyUnitActivated -= Unit_OnAnyUnitActivated;
+        Unit.OnAnyUnitDeactivated -= Unit_OnAnyUnitDeactivated;
     }
 }

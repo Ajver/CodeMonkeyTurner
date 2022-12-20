@@ -10,9 +10,6 @@
 ### Gameplay
 - [ ] Invisible inactive level areas
 - [ ] Action camera when opening suitcase (zoom camera on it)
-- [ ] Things dropping out of Crates
-- [ ] Ammo packs (with grenades) to collect
-- [ ] Mission to free the hostage from prison (?)
 - [ ] Show grenade explosion range (and barrel)
 - [ ] Make Enemy AI opening the doors 
 
