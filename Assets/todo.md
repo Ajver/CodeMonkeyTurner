@@ -10,17 +10,11 @@
 ### Gameplay
 - [ ] Invisible inactive level areas
 - [ ] Action camera when opening suitcase (zoom camera on it)
-- [ ] Better AI
-  - [x] Smart usmoving grenades
-  - [x] Smart moving (closer to player units, even if not in shoot range)
-  - [ ] Opening doors
-  - [x] Random choosing actions with the same value
-  - [x] Debug Tool: add a way to preview the values of different action targets for given action for given enemy 
-  - [ ] Make UnitManager only return Units which are active
 - [ ] Things dropping out of Crates
 - [ ] Ammo packs (with grenades) to collect
 - [ ] Mission to free the hostage from prison (?)
 - [ ] Show grenade explosion range (and barrel)
+- [ ] Make Enemy AI opening the doors 
 
 ### Refactor
 - [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
@@ -28,6 +22,12 @@
 
 ## Done
 
+- [ ] Better AI
+  - [x] Smart usmoving grenades
+  - [x] Smart moving (closer to player units, even if not in shoot range)
+  - [x] Random choosing actions with the same value
+  - [x] Debug Tool: add a way to preview the values of different action targets for given action for given enemy
+  - [x] Make UnitManager only return Units which are active
 - [x] Re-create Crate Destroyed elements (it's a bit glitched because the parts overlap) - and add destroy force
 - [x] Allow selecting grid for action by clicking on object on this position (i.e. Enemy/Crate)
 - [x] Graphics to Mission Goal popup (so one knows what to look for)
