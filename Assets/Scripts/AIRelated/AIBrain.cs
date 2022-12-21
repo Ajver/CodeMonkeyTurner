@@ -24,6 +24,11 @@ public static class AIBrain
 
             foreach (Unit otherUnit in area.GetUnitsList())
             {
+                if (!otherUnit.isActiveAndEnabled)
+                {
+                    continue;
+                }
+
                 if (otherUnit.GetGameTeam() != unit.GetGameTeam())
                 {
                     otherTeamUnitsInOtherArea++;

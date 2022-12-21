@@ -34,20 +34,6 @@ public class UnitManager : MonoBehaviour
     {
         Unit.OnAnyUnitSpawned += Unit_OnAnyUnitSpawned;
         Unit.OnAnyUnitDead += Unit_OnAnyUnitDead;
-        Unit.OnAnyUnitActivated += Unit_OnAnyUnitActivated;
-        Unit.OnAnyUnitDeactivated += Unit_OnAnyUnitDeactivated;
-    }
-
-    private void Unit_OnAnyUnitActivated(object sender, EventArgs e)
-    {
-        Unit unit = sender as Unit;
-        AddUnit(unit);
-    }
-    
-    private void Unit_OnAnyUnitDeactivated(object sender, EventArgs e)
-    {
-        Unit unit = sender as Unit;
-        RemoveUnit(unit);
     }
 
     private void Unit_OnAnyUnitSpawned(object sender, EventArgs e)
@@ -125,7 +111,5 @@ public class UnitManager : MonoBehaviour
     {
         Unit.OnAnyUnitSpawned -= Unit_OnAnyUnitSpawned;
         Unit.OnAnyUnitDead -= Unit_OnAnyUnitDead;
-        Unit.OnAnyUnitActivated -= Unit_OnAnyUnitActivated;
-        Unit.OnAnyUnitDeactivated -= Unit_OnAnyUnitDeactivated;
     }
 }
