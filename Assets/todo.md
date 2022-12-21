@@ -1,20 +1,23 @@
 # TODO
 
-### Tutorial
+## Fov version 1.2
+
+- [ ] Invisible inactive level areas
+- [ ] Make Enemy AI opening the doors
+- [ ] Action camera when opening suitcase (zoom camera on it)
+
+## For later versions
+
+**Tutorial**
 - [ ] Tips on how to control camera
 - [ ] Complete tutorial, with explanation on how to use Interact etc.
 
-### UI
+**UI**
 - [ ] Scrolling mission buttons in Menu (animation)
 - [ ] custom game cursor
   - [ ] different cursors for different actions (or different icons?)
 
-### Gameplay
-- [ ] Invisible inactive level areas
-- [ ] Action camera when opening suitcase (zoom camera on it)
-- [ ] Make Enemy AI opening the doors
-
-### Refactor
+**Refactor**
 - [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
 - [ ] Central GameEvents singleton to replace static Events from classes
 
