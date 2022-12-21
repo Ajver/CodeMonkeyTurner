@@ -150,6 +150,11 @@ public class MoveAction : BaseAction
             
             foreach (Unit testUnit in UnitManager.Instance.GetUnitList())
             {
+                if (!testUnit.isActiveAndEnabled)
+                {
+                    continue;
+                }
+
                 if (testUnit.GetGameTeam() == unit.GetGameTeam())
                 {
                     // Ignore units in the same team

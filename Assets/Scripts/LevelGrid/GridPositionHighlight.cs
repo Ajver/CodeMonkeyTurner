@@ -102,6 +102,9 @@ public class GridPositionHighlight : MonoBehaviour
 
         if (shouldBeActive)
         {
+            // Range is radius, so must be doubled to show the right size
+            range *= 2f;
+            
             explosionRange.transform.localScale = new Vector3(range, range, range);
         }
     }

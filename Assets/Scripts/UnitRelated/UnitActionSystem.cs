@@ -221,6 +221,11 @@ public class UnitActionSystem : MonoBehaviour
     
     public void SetSelectedAction(BaseAction action)
     {
+        if (action != null && !action.CanBeTaken())
+        {
+            return;
+        }
+
         selectedAction = action;
 
         if (selectedUnit != null)
