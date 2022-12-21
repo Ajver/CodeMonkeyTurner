@@ -6,6 +6,8 @@ public abstract class GridOccupant : MonoBehaviour
 
     protected GridPosition gridPosition;
 
+    private LevelArea occupiedLevelArea;
+
     protected void Start()
     {
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
@@ -51,4 +53,21 @@ public abstract class GridOccupant : MonoBehaviour
     {
         return isWalkable;
     }
+
+    public void SetOccupiedLevelArea(LevelArea area)
+    {
+        Debug.Log($"{gameObject} changed area from {occupiedLevelArea} to {area}");
+        occupiedLevelArea = area;
+    }
+
+    public LevelArea GetOccupiedLevelArea(LevelArea area)
+    {
+        return occupiedLevelArea;
+    }
+
+    public bool IsOccupyingLevelArea(LevelArea area)
+    {
+        return occupiedLevelArea == area;
+    }
+    
 }

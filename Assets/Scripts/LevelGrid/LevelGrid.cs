@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGrid : MonoBehaviour
 {
-    public event EventHandler OnAnyOccupantMovedGridPosition;
+    public event EventHandler<GridOccupant> OnAnyOccupantMovedGridPosition;
     public event EventHandler OnAnyOccupantClears;
     
     [SerializeField] private GridDebugObject debugObjectPrefab; 
@@ -53,7 +52,7 @@ public class LevelGrid : MonoBehaviour
             SetOccupantAtGridPosition(toGridPosition, occupant);
         }
 
-        OnAnyOccupantMovedGridPosition?.Invoke(this, EventArgs.Empty);
+        OnAnyOccupantMovedGridPosition?.Invoke(this, occupant);
     }
 
     public IInteractable GetInteractableAtGridPosition(GridPosition gridPosition)

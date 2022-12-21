@@ -74,7 +74,7 @@ public class GridSystemVisual : MonoBehaviour
         UpdateGridVisual();
     }
 
-    private void LevelGrid_OnAnyOccupantMovedGridPosition(object sender, EventArgs e)
+    private void LevelGrid_OnAnyOccupantMovedGridPosition(object sender, GridOccupant occupant)
     {
         UpdateGridVisual();
     }

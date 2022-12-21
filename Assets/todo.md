@@ -5,6 +5,7 @@
 - [ ] Invisible inactive level areas
 - [ ] Make Enemy AI opening the doors
 - [ ] Action camera when opening suitcase (zoom camera on it)
+- [ ] Remove unused PathFindingUpdater
 
 ## For later versions
 

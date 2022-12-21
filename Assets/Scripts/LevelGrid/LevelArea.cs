@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelArea : MonoBehaviour
@@ -19,12 +17,14 @@ public class LevelArea : MonoBehaviour
         boundsRect = GetBoundsRect();
         units = new List<Unit>();
 
-        List<Unit> allEnemyUnits = UnitManager.Instance.GetEnemyUnitList();
+        LevelGrid.Instance.OnAnyOccupantMovedGridPosition += LevelGrid_OnAnyOccupantMovedGridPosition;
+        
+        List<Unit> allUnits = UnitManager.Instance.GetUnitList();
 
         // Loop backwards, because we remove units from the list 
-        for (int i = allEnemyUnits.Count - 1; i >= 0; i--)
+        for (int i = allUnits.Count - 1; i >= 0; i--)
         {
-            Unit unit = allEnemyUnits[i];
+            Unit unit = allUnits[i];
             
             if (IsUnitInside(unit))
             {
@@ -33,13 +33,39 @@ public class LevelArea : MonoBehaviour
                     unit.Deactivate();    
                 }
                 
-                units.Add(unit);
+                AddUnit(unit);
             }
         }
 
         foreach (Door door in doorsWhichActivates)
         {
             door.OnOpened += OnDoorWhichActivateOpened;
+        }
+    }
+
+    private void LevelGrid_OnAnyOccupantMovedGridPosition(object sender, GridOccupant occupant)
+    {
+        Unit unit = occupant as Unit;
+        if (unit == null)
+        {
+            // It wasn't unit. Let's ignore it then
+            return;
+        }
+        
+        bool isUnitInside = IsUnitInside(unit);
+
+        if (units.Contains(unit))
+        {
+            if (!isUnitInside)
+            {
+                // Unit just exited the bounding
+                units.Remove(unit);
+            }
+        }
+        else if (isUnitInside)
+        {
+            // We didn't have this unit yet, but now it's inside the bounds!
+            AddUnit(unit);
         }
     }
 
@@ -66,6 +92,12 @@ public class LevelArea : MonoBehaviour
             );
 
         return boundsRect;
+    }
+
+    private void AddUnit(Unit unit)
+    {
+        units.Add(unit);
+        unit.SetOccupiedLevelArea(this);
     }
 
     private void OnDoorWhichActivateOpened(object sender, EventArgs e)
