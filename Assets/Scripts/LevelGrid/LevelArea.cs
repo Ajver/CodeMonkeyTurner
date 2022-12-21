@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,21 +6,24 @@ public class LevelArea : MonoBehaviour
     
     [SerializeField] private bool isAreaActive;
 
-    [SerializeField] private Door[] doorsWhichActivates;
-
     private List<Unit> units;
     private Rect boundsRect;
-    
+
     private void Start()
     {
+        LevelGrid.Instance.OnAnyOccupantMovedGridPosition += LevelGrid_OnAnyOccupantMovedGridPosition;
+
+        SetupUnitsInsideBoundary();
+    }
+
+    private void SetupUnitsInsideBoundary()
+    {
+        List<Unit> allUnits = UnitManager.Instance.GetUnitList();
+
         boundsRect = GetBoundsRect();
         units = new List<Unit>();
 
-        LevelGrid.Instance.OnAnyOccupantMovedGridPosition += LevelGrid_OnAnyOccupantMovedGridPosition;
-        
-        List<Unit> allUnits = UnitManager.Instance.GetUnitList();
-
-        // Loop backwards, because we remove units from the list 
+        // Loop backwards, because we remove deactivated units from the list
         for (int i = allUnits.Count - 1; i >= 0; i--)
         {
             Unit unit = allUnits[i];
@@ -35,11 +37,6 @@ public class LevelArea : MonoBehaviour
                 
                 AddUnit(unit);
             }
-        }
-
-        foreach (Door door in doorsWhichActivates)
-        {
-            door.OnOpened += OnDoorWhichActivateOpened;
         }
     }
 
@@ -99,19 +96,14 @@ public class LevelArea : MonoBehaviour
         units.Add(unit);
         unit.SetOccupiedLevelArea(this);
     }
-
-    private void OnDoorWhichActivateOpened(object sender, EventArgs e)
+    
+    public void Activate()
     {
         if (isAreaActive)
         {
             return;
         }
         
-        ActivateArea();
-    }
-    
-    private void ActivateArea()
-    {
         isAreaActive = true;
         
         foreach (Unit unit in units)
@@ -136,5 +128,10 @@ public class LevelArea : MonoBehaviour
         Vector3 centerPos = new Vector3(rect.x, 1f, rect.y) + size * 0.5f;
         Gizmos.DrawCube(centerPos, size);
     }
-    
+
+    public List<Unit> GetUnitsList()
+    {
+        return units;
+    }
+
 }

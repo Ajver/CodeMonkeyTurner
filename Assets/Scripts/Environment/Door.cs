@@ -1,5 +1,25 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable]
+public class ConnectedLevelAreasPair : IEnumerable<LevelArea>
+{
+    public LevelArea area1;
+    public LevelArea area2;
+    
+    public IEnumerator<LevelArea> GetEnumerator()
+    {
+        yield return area1;
+        yield return area2;
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+}
 
 public class Door : GridOccupant, IInteractable
 {
@@ -9,6 +29,9 @@ public class Door : GridOccupant, IInteractable
     [SerializeField] private AudioSource doorCloseAudio;
 
     [SerializeField] private bool isOpen;
+    
+    [Header("Which areas are on both sides of the door?")]
+    [SerializeField] private ConnectedLevelAreasPair levelAreasConnected;
 
     public event EventHandler OnOpened;
     
@@ -41,11 +64,20 @@ public class Door : GridOccupant, IInteractable
         {
             if (isOpen)
             {
+                ActivateAreas();
                 OnOpened?.Invoke(this, EventArgs.Empty);
             }
             
             isActive = false;
             onInteractComplete();
+        }
+    }
+
+    private void ActivateAreas()
+    {
+        foreach (LevelArea area in levelAreasConnected)
+        {
+            area.Activate();
         }
     }
 
@@ -98,4 +130,15 @@ public class Door : GridOccupant, IInteractable
         
         PathFinding.Instance.SetIsWalkableGridPosition(gridPosition, isOpen);
     }
+
+    public ConnectedLevelAreasPair GetLevelAreasConnected()
+    {
+        return levelAreasConnected;
+    }
+
+    public bool IsOpen()
+    {
+        return isOpen;
+    }
+    
 }

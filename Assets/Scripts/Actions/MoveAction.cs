@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -170,17 +169,57 @@ public class MoveAction : BaseAction
             // Check how close the closest target was, compared to Very Far Distance
             float ratio = invertedDistance / VERY_FAR_DISTANCE;
             
-            // Returns value between 0-20
+            // Returns value between 1-20
             // This is mapped based on the How Close Ratio, which is distance in units.
             // Since we use invertedDistance, the closer it is, the bigger ratio is (and then the mapped value)
-            float mappedValueF = Mathf.Lerp(0f, defaultValueAction, ratio);
+            float mappedValueF = Mathf.Lerp(1f, defaultValueAction, ratio);
             actionValue = Mathf.RoundToInt(mappedValueF);
         }
-        
+
+        List<Door> doorsNextToIt = GetDoorsNextToGridPosition(gridPosition);
+
+        foreach (Door door in doorsNextToIt)
+        {
+            // For each door next to this position, increase the final actionValue by the HALF value of opening the door
+            actionValue += AIBrain.GetOpenDoorActionValue(door, unit) / 2;
+        }
+
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
             actionValue = actionValue,
         };
     }
+
+    private List<Door> GetDoorsNextToGridPosition(GridPosition gridPosition)
+    {
+        List<Door> doors = new List<Door>();
+
+        int distance = InteractAction.INTERACT_DISTANCE;
+        
+        for (int x = -distance; x <= distance; x++)
+        {
+            for (int z = -distance; z <= distance; z++)
+            {
+                GridPosition offsetGridPos = new GridPosition(x, z);
+                GridPosition testPos = gridPosition + offsetGridPos;
+                
+                if (!LevelGrid.Instance.IsValidGridPosition(testPos))
+                {
+                    continue;
+                }
+
+                GridOccupant occupant = LevelGrid.Instance.GetOccupantAtGridPosition(testPos);
+                Door door = occupant as Door;
+                
+                if (door != null)
+                {
+                    doors.Add(door);
+                }
+            }
+        }
+        
+        return doors;
+    }
+
 }

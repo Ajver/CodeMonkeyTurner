@@ -16,7 +16,7 @@ public class InteractAction : BaseAction
 
     private IInteractable interactable;
     
-    private int interactDistance = 1;
+    public const int INTERACT_DISTANCE = 1;
 
     private void Update()
     {
@@ -95,9 +95,9 @@ public class InteractAction : BaseAction
     {
         List<GridPosition> validPosList = new List<GridPosition>();
 
-        for (int x = -interactDistance; x <= interactDistance; x++)
+        for (int x = -INTERACT_DISTANCE; x <= INTERACT_DISTANCE; x++)
         {
-            for (int z = -interactDistance; z <= interactDistance; z++)
+            for (int z = -INTERACT_DISTANCE; z <= INTERACT_DISTANCE; z++)
             {
                 GridPosition offsetGridPos = new GridPosition(x, z);
                 GridPosition testPos = gridPosition + offsetGridPos;
@@ -121,10 +121,19 @@ public class InteractAction : BaseAction
 
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
+        int actionValue = 0;
+        
+        Door door = LevelGrid.Instance.GetOccupantAtGridPosition(gridPosition) as Door;
+
+        if (door != null)
+        {
+            actionValue += AIBrain.GetOpenDoorActionValue(door, unit);
+        }
+        
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValue = 0,
+            actionValue = actionValue,
         };
     }
 }

@@ -56,13 +56,7 @@ public abstract class GridOccupant : MonoBehaviour
 
     public void SetOccupiedLevelArea(LevelArea area)
     {
-        Debug.Log($"{gameObject} changed area from {occupiedLevelArea} to {area}");
         occupiedLevelArea = area;
-    }
-
-    public LevelArea GetOccupiedLevelArea(LevelArea area)
-    {
-        return occupiedLevelArea;
     }
 
     public bool IsOccupyingLevelArea(LevelArea area)
