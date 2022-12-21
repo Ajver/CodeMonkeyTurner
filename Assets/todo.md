@@ -3,9 +3,7 @@
 ## Fov version 1.2
 
 - [ ] Invisible inactive level areas
-- [ ] Make Enemy AI opening the doors
 - [ ] Action camera when opening suitcase (zoom camera on it)
-- [ ] Remove unused PathFindingUpdater
 
 ## For later versions
 
@@ -24,6 +22,8 @@
 
 ## Done
 
+- [x] Remove unused PathFindingUpdater
+- [x] Make Enemy AI opening the doors
 - [x] remember last selected action for each Unit
 - [x] Show grenade explosion range (and barrel)
 - [x] Better AI
