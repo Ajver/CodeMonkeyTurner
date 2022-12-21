@@ -195,7 +195,14 @@ public class UnitActionSystem : MonoBehaviour
 
         if (unit != null)
         {
-            SetSelectedAction(unit.GetAction<MoveAction>());
+            BaseAction action = unit.GetLastSelectedAction();
+
+            if (action == null)
+            {
+                action = unit.GetAction<MoveAction>();
+            }
+            
+            SetSelectedAction(action);
         }
         else
         {
@@ -216,6 +223,12 @@ public class UnitActionSystem : MonoBehaviour
     public void SetSelectedAction(BaseAction action)
     {
         selectedAction = action;
+
+        if (selectedUnit != null)
+        {
+            selectedUnit.SetLastSelectedAction(action);
+        }
+
         OnSelectedActionChanged?.Invoke(this, EventArgs.Empty);
     }
     

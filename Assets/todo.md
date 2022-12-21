@@ -12,8 +12,7 @@
 ### Gameplay
 - [ ] Invisible inactive level areas
 - [ ] Action camera when opening suitcase (zoom camera on it)
-- [ ] Make Enemy AI opening the doors 
-- [ ] remember last action for each Unit
+- [ ] Make Enemy AI opening the doors
 
 ### Refactor
 - [ ] Refactor UpdateNoActionPointsUIsVisibility to State machine
@@ -21,6 +20,7 @@
 
 ## Done
 
+- [x] remember last selected action for each Unit
 - [x] Show grenade explosion range (and barrel)
 - [x] Better AI
   - [x] Smart usmoving grenades

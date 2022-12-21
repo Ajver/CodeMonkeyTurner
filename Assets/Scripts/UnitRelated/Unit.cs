@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Unit : GridOccupant, IDamageable
 {
@@ -16,7 +18,8 @@ public class Unit : GridOccupant, IDamageable
     private const int ACTION_POINTS_MAX = 2; 
 
     private BaseAction[] baseActionsArray;
-
+    private BaseAction lastSelectedAction;
+    
     private HealthSystem healthSystem;
     
     private int actionPoints = ACTION_POINTS_MAX;
@@ -55,6 +58,21 @@ public class Unit : GridOccupant, IDamageable
     public BaseAction[] GetBaseActionsArray()
     {
         return baseActionsArray;
+    }
+
+    public BaseAction GetLastSelectedAction()
+    {
+        return lastSelectedAction;
+    }
+    
+    public void SetLastSelectedAction(BaseAction action)
+    {
+        if (action != null)
+        {
+            Assert.IsTrue(baseActionsArray.Contains(action), "Last Action should belong to this unit");
+        }
+
+        lastSelectedAction = action;
     }
 
     public bool TrySpendActionPointsToTakeAction(BaseAction action)
