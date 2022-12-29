@@ -7,6 +7,8 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
     [SerializeField] private Suitcase suitcase;
 
     [SerializeField] private AudioSource interactAudio;
+
+    [SerializeField] private Animator animator;
     
     public static event EventHandler OnAnyTreasureCollected;
     public static event EventHandler OnAnyTreasureDestroyed;
@@ -77,6 +79,8 @@ public class TableWithSuitcase : GridOccupant, IInteractable, IDamageable
 
         interactAudio.Play();
         suitcase.Open();
+        
+        animator.SetBool("IsOpen", true);
         
         // Remove from grid, but still make the spot not-walkable
         LevelGrid.Instance.ClearOccupantAtGridPosition(gridPosition);

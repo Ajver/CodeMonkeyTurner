@@ -3,7 +3,6 @@
 ## Fov version 1.2
 
 - [ ] Invisible inactive level areas
-- [ ] Action camera when opening suitcase (zoom camera on it)
 
 ## For later versions
 
@@ -22,6 +21,7 @@
 
 ## Done
 
+- [x] Action camera when opening suitcase (zoom camera on it)
 - [x] Remove unused PathFindingUpdater
 - [x] Make Enemy AI opening the doors
 - [x] remember last selected action for each Unit

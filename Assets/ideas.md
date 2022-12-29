@@ -7,3 +7,4 @@ List of features/changes that MAYBE will be added to the game
 - Things dropping out of Crates
 - Ammo packs (with grenades) to collect
 - Mission to free the hostage from prison (?)
+- POV mode to see the world from selected unit
