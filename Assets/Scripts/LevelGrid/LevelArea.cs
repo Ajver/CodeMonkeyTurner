@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelArea : MonoBehaviour
 {
     
     [SerializeField] private bool isAreaActive;
 
+    [SerializeField] private GameObject bounding;
+    
     private List<Unit> units;
     private Rect boundsRect;
 
@@ -14,8 +17,28 @@ public class LevelArea : MonoBehaviour
         LevelGrid.Instance.OnAnyOccupantMovedGridPosition += LevelGrid_OnAnyOccupantMovedGridPosition;
 
         SetupUnitsInsideBoundary();
+
+        SetChildrenActive(isAreaActive);
+        
+        bounding.SetActive(!isAreaActive);
+        bounding.GetComponent<SpriteRenderer>().color = Color.black;
     }
 
+    private void SetChildrenActive(bool active)
+    {
+        for (int i=0; i<transform.childCount; i++)
+        {
+            GameObject childObject = transform.GetChild(i).gameObject;
+            
+            if (childObject == bounding)
+            {
+                continue;
+            }
+            
+            childObject.SetActive(active);
+        }
+    }
+    
     private void SetupUnitsInsideBoundary()
     {
         List<Unit> allUnits = UnitManager.Instance.GetUnitList();
@@ -77,15 +100,15 @@ public class LevelArea : MonoBehaviour
     
     private Rect GetBoundsRect()
     {
-        Vector3 position = transform.position;
-        Vector3 fullScale = transform.localScale;
+        Vector3 position = bounding.transform.position;
+        Vector3 fullScale = bounding.transform.localScale;
         Vector3 halfScale = fullScale * 0.5f;
         
         Rect boundsRect = new Rect(
             position.x - halfScale.x, 
-            position.z - halfScale.z, 
+            position.z - halfScale.y, // Scale in Y is used, because the Bounds is rotated 90 deg around X; 
             fullScale.x, 
-            fullScale.z
+            fullScale.y
             );
 
         return boundsRect;
@@ -105,28 +128,36 @@ public class LevelArea : MonoBehaviour
         }
         
         isAreaActive = true;
+
+        SetChildrenActive(true);
         
         foreach (Unit unit in units)
         {
             unit.Activate();
         }
+        
+        bounding.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()
     {
+        Color color;
+        
         if (isAreaActive)
         {
-            Gizmos.color = new Color(0.2f, 0.8f, 0.2f, 0.5f);     
+            color = new Color(0.2f, 0.8f, 0.2f, 0.5f);     
         }
         else
         {
-            Gizmos.color = new Color(0.3f, 0.3f, 0.3f, 0.5f);            
+            color = new Color(0.3f, 0.3f, 0.3f, 0.5f);            
         }
-        
-        Rect rect = GetBoundsRect();
-        Vector3 size = new Vector3(rect.width, 1f, rect.height);
-        Vector3 centerPos = new Vector3(rect.x, 1f, rect.y) + size * 0.5f;
-        Gizmos.DrawCube(centerPos, size);
+
+        bounding.GetComponent<SpriteRenderer>().color = color;
+
+        // Rect rect = GetBoundsRect();
+        // Vector3 size = new Vector3(rect.width, 1f, rect.height);
+        // Vector3 centerPos = new Vector3(rect.x, 1f, rect.y) + size * 0.5f;
+        // Gizmos.DrawCube(centerPos, size);
     }
 
     public List<Unit> GetUnitsList()

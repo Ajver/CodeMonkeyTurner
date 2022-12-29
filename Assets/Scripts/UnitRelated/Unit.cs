@@ -13,7 +13,7 @@ public class Unit : GridOccupant, IDamageable
     public static event EventHandler OnAnyUnitDead;
     public static event EventHandler OnAnyUnitDamaged;
     
-    private const int ACTION_POINTS_MAX = 2; 
+    private const int ACTION_POINTS_MAX = 200; 
 
     private BaseAction[] baseActionsArray;
     private BaseAction lastSelectedAction;
